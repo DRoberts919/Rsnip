@@ -1,0 +1,51 @@
+/* Color Variables */
+
+:root {
+  --main-bg-color: #fafafa;
+  --primary-color: #34495E;
+  --secondary-color:#41B883;
+  /* Add purple - #9997FF*/
+  /* Add yellow-orange - #F8C024 */
+}
+
+/* HTML Elements */
+
+html, body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--main-bg-color);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/*  */
+
+.row-center{
+  display: flex;
+  justify-content: center;
+}
+
+.row-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.btn{
+
+}
+
+.green-btn{
+  
+}
