@@ -5,7 +5,8 @@ const Home = () => {
     <>
       <img style={{ width: "100%" }} src={BgHeader} alt="Header Bg" />
       <div class="content">
-        <div>Welcome To The Home Page</div>
+        <div style={{ height: "100vh" }}>Welcome To The Home Page</div>
+        <div className="btn green-btn">TEST BTN</div>
       </div>
     </>
   );
