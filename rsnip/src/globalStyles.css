@@ -1,5 +1,6 @@
-/* Color Variables */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
+/* Color Variables */
 :root {
   --main-bg-color: #fafafa;
   --primary-color: #34495E;
@@ -18,11 +19,16 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--main-bg-color);
+  font-family: 'Poppins', sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a{
+  text-decoration: none;
 }
 
 /*  */
@@ -47,5 +53,13 @@ code {
 }
 
 .green-btn{
-  
+  background-color: var(--secondary-color);
+}
+
+.green-outline{
+  border: 2px solid var(--secondary-color);
+}
+
+.border-test{
+  border: 1px solid red;
 }

@@ -1,0 +1,5 @@
+<svg id="header-bg" xmlns="http://www.w3.org/2000/svg" width="1920" height="902" viewBox="0 0 1920 902">
+  <rect id="Rectangle_105" data-name="Rectangle 105" width="1920" height="902" fill="#345576"/>
+  <path id="Path_111" data-name="Path 111" d="M0,344.034C128,291.548,384,75.042,640,81.6s384,300.156,640,295.235S1792,120.968,1920,57V882.018H0Z" transform="translate(0 19)" fill="#34506e"/>
+  <path id="Path_112" data-name="Path 112" d="M0,538.86c96-38.933,288-182.667,480-194.667s288,119.2,480,134.667,288-74.933,480-57.333,384,116.267,480,145.333v65.333H0Z" transform="translate(0 268.824)" fill="#34495e"/>
+</svg>

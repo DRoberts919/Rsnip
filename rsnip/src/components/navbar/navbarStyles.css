@@ -2,3 +2,11 @@
     width: 75px;
     height: 75px;
 }
+
+.nav{
+    /* background-color: var(--primary-color); */
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+}
