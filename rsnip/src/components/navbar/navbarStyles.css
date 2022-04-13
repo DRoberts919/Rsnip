@@ -29,6 +29,14 @@ display: flex;
     display: none;
 }
 
+
+.nav.white-txt .nav-links a {
+    color: #fff;
+}
+.nav.black-txt .nav-links a {
+    color: var(--primary-color);
+}
+
 @media all and (max-width:768px) {
     .nav-burger{
         display: block;
