@@ -11,8 +11,8 @@ const Home = () => {
         style={{ backgroundImage: `url(${BgHeader})` }}
         className="home-header"
       >
-        <div className="content p-8 p-b-4 header-content white-txt">
-          <div className="border-test">
+        <div className="content row-center p-tb-10 white-txt">
+          <div className="p-lr-2 header-txt">
             <h1>Welcome To RSnip</h1>
             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.. </h3>
             <div>
@@ -25,7 +25,7 @@ const Home = () => {
             </Link>
           </div>
           <img
-            className="border-test"
+            className="header-img"
             src={HeaderImg}
             alt="Person Holding Phone"
           />

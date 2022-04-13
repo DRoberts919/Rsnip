@@ -24,14 +24,14 @@ const Navbar = () => {
         </Link>
         <div className={menuOpen ? "nav-links" : "nav-links nav-hidden"}>
           {/* <div>{location.pathname}</div> */}
-          <Link className="m-r-1 text-shadow" to="/register">
+          <Link className="m-r-1 text-shadow nav-link" to="/register">
             Sign Up
           </Link>
           <Link className="btn green-btn light-shadow m-r-1" to="/login">
             Login
           </Link>
         </div>
-        <div className="m-r-1 nav-burger">
+        <div className="nav-burger">
           <Hamburger toggled={menuOpen} toggle={setMenuOpen} />
         </div>
       </div>

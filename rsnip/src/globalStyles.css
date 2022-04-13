@@ -47,12 +47,15 @@ h1,h2,h3,h4,h5,h6{
 .row-center{
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .row-space-between {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /* Buttons */
@@ -70,7 +73,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .green-btn{
-  color: var(--main-bg-color);
+  color: var(--main-bg-color) !important;
   background-color: var(--secondary-color);
 }
 
@@ -87,8 +90,12 @@ h1,h2,h3,h4,h5,h6{
   margin-top:  1rem;
 }
 
-.p-8{
-  padding: 8rem 0px;
+.p-tb-10{
+  padding: 10rem 0px;
+}
+
+.p-lr-2{
+  padding: 0px 2rem;
 }
 
 
