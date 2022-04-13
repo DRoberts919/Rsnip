@@ -4,7 +4,7 @@ import "./snippetEditorStyles.css";
 const SnippetEditor = () => {
 
     const [selectedEditorTab, setSelectedEditorTab] = useState("JSX");
-
+    const [visibility, setVisibility] = useState("private");
 
     const selectTab = (tab) => {
         setSelectedEditorTab(tab);
@@ -29,24 +29,24 @@ const SnippetEditor = () => {
 
             </div>
             <div className="input-section">
-                <div className="input-field">
+                <div className="input-field type2">
                     <label htmlFor="title">Title</label>
                     <input type="text" id="title" />
                 </div>
                 
-                <div className="input-field">
+                <div className="input-field type2">
                     <label htmlFor="visibility">Visibility</label>
                     {/* Button group */}
                     <div className="btn-group">
-                        <button>Public</button>
-                        <button>Private</button>
+                        <button onClick={() => setVisibility("public")} className={`btn ${visibility === "public" ? "selected" : ""}`}>Public</button>
+                        <button onClick={() => setVisibility("private")} className={`btn ${visibility === "private" ? "selected" : ""}`}>Private</button>
                     </div>
                 </div>
-                <div className="input-field">
+                <div className="input-field type2">
                     <label htmlFor="desc">Description</label>
                     <textarea id="desc"></textarea>
                 </div>
-                <div className="input-field">
+                <div className="input-field type2">
                     <label htmlFor="category">Category</label>
                     <input type="text" id="category" list="categories" />
                     <datalist id="categories">
