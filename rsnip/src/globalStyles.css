@@ -29,6 +29,7 @@ code {
 
 a{
   text-decoration: none;
+  color: inherit;
 }
 
 .content{
@@ -58,6 +59,10 @@ a{
   border-radius: 8px;
 }
 
+.btn:hover{
+  opacity: 0.9;
+}
+
 .green-btn{
   color: var(--main-bg-color);
   background-color: var(--secondary-color);
@@ -72,6 +77,11 @@ a{
   margin-right: 1rem;
 }
 
+.p-t-5{
+  padding-top: 5rem;
+}
+
+
 /* Font-Weight */
 .semi-bold{
   font-weight: 600;
@@ -81,9 +91,20 @@ a{
   font-weight: 700;
 }
 
+/* Backgrounds */
+.white-bg{
+  background-color: var(--main-bg-color);
+}
+
+/* Text */
+
+.white-txt{
+ color: var(--main-bg-color); 
+}
+
 /* Shadow */
 .light-shadow{
-  box-shadow: 2px 2px 2px rgba(0,0,0, 0.1) ;
+  box-shadow: 2px 2px 2px rgba(0,0,0, 0.2) ;
 }
 
 /* CSS Testing */
