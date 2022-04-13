@@ -32,9 +32,14 @@ a{
   color: inherit;
 }
 
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Roboto', sans-serif;
+}
+
 .content{
   max-width: 1200px;
   margin: 0 auto;
+  padding:1rem;
 }
 
 /* Flex Stuff */
@@ -77,9 +82,14 @@ a{
   margin-right: 1rem;
 }
 
-.p-t-5{
-  padding-top: 5rem;
+.m-t-1{
+  margin-top:  1rem;
 }
+
+.p-8{
+  padding: 8rem 0px;
+}
+
 
 
 /* Font-Weight */
@@ -102,9 +112,17 @@ a{
  color: var(--main-bg-color); 
 }
 
+.black-txt{
+  color: var(--primary-color);
+}
+
 /* Shadow */
 .light-shadow{
   box-shadow: 2px 2px 2px rgba(0,0,0, 0.2) ;
+}
+
+.text-shadow{
+  text-shadow:2px 2px rgba(0,0,0, 0.2) ;
 }
 
 /* CSS Testing */

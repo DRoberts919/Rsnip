@@ -1,17 +1,38 @@
 import BgHeader from "../../assets/images/header-bg.svg";
+import HeaderImg from "../../assets/images/header-img.svg";
+import "./homeStyles.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <>
       {/* <img style={{ width: "100%" }} src={BgHeader} alt="Header Bg" /> */}
       <div
-        style={{ backgroundImage: `url(${BgHeader})`, height: "90vh" }}
-        class="home-header"
+        style={{ backgroundImage: `url(${BgHeader})` }}
+        className="home-header"
       >
-        <div className="content p-t-5">Test</div>
+        <div className="content p-8 p-b-4 header-content white-txt">
+          <div className="border-test">
+            <h1>Welcome To RSnip</h1>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.. </h3>
+            <div>
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip. Ut enim ad minim veniam, quis nostrud
+              exercitation
+            </div>
+            <Link className="m-t-1 btn green-btn" to="/register">
+              Get Started
+            </Link>
+          </div>
+          <img
+            className="border-test"
+            src={HeaderImg}
+            alt="Person Holding Phone"
+          />
+        </div>
       </div>
       <div className="content">
-        <div style={{ height: "100vh" }}>Welcome To The Home Page</div>
+        <div>Welcome To The Home Page</div>
         <div className="btn green-btn">TEST BTN</div>
       </div>
     </>

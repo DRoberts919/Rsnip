@@ -3,3 +3,11 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.header-content{
+display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-gap: 1rem;
+  justify-items: center;
+  align-items: center;
+}

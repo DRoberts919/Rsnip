@@ -1,29 +1,38 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbarStyles.css";
+import Hamburger from "hamburger-react";
 
 const Navbar = () => {
   const location = useLocation();
   const [changeNav, setChangeNav] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const changeNavColors = () => {
     window.scrollY >= 1 ? setChangeNav(true) : setChangeNav(false);
   };
   window.addEventListener("scroll", changeNavColors);
   return (
-    <div className={changeNav ? "nav white-bg light-shadow" : "nav white-txt"}>
-      <div className="content row-space-between semi-bold">
+    <div
+      className={
+        changeNav ? "nav white-bg light-shadow black-txt" : "nav white-txt"
+      }
+    >
+      <div className="content nav-group semi-bold">
         <Link className="nav-title nav-group" to="/">
-          <img class="nav-logo" src="/RSnip_Logo.svg" alt="RSnip Logo" />
+          <img className="nav-logo" src="/RSnip_Logo.svg" alt="RSnip Logo" />
           Snip
         </Link>
-        <div>
+        <div className={menuOpen ? "nav-links" : "nav-links nav-hidden"}>
           {/* <div>{location.pathname}</div> */}
-          <Link className="m-r-1" to="/register">
+          <Link className="m-r-1 text-shadow" to="/register">
             Sign Up
           </Link>
           <Link className="btn green-btn light-shadow m-r-1" to="/login">
             Login
           </Link>
+        </div>
+        <div className="m-r-1 nav-burger">
+          <Hamburger toggled={menuOpen} toggle={setMenuOpen} />
         </div>
       </div>
     </div>
