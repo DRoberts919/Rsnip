@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./snippetEditorStyles.css";
+import categories from "../../categories.json";
 
 const SnippetEditor = () => {
 
     const [selectedEditorTab, setSelectedEditorTab] = useState("JSX");
     const [visibility, setVisibility] = useState("private");
+    const [categoryJSXList, setCategoryJSXList] = useState(<></>);
 
     const selectTab = (tab) => {
         setSelectedEditorTab(tab);
     }
+
+    //On page load
+    useEffect(() => {
+        let tempJSX = [];
+        categories.forEach(c => {
+            tempJSX.push(<option value={c} />)
+        });
+        setCategoryJSXList(tempJSX);
+    }, []);
 
 
     return (
@@ -50,11 +61,7 @@ const SnippetEditor = () => {
                     <label htmlFor="category">Category</label>
                     <input type="text" id="category" list="categories" />
                     <datalist id="categories">
-                        <option value="Edge" />
-                        <option value="Firefox" />
-                        <option value="Chrome" />
-                        <option value="Opera" />
-                        <option value="Safari" />
+                        {categoryJSXList}
                     </datalist>
                 </div>
             </div>
