@@ -4,6 +4,10 @@ import CardImgOne from "../../assets/images/card-img-1.png";
 import CardImgTwo from "../../assets/images/card-img-2.png";
 import CardImgThree from "../../assets/images/card-img-3.png";
 import Header from "../../components/header/header";
+import Fast from "../../assets/images/fast.png";
+import Easy from "../../assets/images/easy.png";
+import Secure from "../../assets/images/secure.png";
+import Shareable from "../../assets/images/shareable.png";
 
 const Home = () => {
   return (
@@ -15,10 +19,73 @@ const Home = () => {
           <Card txt={"Create your first snippet"} img={CardImgTwo} />
           <Card txt={"Share it with the world"} img={CardImgThree} />
         </div>
-        <div>Welcome To The Home Page</div>
-        <div className="btn green-btn">TEST BTN</div>
+        <div className="mw-900">
+          <div
+            style={{ marginBottom: 6 }}
+            className="p-t-8 green-txt semi-bold"
+          >
+            WHAT WE DO
+          </div>
+          <h3 className="m-b-1">What is RSnip?</h3>
+          <div>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation{" "}
+          </div>
+          <div className="row-center">
+            <HomeBoxes
+              title="Fast"
+              img={Fast}
+              content="Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip. Ut enim ad minim veniam, quis
+                    nostrud exercitation Ut enim ad minim veniam, quis nostrud
+                    exercitation."
+            />
+            <HomeBoxes
+              title="Easy"
+              img={Easy}
+              content="Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip. Ut enim ad minim veniam, quis
+                    nostrud exercitation Ut enim ad minim veniam, quis nostrud
+                    exercitation."
+            />
+            <HomeBoxes
+              title="Secure"
+              img={Secure}
+              content="Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip. Ut enim ad minim veniam, quis
+                    nostrud exercitation Ut enim ad minim veniam, quis nostrud
+                    exercitation."
+            />
+            <HomeBoxes
+              title="Shareable"
+              img={Shareable}
+              content="Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip. Ut enim ad minim veniam, quis
+                    nostrud exercitation Ut enim ad minim veniam, quis nostrud
+                    exercitation."
+            />
+          </div>
+        </div>
       </div>
     </>
+  );
+};
+
+const HomeBoxes = ({ title, img, content }) => {
+  return (
+    <div className="box-425">
+      <div className="row">
+        <div className="icon light-shadow">
+          <img className="icon-img" src={img} alt="Fast Icon" />
+        </div>
+        <div className="box-text">
+          <h4 className="box-title">{title}</h4>
+          <div>{content}</div>
+        </div>
+      </div>
+    </div>
   );
 };
 

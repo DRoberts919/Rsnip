@@ -1,0 +1,35 @@
+.mw-900{
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.box-425{
+    width:425px;
+    margin: 3rem 0.5rem;
+}
+
+.box-text{
+    width:300px;
+    padding-left:20px;
+}
+
+.box-title{
+    margin-bottom: 0.5rem;
+}
+
+.icon-img{
+    width:60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 100vh;
+}
+
+.icon{
+    background-color: #fff;
+    width:90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100vh;
+}

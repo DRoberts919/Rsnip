@@ -11,8 +11,10 @@ const Header = () => {
     >
       <div className="content row-center p-t-8 p-b-12 white-txt">
         <div className="p-lr-2 header-txt">
-          <h1>Welcome To RSnip</h1>
-          <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.. </h3>
+          <h2 className="m-b-1">Welcome To RSnip</h2>
+          <h5 className="m-b-1">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit..{" "}
+          </h5>
           <div>
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation
