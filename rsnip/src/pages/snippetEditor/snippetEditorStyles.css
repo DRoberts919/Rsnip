@@ -100,3 +100,23 @@
     background-color: var(--secondary-color);
     color:#fff;
 }
+
+
+/* scroll bar */
+
+
+
+.ace_scrollbar::-webkit-scrollbar-track {
+    padding: 2px 0;
+    background-color: #282A2E;
+}
+
+
+.ace_scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ace_scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #777;
+}
