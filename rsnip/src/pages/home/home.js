@@ -4,6 +4,7 @@ import CardImgOne from "../../assets/images/card-img-1.png";
 import CardImgTwo from "../../assets/images/card-img-2.png";
 import CardImgThree from "../../assets/images/card-img-3.png";
 import Header from "../../components/header/header";
+import CallToAction from "../../components/cta/cta";
 import Fast from "../../assets/images/fast.png";
 import Easy from "../../assets/images/easy.png";
 import Secure from "../../assets/images/secure.png";
@@ -68,6 +69,9 @@ const Home = () => {
             />
           </div>
         </div>
+      </div>
+      <div className="m-t-5">
+        <CallToAction />
       </div>
     </>
   );

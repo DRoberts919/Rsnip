@@ -1,3 +1,5 @@
+import "./footerStyles.css";
+
 const Footer = () => {
   return (
     <>
@@ -5,3 +7,5 @@ const Footer = () => {
     </>
   );
 };
+
+export default Footer;
