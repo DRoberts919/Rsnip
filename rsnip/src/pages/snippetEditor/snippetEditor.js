@@ -46,9 +46,10 @@ const SnippetEditor = () => {
             {selectedEditorTab === "JSX" ?
             <AceEditor
                 style={{
-                    height: '100vh',
+                    height: 'calc(100vh - 7.5rem)',
                     width: '100%',
                 }}
+                className="ace-editor"
                 placeholder='Start Coding'
                 mode='html'
                 theme='monokai'
@@ -70,9 +71,10 @@ const SnippetEditor = () => {
             : selectedEditorTab === "JS" ? 
             <AceEditor
             style={{
-                height: '100vh',
+                height: 'calc(100vh - 7.5rem)',
                 width: '100%',
             }}
+            className="ace-editor"
             placeholder='Start Coding'
             mode='javascript'
             theme='monokai'
@@ -93,15 +95,16 @@ const SnippetEditor = () => {
             /> : 
             <AceEditor
                 style={{
-                    height: '100vh',
+                    height: 'calc(100vh - 7.5rem)',
                     width: '100%',
                 }}
+                className="ace-editor"
                 placeholder='Start Coding'
                 mode='css'
                 theme='monokai'
                 name='style-code-editor'
                 onChange={currentCode => setStyleCode(currentCode)}
-                fontSize={28}
+                fontSize={18}
                 showPrintMargin={true}
                 showGutter={true}
                 highlightActiveLine={true}
