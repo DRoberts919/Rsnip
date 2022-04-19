@@ -8,22 +8,22 @@ const SnippetEditor = () => {
     const [visibility, setVisibility] = useState("private");
     const [categoryJSXList, setCategoryJSXList] = useState(<></>);
 
+    const [structureCode, setStructureCode] = useState("");
+    const [styleCode, setStyleCode] = useState("");
+    const [functionCode, setFunctionCode] = useState("");
+
     const selectTab = (tab) => {
         setSelectedEditorTab(tab);
     }
 
     //On page load
     useEffect(() => {
-        let tempJSX = [];
-        categories.forEach(c => {
-            tempJSX.push(<option value={c} />)
-        });
-        setCategoryJSXList(tempJSX);
+        
     }, []);
 
 
     return (
-      <div class="editor-content">
+      <div className="editor-content">
         <div className="editor-section">
             <div className="editor-bar">
                 <div className="tabs">
@@ -61,7 +61,11 @@ const SnippetEditor = () => {
                     <label htmlFor="category">Category</label>
                     <input type="text" id="category" list="categories" />
                     <datalist id="categories">
-                        {categoryJSXList}
+                        {
+                            categories.map(c => {
+                                return (<option key={c} value={c} />)
+                            })
+                        }
                     </datalist>
                 </div>
             </div>
