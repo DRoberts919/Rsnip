@@ -2,6 +2,19 @@ import { useEffect, useState } from "react";
 import "./snippetEditorStyles.css";
 import categories from "../../categories.json";
 
+import AceEditor from 'react-ace'
+
+// import mode-<language> , this imports the style and colors for the selected language.
+import 'ace-builds/src-noconflict/mode-javascript'
+import 'ace-builds/src-noconflict/mode-html'
+import 'ace-builds/src-noconflict/mode-css'
+// there are many themes to import, I liked monokai.
+import 'ace-builds/src-noconflict/theme-monokai'
+// this is an optional import just improved the interaction.
+import 'ace-builds/src-noconflict/ext-language_tools'
+import 'ace-builds/src-noconflict/ext-beautify'
+
+
 const SnippetEditor = () => {
 
     const [selectedEditorTab, setSelectedEditorTab] = useState("JSX");
@@ -12,14 +25,11 @@ const SnippetEditor = () => {
     const [styleCode, setStyleCode] = useState("");
     const [functionCode, setFunctionCode] = useState("");
 
+
+
     const selectTab = (tab) => {
         setSelectedEditorTab(tab);
     }
-
-    //On page load
-    useEffect(() => {
-        
-    }, []);
 
 
     return (
@@ -33,7 +43,77 @@ const SnippetEditor = () => {
                 </div>
                 <div className="run-btn">Run ▶</div>
             </div>
-
+            {selectedEditorTab === "JSX" ?
+            <AceEditor
+                style={{
+                    height: '100vh',
+                    width: '100%',
+                }}
+                placeholder='Start Coding'
+                mode='html'
+                theme='monokai'
+                name='structure-code-editor'
+                onChange={currentCode => setStructureCode(currentCode)}
+                fontSize={18}
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                value={structureCode}
+                setOptions={{
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true,
+                    enableSnippets: true,
+                    showLineNumbers: true,
+                    tabSize: 2,
+                }}
+                />
+            : selectedEditorTab === "JS" ? 
+            <AceEditor
+            style={{
+                height: '100vh',
+                width: '100%',
+            }}
+            placeholder='Start Coding'
+            mode='javascript'
+            theme='monokai'
+            name='script-code-editor'
+            onChange={currentCode => setFunctionCode(currentCode)}
+            fontSize={18}
+            showPrintMargin={true}
+            showGutter={true}
+            highlightActiveLine={true}
+            value={functionCode}
+            setOptions={{
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true,
+                enableSnippets: true,
+                showLineNumbers: true,
+                tabSize: 2,
+            }}
+            /> : 
+            <AceEditor
+                style={{
+                    height: '100vh',
+                    width: '100%',
+                }}
+                placeholder='Start Coding'
+                mode='css'
+                theme='monokai'
+                name='style-code-editor'
+                onChange={currentCode => setStyleCode(currentCode)}
+                fontSize={28}
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                value={styleCode}
+                setOptions={{
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true,
+                    enableSnippets: true,
+                    showLineNumbers: true,
+                    tabSize: 2,
+                }}
+                />} 
         </div>
         <div className="input-output-section">
             <div className="rendered-output-section">
