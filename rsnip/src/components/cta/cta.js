@@ -6,12 +6,9 @@ import CtaImgTwo from "../../assets/images/cta-img-2.png";
 
 const CallToAction = () => {
   return (
-    <div
-      style={{ backgroundImage: `url(${BgHeader})` }}
-      className="home-header"
-    >
-      <div className="content row-center white-txt txt-center">
-        <img src={CtaImgOne} alt="CTA Img One" />
+    <div style={{ backgroundImage: `url(${BgHeader})` }} className="cta-bg">
+      <div className="content row-center white-txt txt-center p-tb-6">
+        <img className="cta-mobile-img" src={CtaImgOne} alt="CTA Img One" />
         <div>
           <h3 className="m-b-1">Let's Get Started!</h3>
           <div>Sign Up now and share your skills to the world!</div>
@@ -19,7 +16,7 @@ const CallToAction = () => {
             Sign Up
           </Link>
         </div>
-        <img src={CtaImgTwo} alt="CTA Img Two" />
+        <img className="cta-mobile-img" src={CtaImgTwo} alt="CTA Img Two" />
       </div>
     </div>
   );

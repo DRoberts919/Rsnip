@@ -1,0 +1,10 @@
+.cta-bg{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media all and (max-width:900px){
+    .cta-mobile-img{
+        display:none;
+    }
+}
