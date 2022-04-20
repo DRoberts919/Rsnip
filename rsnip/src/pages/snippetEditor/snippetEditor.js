@@ -19,7 +19,9 @@ const SnippetEditor = () => {
 
     const [selectedEditorTab, setSelectedEditorTab] = useState("JSX");
     const [visibility, setVisibility] = useState("private");
-    const [categoryJSXList, setCategoryJSXList] = useState(<></>);
+    const [selectedCategoryList, setSelectedCategoryList] = useState([]);
+
+    const [categoryInput, setCategoryInput] = useState("");
 
     const [structureCode, setStructureCode] = useState("");
     const [styleCode, setStyleCode] = useState("");
@@ -29,6 +31,36 @@ const SnippetEditor = () => {
 
     const selectTab = (tab) => {
         setSelectedEditorTab(tab);
+    }
+
+    const isCategoryReal = (category) => {
+        return categories.indexOf(category) !== -1;
+    }
+
+    const isCategoryInList = (category) => {
+        return selectedCategoryList.indexOf(category) !== -1;
+    }
+
+    const addCategoryToList = (event) => {
+        let category = event.target.value;
+        if(isCategoryReal(category) && !isCategoryInList(category)) {
+            // console.log(`Adding ${category}`);
+            let temp = [...selectedCategoryList];
+            temp.push(category);
+            setSelectedCategoryList(temp);
+
+            //Clear input field
+            setCategoryInput("");
+        }
+    }
+    const removeCategoryFromList = (category) => {
+        if(isCategoryInList(category)) {
+            // console.log(`Removing ${category}`);
+
+            let temp = [...selectedCategoryList];
+            temp.splice(selectedCategoryList.indexOf(category) , 1);
+            setSelectedCategoryList(temp);
+        }
     }
 
 
@@ -142,7 +174,7 @@ const SnippetEditor = () => {
                 </div>
                 <div className="input-field type2">
                     <label htmlFor="category">Category</label>
-                    <input type="text" id="category" list="categories" />
+                    <input type="text" id="category" list="categories" value={categoryInput} onChange={(e) => setCategoryInput(e.target.value)} onKeyPress={event => {addCategoryToList(event)}}/>
                     <datalist id="categories">
                         {
                             categories.map(c => {
@@ -150,6 +182,13 @@ const SnippetEditor = () => {
                             })
                         }
                     </datalist>
+                    <div className="selected-categories"> 
+                        {
+                            selectedCategoryList.map(category => {
+                                return (<div key={category} className="selected-category-tag">{category} <span onClick={() => removeCategoryFromList(category)}>&#10006;</span></div>)
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         </div>
