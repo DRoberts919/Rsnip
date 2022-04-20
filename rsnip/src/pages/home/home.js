@@ -9,6 +9,7 @@ import Fast from "../../assets/images/fast.png";
 import Easy from "../../assets/images/easy.png";
 import Secure from "../../assets/images/secure.png";
 import Shareable from "../../assets/images/shareable.png";
+import Testimonial from "../../components/testimonial/testimonial";
 
 const Home = () => {
   return (
@@ -73,6 +74,7 @@ const Home = () => {
       <div className="m-t-5">
         <CallToAction />
       </div>
+      <Testimonial />
     </>
   );
 };

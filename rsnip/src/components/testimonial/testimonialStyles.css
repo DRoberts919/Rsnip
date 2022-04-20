@@ -1,0 +1,27 @@
+.testimonial-msg{
+    max-width:525px;
+    margin: 2.5rem auto;
+    border-radius: 7px;
+    padding: 2rem;
+    
+}
+
+path.star{
+    /* box-shadow: 1px */
+    border: 1px solid red;
+    filter: drop-shadow(3px 3px 2px rgb(0 0 0 / 0.2));
+}
+
+.position-triangle{
+    margin: 0 auto;
+    width: 200px;
+}
+
+.triangle{
+    width: 0;
+    height: 0;
+    border-left: 1px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid red;
+    transform: rotate(30deg);
+}
