@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="content">
+      <div className="content black-txt">
         <div style={{ marginTop: "-6rem" }} className="row-space-around">
           <Card txt={"Sign up for free"} img={CardImgOne} />
           <Card txt={"Create your first snippet"} img={CardImgTwo} />
