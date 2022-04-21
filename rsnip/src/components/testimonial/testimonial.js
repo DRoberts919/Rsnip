@@ -1,9 +1,10 @@
 import "./testimonialStyles.css";
 import StarRatings from "react-star-ratings";
+import Cody from "../../assets/images/cody.jpg";
 
 const Testimonial = () => {
   return (
-    <div className="black-txt m-tb-5 txt-center">
+    <div className="black-txt m-t-5 m-b-10 txt-center">
       <div style={{ marginBottom: 8 }} className="green-txt semi-bold">
         WHAT WE DO
       </div>
@@ -23,6 +24,11 @@ const Testimonial = () => {
       </div>
       <div className="position-triangle">
         <div className="triangle"></div>
+        <div className="overlap-triangle"></div>
+      </div>
+      <div className="profile-bg light-shadow">
+        <img className="profile-img" src={Cody} alt="Cody" />
+        <div className="bold">Cody Ashby</div>
       </div>
     </div>
   );

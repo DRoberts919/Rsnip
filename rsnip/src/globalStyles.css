@@ -93,6 +93,10 @@ h6{
   flex-wrap: wrap;
 }
 
+.stretch{
+  align-items: stretch;
+}
+
 /* Buttons */
 
 .btn{
@@ -159,6 +163,27 @@ h6{
 
 .m-tb-5{
   margin: 5rem 0px;
+}
+
+.m-t-5{
+  margin-top: 5rem;
+}
+
+.m-b-8{
+  margin-bottom: 8rem;
+}
+
+.m-b-10{
+  margin-bottom: 10rem;
+}
+
+
+.p-b-3{
+  padding-bottom: 3;
+}
+
+.p-tb-3{
+  padding: 3rem 0px;
 }
 
 .p-tb-6{
