@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import "./snippetEditorStyles.css";
 import categories from "../../categories.json";
+import React from 'react'
 
-import AceEditor from 'react-ace'
+import AceEditor from 'react-ace';
+
 
 // import mode-<language> , this imports the style and colors for the selected language.
-import 'ace-builds/src-noconflict/mode-javascript'
-import 'ace-builds/src-noconflict/mode-html'
-import 'ace-builds/src-noconflict/mode-css'
+import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/mode-html';
+import 'ace-builds/src-noconflict/mode-css';
 // there are many themes to import, I liked monokai.
-import 'ace-builds/src-noconflict/theme-monokai'
+import 'ace-builds/src-noconflict/theme-monokai';
 // this is an optional import just improved the interaction.
-import 'ace-builds/src-noconflict/ext-language_tools'
-import 'ace-builds/src-noconflict/ext-beautify'
+import 'ace-builds/src-noconflict/ext-language_tools';
+import 'ace-builds/src-noconflict/ext-beautify';
 
 
 const SnippetEditor = () => {
 
-    const [selectedEditorTab, setSelectedEditorTab] = useState("JSX");
+    const [selectedEditorTab, setSelectedEditorTab] = useState("JS");
     const [visibility, setVisibility] = useState("private");
     const [selectedCategoryList, setSelectedCategoryList] = useState([]);
 
@@ -26,6 +28,44 @@ const SnippetEditor = () => {
     const [structureCode, setStructureCode] = useState("");
     const [styleCode, setStyleCode] = useState("");
     const [functionCode, setFunctionCode] = useState("");
+
+    const [srcDoc, setSrcDoc] = useState("<h1>hello</h1>");
+
+
+
+    const compileCode = () => {
+        let splithtml, headSplit;
+        if(structureCode.includes("</body>")) {
+            splithtml = structureCode.split("</body>");
+        }
+        if(splithtml && splithtml[0].includes("<head>")) {
+            headSplit = splithtml[0].split("<head>");
+        }
+        setSrcDoc(`
+    
+        ${headSplit ? `${headSplit[0]} <head>`: `<head><style>${styleCode}</style>`}
+        ${headSplit ? `${headSplit[1]}` : splithtml? splithtml[0] : ""}
+            <script type="text/babel">
+                ${functionCode}
+    
+            </script>
+            <script src="https://unpkg.com/react@16.13.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/dataformsjs@4.0.1/js/react/jsxLoader.min.js"></script>
+        ${splithtml && splithtml.length > 1 ? `</body> ${splithtml[1]}` : "</body>"}
+        `);
+    }
+
+    // useEffect(() => {
+    //     compileCode();
+    // }, [structureCode, styleCode, functionCode]);
+
+
+
+
+
+
+
 
 
 
@@ -69,13 +109,13 @@ const SnippetEditor = () => {
         <div className="editor-section">
             <div className="editor-bar">
                 <div className="tabs">
-                    <div className={selectedEditorTab === "JSX" ? "selected" : ""} onClick={() => selectTab("JSX")}>JSX</div>
+                    <div className={selectedEditorTab === "HTML" ? "selected" : ""} onClick={() => selectTab("HTML")}>HTML</div>
                     <div className={selectedEditorTab === "JS" ? "selected" : ""} onClick={() => selectTab("JS")}>JS</div>
                     <div className={selectedEditorTab === "CSS" ? "selected" : ""} onClick={() => selectTab("CSS")}>CSS</div>
                 </div>
                 <div className="run-btn">Run ▶</div>
             </div>
-            {selectedEditorTab === "JSX" ?
+            {selectedEditorTab === "HTML" ?
             <AceEditor
                 style={{
                     height: 'calc(100vh - 7.5rem)',
@@ -152,7 +192,13 @@ const SnippetEditor = () => {
         </div>
         <div className="input-output-section">
             <div className="rendered-output-section">
-
+            <iframe
+                srcDoc={srcDoc}
+                width="100%"
+                height="100%"
+                title="output"
+                sandbox="allow-scripts"
+            />
             </div>
             <div className="input-section">
                 <div className="input-field type2">

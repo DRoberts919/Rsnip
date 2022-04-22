@@ -13,10 +13,11 @@ root.render(
   <BrowserRouter>
     <Navbar />
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<SignUp />} />
-      <Route path="snippet/edit/:snippetId" element={<SnippetEditor />} />
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<SignUp />} />
+        {/* <Route path="snippet/edit/worker-javascript.js" element={<SnippetEditor />} /> */}
+        <Route path="snippet/edit/:snippetId" element={<SnippetEditor />} />
     </Routes>
   </BrowserRouter>
 );
