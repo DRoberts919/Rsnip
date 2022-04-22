@@ -26,6 +26,7 @@ root.render(
       <Route path='login' element={<Login />} />
       <Route path='register' element={<SignUp />} />
       <Route path='/confirmation' element={<Confirmation />}></Route>
+       <Route path="snippet/edit/worker-javascript.js" element={<SnippetEditor />} />
       <Route path='snippet/edit/:snippetId' element={<SnippetEditor />} />
     </Routes>
   </BrowserRouter>
