@@ -93,6 +93,10 @@ h6{
   flex-wrap: wrap;
 }
 
+.stretch{
+  align-items: stretch;
+}
+
 /* Buttons */
 
 .btn{
@@ -148,6 +152,40 @@ h6{
   margin-bottom: 1rem;
 }
 
+
+.m-b-3{
+  margin-bottom: 3rem;
+}
+
+.m-tb-3{
+  margin: 3rem 0px;
+}
+
+.m-tb-5{
+  margin: 5rem 0px;
+}
+
+.m-t-5{
+  margin-top: 5rem;
+}
+
+.m-b-8{
+  margin-bottom: 8rem;
+}
+
+.m-b-10{
+  margin-bottom: 10rem;
+}
+
+
+.p-b-3{
+  padding-bottom: 3;
+}
+
+.p-tb-3{
+  padding: 3rem 0px;
+}
+
 .p-tb-6{
   padding: 6rem 0px;
 }
@@ -180,6 +218,10 @@ h6{
   background-color: var(--main-bg-color);
 }
 
+.extra-white-bg{
+  background-color: #fff;
+}
+
 /* Text */
 
 .white-txt{
@@ -196,6 +238,10 @@ h6{
 
 .txt-center{
   text-align: center;
+}
+
+.txt-left{
+  text-align: left;
 }
 
 /* Shadow */

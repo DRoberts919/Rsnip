@@ -1,0 +1,15 @@
+.footer-bg{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.footer-block{
+    width: 250px;
+    /* height: 225px; */
+    padding: 1rem 2rem;
+    font-weight: 600;
+}
+
+.footer-title{
+    font-size: 1.25rem;
+}
