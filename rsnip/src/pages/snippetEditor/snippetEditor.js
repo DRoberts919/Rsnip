@@ -25,9 +25,31 @@ const SnippetEditor = () => {
 
     const [categoryInput, setCategoryInput] = useState("");
 
-    const [structureCode, setStructureCode] = useState("");
+    const [structureCode, setStructureCode] = useState(` 
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>My New Snippet</title>
+</head>
+
+<body>
+    <div id="app"> </div>
+</body>
+</html>`);
     const [styleCode, setStyleCode] = useState("");
-    const [functionCode, setFunctionCode] = useState("");
+    const [functionCode, setFunctionCode] = useState(`
+class App extends React.Component {
+  
+    render() {
+        return (
+        <div>Hello React..!</div>
+        );
+    }
+    
+    }
+      
+React.render(<App />, document.getElementById('app'));`);
 
     const [srcDoc, setSrcDoc] = useState("<h1>hello</h1>");
 
@@ -43,7 +65,7 @@ const SnippetEditor = () => {
         }
         setSrcDoc(`
     
-        ${headSplit ? `${headSplit[0]} <head>`: `<head><style>${styleCode}</style>`}
+        ${headSplit ? `${headSplit[0]} <head> <style>${styleCode}</style>`: `<head><style>${styleCode}</style></head>`}
         ${headSplit ? `${headSplit[1]}` : splithtml? splithtml[0] : ""}
             <script type="text/babel">
                 ${functionCode}
@@ -61,7 +83,9 @@ const SnippetEditor = () => {
     // }, [structureCode, styleCode, functionCode]);
 
 
-
+    const renderScreen = () => {
+        compileCode();
+    }
 
 
 
@@ -113,7 +137,7 @@ const SnippetEditor = () => {
                     <div className={selectedEditorTab === "JS" ? "selected" : ""} onClick={() => selectTab("JS")}>JS</div>
                     <div className={selectedEditorTab === "CSS" ? "selected" : ""} onClick={() => selectTab("CSS")}>CSS</div>
                 </div>
-                <div className="run-btn">Run ▶</div>
+                <div className="run-btn" onClick={renderScreen}>Run ▶</div>
             </div>
             {selectedEditorTab === "HTML" ?
             <AceEditor
