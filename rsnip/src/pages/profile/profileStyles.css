@@ -1,0 +1,10 @@
+.profile-section{
+    background-color: #fff;
+    border-radius: 7px;
+    width: 325px;
+}
+
+.snippet-section{
+    border: 1px solid red;
+    max-width: 700px;
+}

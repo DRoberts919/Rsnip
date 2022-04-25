@@ -19,7 +19,7 @@ const Header = () => {
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation
           </div>
-          <Link className="m-t-1 btn green-btn" to="/register">
+          <Link className="m-t-1 btn green-btn light-shadow" to="/register">
             Get Started
           </Link>
         </div>

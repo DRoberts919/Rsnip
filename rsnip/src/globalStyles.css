@@ -86,6 +86,13 @@ h6{
   flex-wrap: wrap;
 }
 
+.row-space-evenly {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .row-space-around{
   display: flex;
   justify-content: space-around;
@@ -95,6 +102,10 @@ h6{
 
 .stretch{
   align-items: stretch;
+}
+
+.align-start{
+  align-items: flex-start;
 }
 
 /* Buttons */
@@ -253,6 +264,12 @@ h6{
   text-shadow:2px 2px rgba(0,0,0, 0.2) ;
 }
 
+/* Snippet Cards */
+.snippet-card{
+  width: 300px;
+  border: 1px solid red;
+}
+
 /* CSS Testing */
 .border-test{
   border: 1px solid red;
@@ -289,3 +306,4 @@ h6{
   resize: vertical;
   min-height: 4rem;
 }
+

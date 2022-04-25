@@ -12,7 +12,7 @@ const CallToAction = () => {
         <div>
           <h3 className="m-b-1">Let's Get Started!</h3>
           <div>Sign Up now and share your skills to the world!</div>
-          <Link className="m-t-1 btn green-btn" to="/register">
+          <Link className="m-t-1 btn green-btn light-shadow" to="/register">
             Sign Up
           </Link>
         </div>
