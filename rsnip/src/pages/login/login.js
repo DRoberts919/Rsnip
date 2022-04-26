@@ -30,7 +30,7 @@ const Login = () => {
     <div className='content login'>
       <form onSubmit={(e) => handleLogin(e)}>
         <input
-          placeholder='email'
+          placeholder='Email / Username'
           onChange={(e) => setEmail(e.target.value)}></input>
         <input
           placeholder='password'
