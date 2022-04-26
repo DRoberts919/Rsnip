@@ -1,5 +1,5 @@
 import { Auth } from "aws-amplify";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "@aws-amplify/ui-react/styles.css";
 
