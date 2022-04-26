@@ -1,10 +1,91 @@
 .profile-section{
     background-color: #fff;
-    border-radius: 7px;
+    border-radius: 8px;
     width: 325px;
+    margin: 1rem;
+}
+
+.snippet-container{
+    height: 500px;
+    overflow-y: scroll;
 }
 
 .snippet-section{
-    border: 1px solid red;
-    max-width: 700px;
+    max-width: 750px;
+    /* height: 700px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+
+.snippet-card{
+    width: 320px;
+    height: 260px;
+    margin: 1.5rem;
+    border-radius: 8px;
+    background-color: #fff;
+    color: var(--primary-color)
+}
+.snippet-title{
+    font-size: 1.25rem;
+    text-align: center;
+    margin: 0.75rem 0px 0.5rem 0px;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.snippet-description{
+    padding:0rem 1rem;
+    opacity: 0.7;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.category-group{
+    padding:1rem;
+    margin-top:0.5rem;
+}
+
+.banner{
+    padding: 1rem;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.purple-banner{
+    background-color: var(--purple-color);
+}
+
+.orange-banner{
+    background-color: var(--orange-color);
+}
+
+.dark-blue-banner{
+    background-color: var(--primary-color);
+}
+
+.light-blue-banner{
+    background-color: var(--light-blue-color);
+}
+
+.snippet-scrollbar::-webkit-scrollbar-track {
+    padding: 2px 0;
+    background-color: #282A2E;
+}
+
+
+.snippet-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.snippet-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #777;
 }
