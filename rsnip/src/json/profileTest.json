@@ -7,7 +7,7 @@
       "saved": {
         "dateUpdated":"2020-07-10T15:00:00.000",
         "visibility": "public",
-        "title": "Title of Project",
+        "title": "Title of Project Test",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "categories": ["Animated", "Hero"],
         "code": {
@@ -150,5 +150,43 @@
               "imports":["importOne","importTwo"]
           }
         }
-    }
+    },
+    {
+      "snippet_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "user_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "dateCreated": "2020-07-10T15:00:00.000",
+      "isPublished": false,
+      "saved": {
+        "dateUpdated":"2020-07-10T15:00:00.000",
+        "visibility": "public",
+        "title": "Title of Project",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "categories": ["Animated", "Hero"],
+        "code": {
+            "structureLanguage":"JSX",
+            "structure":"",
+            "styleLanguage":"CSS",
+            "styles":"",
+            "functionLanguage":"JS",
+            "functionality":"",
+            "imports":["importOne","importTwo"]
+        }
+      },
+      "published": {
+        "dateUpdated":"2020-07-10T15:00:00.000",
+        "visibility": "public",
+        "title": "Title of Project",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "categories": ["Animated", "Hero"],
+        "code": {
+            "structureLanguage":"JSX",
+            "structure":"",
+            "styleLanguage":"CSS",
+            "styles":"",
+            "functionLanguage":"JS",
+            "functionality":"",
+            "imports":["importOne","importTwo"]
+        }
+      }
+  }
 ]

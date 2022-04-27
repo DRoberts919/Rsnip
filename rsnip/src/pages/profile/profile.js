@@ -14,9 +14,6 @@ const Profile = () => {
   ]);
 
   // useEffect(() => {
-  //   const colors = [""];
-  // }, []);
-  // useEffect(() => {
   // Fetch /snippet/user/{user_id} and set response to setProfileData
   // console.log(profileData);
   // console.log(userId);

@@ -6,7 +6,7 @@
 }
 
 .snippet-container{
-    height: 500px;
+    height: 700px;
     overflow-y: scroll;
 }
 
@@ -15,7 +15,7 @@
     /* height: 700px; */
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-start;
     flex-wrap: wrap;
 }
@@ -27,13 +27,24 @@
     margin: 1.5rem;
     border-radius: 8px;
     background-color: #fff;
-    color: var(--primary-color)
+    color: var(--primary-color);
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition:0.2s;
 }
+
+.snippet-card:hover{
+    border: 3px solid var(--secondary-color);
+    transition: 0.2s;
+}
+
 .snippet-title{
     font-size: 1.25rem;
     text-align: center;
     margin: 0.75rem 0px 0.5rem 0px;
     font-weight: 600;
+    /* border: 1px solid red; */
+    height: 2rem;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -47,16 +58,23 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    /* border: 1px solid red; */
+    height: 6rem;
 }
 
 .category-group{
-    padding:1rem;
-    margin-top:0.5rem;
+    padding:0.5rem 1rem;
+    margin-top:1.5rem;
+    /* border: 1px solid red; */
 }
 
 .banner{
     padding: 1rem;
     border-radius: 8px 8px 0px 0px;
+    width: 320px;
+    margin-left: -3px;
+    margin-top: -3px;
+    transition:0.2s;
 }
 
 .purple-banner{
@@ -75,17 +93,23 @@
     background-color: var(--light-blue-color);
 }
 
+.snippet-card:hover .purple-banner, .snippet-card:hover .orange-banner, .snippet-card:hover .dark-blue-banner, .snippet-card:hover .light-blue-banner{
+    background-color: var(--secondary-color);
+    transition:0.2s;
+}
+
 .snippet-scrollbar::-webkit-scrollbar-track {
     padding: 2px 0;
-    background-color: #282A2E;
+    background-color: #ffffff;
+    border-radius: 8px;
 }
 
 
 .snippet-scrollbar::-webkit-scrollbar {
-    width: 8px;
+    width: 7px;
 }
 
 .snippet-scrollbar::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: #777;
+    background-color: rgb(235, 235, 235);
 }
