@@ -142,3 +142,7 @@
     cursor: pointer;
     padding-left:0.25rem;
 }
+
+iframe {
+    border: none;
+}
