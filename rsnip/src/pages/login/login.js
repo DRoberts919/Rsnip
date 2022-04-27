@@ -15,15 +15,20 @@ const Login = () => {
     try {
       Auth.signIn(email, password).then((res) => {
         console.log(res);
-        
       });
       navigate("/", { replace: true });
       //signInUserSession.accessToken.jwtToken
     } catch (error) {
       console.log(error);
     }
+  };
 
-    
+  const logout = async () => {
+    try {
+     await Auth.signOut();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -38,6 +43,10 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}></input>
         <button type='submit'>LOGIN</button>
       </form>
+
+      <div>
+        <button onClick={() => logout()}>Logout</button>
+      </div>
     </div>
   );
 };
