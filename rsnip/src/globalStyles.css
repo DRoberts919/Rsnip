@@ -5,8 +5,9 @@
   --main-bg-color: #fafafa;
   --primary-color: #34495E;
   --secondary-color:#41B883;
-  /* Add purple - #9997FF*/
-  /* Add yellow-orange - #F8C024 */
+  --purple-color: #9997FF;
+  --orange-color: #F8C024;
+  --light-blue-color:#87BCC7;
 }
 
 /* HTML Elements */
@@ -162,7 +163,9 @@ h6{
 .m-b-1{
   margin-bottom: 1rem;
 }
-
+.m-b-2{
+  margin-bottom: 2rem;
+}
 
 .m-b-3{
   margin-bottom: 3rem;
@@ -264,15 +267,32 @@ h6{
   text-shadow:2px 2px rgba(0,0,0, 0.2) ;
 }
 
-/* Snippet Cards */
-.snippet-card{
-  width: 300px;
-  border: 1px solid red;
-}
 
 /* CSS Testing */
 .border-test{
   border: 1px solid red;
+}
+
+/* categories */
+.selected-categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.selected-category-tag {
+  border-radius: 100vh;
+  background-color: var(--secondary-color);
+  color:#fff;
+  padding:6px 12px;
+  font-size: 0.8rem;
+  margin: 0 0.5rem 0.5rem 0;
+}
+
+.selected-category-tag span {
+  cursor: pointer;
+  padding-left:0.25rem;
 }
 
 

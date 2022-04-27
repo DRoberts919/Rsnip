@@ -1,24 +1,31 @@
 import { Auth } from "aws-amplify";
-import { Link, useNavigate } from "react-router-dom";
-
-import "@aws-amplify/ui-react/styles.css";
-
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import ResendConfirm from "../../components/resendconfirmemail/ResendConfirm.js";
 import "./signupStyles.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const handleSignup = () => {
+
+  // state
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("");
+
+  const handleSignup = (evt) => {
+    evt.preventDefault();
     try {
       Auth.signUp({
-        username: "philip",
-        email: "droberts@student.neumont.edu",
-        password: "philipD123!",
+        username: username,
+        email: email,
+        password: password,
         attributes: {
-          email: "droberts@student.neumont.edu",
-          name: "philip",
+          email: email,
+          name: username,
         },
       }).then((res) => {
-        console.log(res);
+        // console.log(res);
         navigate("../confirmation", { replace: true });
       });
     } catch (error) {
@@ -28,7 +35,24 @@ const SignUp = () => {
 
   return (
     <div className='content signup'>
-      <button onClick={() => handleSignup()}>Sign up</button>
+      <form onSubmit={(e) => handleSignup(e)}>
+        <input
+          placeholder='Username'
+          onChange={(e) => setUsername(e.target.value)}></input>
+        <input
+          placeholder='Password'
+          type='password'
+          onChange={(e) => setPassword(e.target.value)}></input>
+        <input
+          placeholder='Confirm Password'
+          type='password'
+          onChange={(e) => setConfirmPassword(e.target.value)}></input>
+        <input
+          placeholder='Email'
+          onChange={(e) => setEmail(e.target.value)}></input>
+        <button type='submit'>Sign up</button>
+      </form>
+      <ResendConfirm />
     </div>
   );
 };

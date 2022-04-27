@@ -1,19 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./confirmationStyle.css";
 
 import { Auth } from "aws-amplify";
 
 function Confirmation() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [pin, setPin] = useState("");
+
+  const navigate = useNavigate();
 
   const handleConfirm = async (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(pin);
 
     try {
-      await Auth.confirmSignUp(email, pin).then((res) => console.log(res));
+      await Auth.confirmSignUp(username, pin).then((res) => console.log(res));
+      navigate("../login", { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -22,8 +24,8 @@ function Confirmation() {
     <div className='confirm'>
       <form onSubmit={(e) => handleConfirm(e)}>
         <input
-          placeholder='email'
-          onChange={(e) => setEmail(e.target.value)}></input>
+          placeholder='Username'
+          onChange={(e) => setUsername(e.target.value)}></input>
         <input
           placeholder='pin'
           onChange={(e) => setPin(e.target.value)}></input>
