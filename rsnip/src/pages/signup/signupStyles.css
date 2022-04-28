@@ -1,3 +1,16 @@
 .signup{
-    margin-top: 100px;
+    padding:12rem 1rem;
 }
+
+.signup-form{
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding:  2.5rem 3.5rem;
+    border-radius: 8px;
+}
+
+
+
+
+

@@ -1,12 +1,12 @@
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import ResendConfirm from "../../components/resendconfirmemail/ResendConfirm.js";
+
 import "./signupStyles.css";
+import UserIcon from "../../assets/images/form-user-icon.png";
 
 const SignUp = () => {
   const navigate = useNavigate();
-
   // state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,25 +34,50 @@ const SignUp = () => {
   };
 
   return (
-    <div className='content signup'>
-      <form onSubmit={(e) => handleSignup(e)}>
-        <input
-          placeholder='Username'
-          onChange={(e) => setUsername(e.target.value)}></input>
-        <input
-          placeholder='Password'
-          type='password'
-          onChange={(e) => setPassword(e.target.value)}></input>
-        <input
-          placeholder='Confirm Password'
-          type='password'
-          onChange={(e) => setConfirmPassword(e.target.value)}></input>
-        <input
-          placeholder='Email'
-          onChange={(e) => setEmail(e.target.value)}></input>
-        <button type='submit'>Sign up</button>
-      </form>
-      <ResendConfirm />
+    <div className="content signup">
+      <div className="signup-form light-shadow">
+        <div className="form-title">Sign Up</div>
+        <form onSubmit={(e) => handleSignup(e)}>
+          <div className="relative">
+            <img className="form-icon" src={UserIcon} alt="User Icon" />
+            <input
+              className="login-signup-input"
+              placeholder="Username"
+              onChange={(e) => setUsername(e.target.value)}
+            ></input>
+          </div>
+          <div className="relative">
+            <img className="form-icon" src={UserIcon} alt="User Icon" />
+            <input
+              className="login-signup-input"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+          </div>
+          <div className="relative">
+            <img className="form-icon" src={UserIcon} alt="User Icon" />
+            <input
+              className="login-signup-input"
+              placeholder="Password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </div>
+          <div className="relative">
+            <img className="form-icon" src={UserIcon} alt="User Icon" />
+            <input
+              className="login-signup-input"
+              placeholder="Confirm Password"
+              type="password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></input>
+          </div>
+          <div className="m-2"></div>
+          <button className="light-shadow form-btn green-btn" type="submit">
+            Sign up
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
