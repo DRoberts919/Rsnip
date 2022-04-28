@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import "./snippetEditorStyles.css";
 import categories from "../../categories.json";
 import React from 'react';
-
+import Frame from 'react-frame-component';
 import AceEditor from 'react-ace';
 
+import ReactHtmlParser from 'react-html-parser';
 
 // import mode-<language> , this imports the style and colors for the selected language.
 import 'ace-builds/src-noconflict/mode-javascript';
@@ -132,6 +133,16 @@ ReactDOM.render(
         }
     }
 
+    const TestApp = (props) => { 
+        const [text, setText] = useState('hello');
+    
+        return (
+          <div>
+            <h1>{text}</h1>
+            <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
+          </div>
+        );
+      }
 
     return (
       <div className="editor-content">
@@ -228,6 +239,13 @@ ReactDOM.render(
                 title="output"
                 sandbox="allow-scripts"
             />
+            <Frame head={<style>{styleCode}</style>}>
+                
+                <TestApp />
+
+
+
+            </Frame>
             </div>
             <div className="input-section">
                 <div className="input-field type2">
