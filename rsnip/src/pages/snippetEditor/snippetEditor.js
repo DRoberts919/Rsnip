@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./snippetEditorStyles.css";
 import categories from "../../categories.json";
-import React from 'react'
+import React from 'react';
 
 import AceEditor from 'react-ace';
 
@@ -29,29 +29,34 @@ const SnippetEditor = () => {
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>My New Snippet</title>
+  <meta charset="utf-8">
+  <title>My New Snippet</title>
 </head>
 
 <body>
-    <div id="app"> </div>
+  <div id="app"> </div>
 </body>
 </html>`);
     const [styleCode, setStyleCode] = useState("");
     const [functionCode, setFunctionCode] = useState(`
-class App extends React.Component {
-  
-    render() {
-        return (
-        <div>Hello React..!</div>
-        );
-    }
-    
-    }
-      
-React.render(<App />, document.getElementById('app'));`);
+var App = (props) => {
+  return (
+    <div>
+      <h1>Hello World</h1>
+      <p>
+        Get started by using text editor to create something amazing! Once you are ready, hit that run button and watch your snippet come to life.
+      </p>
+    </div>
+  );
+};
 
-    const [srcDoc, setSrcDoc] = useState("<h1>hello</h1>");
+
+ReactDOM.render(
+    App(),
+    document.getElementById('app')
+);`);
+
+    const [srcDoc, setSrcDoc] = useState("");
 
 
 
@@ -67,20 +72,20 @@ React.render(<App />, document.getElementById('app'));`);
     
         ${headSplit ? `${headSplit[0]} <head> <style>${styleCode}</style>`: `<head><style>${styleCode}</style></head>`}
         ${headSplit ? `${headSplit[1]}` : splithtml? splithtml[0] : ""}
-            <script type="text/babel">
-                ${functionCode}
-    
-            </script>
-            <script src="https://unpkg.com/react@16.13.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-            <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/dataformsjs@4.0.1/js/react/jsxLoader.min.js"></script>
+    <script defer src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+    <script defer src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+    <script defer type="text/babel">
+      ${functionCode}
+
+    </script>
         ${splithtml && splithtml.length > 1 ? `</body> ${splithtml[1]}` : "</body>"}
         `);
     }
 
-    // useEffect(() => {
-    //     compileCode();
-    // }, [structureCode, styleCode, functionCode]);
+    useEffect(() => {
+        compileCode();
+    }, []);
 
 
     const renderScreen = () => {
