@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./confirmationStyle.css";
 import ResendConfirm from "../../components/resendconfirmemail/ResendConfirm.js";
 import { Auth } from "aws-amplify";
-import UserIcon from "../../assets/images/form-user-icon.png";
+// import UserIcon from "../../assets/images/form-user-icon.png";
 
 function Confirmation() {
   const [username, setUsername] = useState("");
@@ -30,7 +30,7 @@ function Confirmation() {
         </div>
         <form onSubmit={(e) => handleConfirm(e)}>
           <div className="relative">
-            <img className="form-icon" src={UserIcon} alt="User Icon" />
+            {/* <img className="form-icon" src={UserIcon} alt="User Icon" /> */}
             <input
               className="login-signup-input"
               placeholder="Username"
@@ -38,7 +38,7 @@ function Confirmation() {
             ></input>
           </div>
           <div className="relative">
-            <img className="form-icon" src={UserIcon} alt="User Icon" />
+            {/* <img className="form-icon" src={UserIcon} alt="User Icon" /> */}
             <input
               className="login-signup-input"
               placeholder="Pin #"

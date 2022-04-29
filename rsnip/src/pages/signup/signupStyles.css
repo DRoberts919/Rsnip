@@ -1,5 +1,7 @@
 .signup{
     padding:12rem 1rem;
+    max-width: 800px;
+    margin:  0 auto;
 }
 
 .signup-form{
@@ -10,7 +12,18 @@
     border-radius: 8px;
 }
 
+.signup-img{
+    position: absolute;
+    bottom:0;
+    right:0;
+    width:175px;
+}
 
+@media all and (max-width: 768px){
+    .signup-img{
+        display: none;
+    }
+}
 
 
 
