@@ -1,0 +1,17 @@
+.resend-form{
+    max-width: 400px;
+    margin: 0 auto;
+    padding:  0rem 3.5rem 1rem 3.5rem;
+    border-radius: 8px;
+}
+
+.resend-form input {
+    background-color: transparent;
+}
+
+.click-here-btn{
+    font-weight: 500;
+    color: var(--secondary-color);
+    text-decoration: underline;
+    cursor: pointer;
+}

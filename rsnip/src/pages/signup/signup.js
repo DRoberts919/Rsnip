@@ -23,6 +23,9 @@ const SignUp = () => {
 
   const handleSignup = (evt) => {
     evt.preventDefault();
+
+    // Regex
+
     try {
       Auth.signUp({
         username: username,
@@ -124,7 +127,7 @@ const SignUp = () => {
             </button>
           </form>
         </div>
-        <img class="signup-img" src={SignUpImg} alt="SignUp Img" />
+        <img className="signup-img" src={SignUpImg} alt="SignUp Img" />
       </div>
     </div>
   );

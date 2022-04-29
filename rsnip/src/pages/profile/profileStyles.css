@@ -58,20 +58,18 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    /* border: 1px solid red; */
     height: 6rem;
 }
 
 .category-group{
     padding:0.5rem 1rem;
     margin-top:1.5rem;
-    /* border: 1px solid red; */
 }
 
 .banner{
     padding: 1rem;
     border-radius: 8px 8px 0px 0px;
-    width: 320px;
+    width: 295px;
     margin-left: -3px;
     margin-top: -3px;
     transition:0.2s;

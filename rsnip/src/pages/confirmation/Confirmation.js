@@ -3,12 +3,22 @@ import { useNavigate } from "react-router-dom";
 import "./confirmationStyle.css";
 import ResendConfirm from "../../components/resendconfirmemail/ResendConfirm.js";
 import { Auth } from "aws-amplify";
-// import UserIcon from "../../assets/images/form-user-icon.png";
+import { FaUserAlt } from "react-icons/fa";
+import { MdPassword } from "react-icons/md";
 
 function Confirmation() {
   const [username, setUsername] = useState("");
   const [pin, setPin] = useState("");
-
+  const [focus, setFocus] = useState({
+    username: false,
+    pin: false,
+  });
+  const onFocus = (inputName) => {
+    setFocus((prev) => ({ ...prev, [inputName]: true }));
+  };
+  const onBlur = (inputName) => {
+    setFocus((prev) => ({ ...prev, [inputName]: false }));
+  };
   const navigate = useNavigate();
 
   const handleConfirm = async (e) => {
@@ -21,6 +31,7 @@ function Confirmation() {
       console.log(error);
     }
   };
+
   return (
     <div className="content confirm">
       <div className="confirm-form light-shadow">
@@ -30,18 +41,29 @@ function Confirmation() {
         </div>
         <form onSubmit={(e) => handleConfirm(e)}>
           <div className="relative">
-            {/* <img className="form-icon" src={UserIcon} alt="User Icon" /> */}
+            <div style={{ marginLeft: 2 }} className="form-icon">
+              <FaUserAlt
+                color={focus.username ? "#41B883" : "#777777"}
+                size={16}
+              />
+            </div>
             <input
               className="login-signup-input"
               placeholder="Username"
+              onFocus={() => onFocus("username")}
+              onBlur={() => onBlur("username")}
               onChange={(e) => setUsername(e.target.value)}
             ></input>
           </div>
           <div className="relative">
-            {/* <img className="form-icon" src={UserIcon} alt="User Icon" /> */}
+            <div className="form-icon">
+              <MdPassword color={focus.pin ? "#41B883" : "#777777"} size={20} />
+            </div>
             <input
               className="login-signup-input"
-              placeholder="Pin #"
+              placeholder="Pin"
+              onFocus={() => onFocus("pin")}
+              onBlur={() => onBlur("pin")}
               onChange={(e) => setPin(e.target.value)}
             ></input>
           </div>
@@ -50,10 +72,9 @@ function Confirmation() {
             Confirm Account
           </button>
         </form>
-        <div className="m-2"></div>
-        <div>Have not recieved an email?</div>
-        <ResendConfirm />
       </div>
+      <div className="m-2"></div>
+      <ResendConfirm />
     </div>
   );
 }

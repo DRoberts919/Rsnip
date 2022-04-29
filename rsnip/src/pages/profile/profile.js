@@ -20,7 +20,7 @@ const Profile = () => {
   // }, [profileData, userId]);
 
   return (
-    <div className="content row-center align-start p-t-8  border-test">
+    <div className="content row-center align-start p-t-8">
       <div className="profile-section light-shadow">Profile section</div>
       <div className="snippet-container snippet-scrollbar">
         <div className="snippet-section">
