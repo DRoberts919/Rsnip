@@ -4,7 +4,7 @@ import categories from "../../categories.json";
 import React from 'react';
 import Frame from 'react-frame-component';
 import AceEditor from 'react-ace';
-
+import SplitPane from "react-split-pane";
 import ReactHtmlParser from 'react-html-parser';
 
 // import mode-<language> , this imports the style and colors for the selected language.
@@ -145,7 +145,7 @@ ReactDOM.render(
       }
 
     return (
-      <div className="editor-content">
+      <SplitPane split="vertical" minSize={"50%"} className="editor-content">
         <div className="editor-section">
             <div className="editor-bar">
                 <div className="tabs">
@@ -285,7 +285,7 @@ ReactDOM.render(
                 </div>
             </div>
         </div>
-      </div>
+      </SplitPane>
     );
   };
   
