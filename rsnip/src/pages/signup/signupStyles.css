@@ -19,6 +19,13 @@
     width:175px;
 }
 
+.already-member{
+    margin-top: 1rem;
+    text-decoration: underline;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
 @media all and (max-width: 768px){
     .signup-img{
         display: none;

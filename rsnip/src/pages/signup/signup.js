@@ -1,5 +1,5 @@
 import { Auth } from "aws-amplify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./signupStyles.css";
 import { FaUserAlt, FaCheckCircle } from "react-icons/fa";
@@ -266,6 +266,9 @@ const SignUp = () => {
           </form>
         </div>
         <img className="signup-img" src={SignUpImg} alt="SignUp Img" />
+      </div>
+      <div className="txt-center already-member">
+        <Link to="/login">Already A Member</Link>
       </div>
     </div>
   );
