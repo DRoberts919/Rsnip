@@ -10,6 +10,7 @@ import SnippetEditor from "./pages/snippetEditor/snippetEditor";
 import Profile from "./pages/profile/profile";
 import Confirmation from "./pages/confirmation/Confirmation";
 import { Amplify } from "aws-amplify";
+import Search from "./pages/search/search";
 
 Amplify.configure({
   aws_cognito_region:
@@ -29,6 +30,7 @@ root.render(
       <Route path="snippet/edit/:snippetId" element={<SnippetEditor />} />
       <Route path="user/:userId" element={<Profile />} />
       <Route path="confirmation" element={<Confirmation />}></Route>
+      <Route path="search" element={<Search />} />
       <Route
         path="snippet/edit/worker-javascript.js"
         element={<SnippetEditor />}
