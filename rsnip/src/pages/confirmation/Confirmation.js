@@ -13,6 +13,8 @@ function Confirmation() {
     username: false,
     pin: false,
   });
+  const [error, setError] = useState(false);
+
   const onFocus = (inputName) => {
     setFocus((prev) => ({ ...prev, [inputName]: true }));
   };
@@ -28,6 +30,7 @@ function Confirmation() {
       await Auth.confirmSignUp(username, pin).then((res) => console.log(res));
       navigate("../login", { replace: true });
     } catch (error) {
+      setError(true);
       console.log(error);
     }
   };
@@ -43,12 +46,16 @@ function Confirmation() {
           <div className="relative">
             <div style={{ marginLeft: 2 }} className="form-icon">
               <FaUserAlt
-                color={focus.username ? "#41B883" : "#777777"}
+                color={
+                  error ? "#CC0000" : focus.username ? "#41B883" : "#777777"
+                }
                 size={16}
               />
             </div>
             <input
-              className="login-signup-input"
+              className={
+                error ? "login-signup-input error" : "login-signup-input"
+              }
               placeholder="Username"
               onFocus={() => onFocus("username")}
               onBlur={() => onBlur("username")}
@@ -57,16 +64,24 @@ function Confirmation() {
           </div>
           <div className="relative">
             <div className="form-icon">
-              <MdPassword color={focus.pin ? "#41B883" : "#777777"} size={20} />
+              <MdPassword
+                color={error ? "#CC0000" : focus.pin ? "#41B883" : "#777777"}
+                size={20}
+              />
             </div>
             <input
-              className="login-signup-input"
+              className={
+                error ? "login-signup-input error" : "login-signup-input"
+              }
               placeholder="Pin"
               onFocus={() => onFocus("pin")}
               onBlur={() => onBlur("pin")}
               onChange={(e) => setPin(e.target.value)}
             ></input>
           </div>
+          {error ? (
+            <div className="error-txt txt-center">Invalid Username/Pin</div>
+          ) : null}
           <div className="m-2"></div>
           <button className="light-shadow form-btn green-btn" type="submit">
             Confirm Account

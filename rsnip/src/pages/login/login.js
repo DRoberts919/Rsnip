@@ -7,30 +7,28 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [focus, setFocus] = useState({
     email: false,
     password: false,
   });
-
-  const onFocus = (inputName) => {
-    setFocus((prev) => ({ ...prev, [inputName]: true }));
-  };
-  const onBlur = (inputName) => {
-    setFocus((prev) => ({ ...prev, [inputName]: false }));
-  };
-
-  const navigate = useNavigate();
+  const [error, setError] = useState(false);
 
   const handleLogin = (evt) => {
     evt.preventDefault();
+
     try {
-      Auth.signIn(email, password).then((res) => {
-        console.log(res);
-      });
-      navigate("/", { replace: true });
-      //signInUserSession.accessToken.jwtToken
+      Auth.signIn(email, password)
+        .then((res) => {
+          console.log(res);
+          //signInUserSession.accessToken.jwtToken
+          // navigate("/", { replace: true });
+        })
+        .catch(() => {
+          setError(true);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +42,13 @@ const Login = () => {
     }
   };
 
+  const onFocus = (inputName) => {
+    setFocus((prev) => ({ ...prev, [inputName]: true }));
+  };
+  const onBlur = (inputName) => {
+    setFocus((prev) => ({ ...prev, [inputName]: false }));
+  };
+
   return (
     <div className="login">
       <div className="relative">
@@ -53,12 +58,16 @@ const Login = () => {
             <div className="relative">
               <div className="form-icon">
                 <MdEmail
-                  color={focus.email ? "#41B883" : "#777777"}
+                  color={
+                    error ? "#CC0000" : focus.email ? "#41B883" : "#777777"
+                  }
                   size={20}
                 />
               </div>
               <input
-                className="login-signup-input"
+                className={
+                  error ? "login-signup-input error" : "login-signup-input"
+                }
                 placeholder="Email/Username"
                 onFocus={() => onFocus("email")}
                 onBlur={() => onBlur("email")}
@@ -68,12 +77,16 @@ const Login = () => {
             <div className="relative">
               <div className="form-icon">
                 <RiLockPasswordFill
-                  color={focus.password ? "#41B883" : "#777777"}
+                  color={
+                    error ? "#CC0000" : focus.password ? "#41B883" : "#777777"
+                  }
                   size={20}
                 />
               </div>
               <input
-                className="login-signup-input"
+                className={
+                  error ? "login-signup-input error" : "login-signup-input"
+                }
                 placeholder="Password"
                 type="password"
                 onFocus={() => onFocus("password")}
@@ -81,6 +94,11 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
+            {error ? (
+              <div className="error-txt txt-center">
+                Invalid Username/Password
+              </div>
+            ) : null}
             <div className="m-2"></div>
             <button className="light-shadow form-btn green-btn" type="submit">
               Login

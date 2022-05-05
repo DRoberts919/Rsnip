@@ -8,6 +8,7 @@
   --purple-color: #9997FF;
   --orange-color: #F8C024;
   --light-blue-color:#87BCC7;
+  --error-color: #cc0000;
 }
 
 /* HTML Elements */
@@ -290,6 +291,23 @@ h6{
   text-align: left;
 }
 
+.error-txt{
+  color: var(--error-color);
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.success-txt{
+  color: var(--secondary-color);
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.error-txt ul {
+  padding-left: 1rem;
+  margin: 0;
+}
+
 .form-title{
   text-align: center;
   font-size: 2rem;
@@ -366,6 +384,11 @@ h6{
 .input-field.type2 textarea {
   resize: vertical;
   min-height: 4rem;
+}
+
+.login-signup-input.error, .login-signup-input.error{
+  outline:none;
+  border-color: var(--error-color);
 }
 
 .login-signup-input{
