@@ -37,7 +37,7 @@ const Navbar = () => {
         </Link>
         <div className={menuOpen ? "nav-links" : "nav-links nav-hidden"}>
           {/* <div>{location.pathname}</div> */}
-          <div className="relative">
+          <div className="relative m-r-1">
             <input
               className="nav-search-snippet light-shadow m-1"
               type="text"
@@ -51,7 +51,7 @@ const Navbar = () => {
             >
               <div className="row">
                 <div className="search-line"></div>
-                <BsSearch color="#999" size={20} />
+                <BsSearch color="#999" size={18} />
               </div>
             </Link>
           </div>

@@ -3,6 +3,7 @@
 /* Color Variables */
 :root {
   --main-bg-color: #fafafa;
+  --main-bg-color-2: #f1f4fed5;
   --primary-color: #34495E;
   --secondary-color:#41B883;
   --purple-color: #9997FF;
@@ -118,17 +119,23 @@ h6{
   font-weight: 600;
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
-  
+  transition: background-color 0.15s ease;
 }
 
-.btn:hover{
+/* .btn:hover{
   opacity: 0.9;
-}
+} */
 
 .green-btn{
   color: var(--main-bg-color) !important;
   background-color: var(--secondary-color);
   cursor: pointer;
+  transition: background-color 0.15s ease;
+
+}
+.green-btn:hover {
+  opacity: 1;
+  background-color: #46c78d;
 }
 
 .green-btn-outline{
@@ -276,7 +283,9 @@ h6{
 .white-txt{
  color: var(--main-bg-color); 
 }
-
+.white-txt-secondary {
+  color: var(--main-bg-color-2);
+}
 .black-txt{
   color: var(--primary-color);
 }
@@ -321,7 +330,8 @@ h6{
 
 /* Shadow */
 .light-shadow{
-  box-shadow: 2px 2px 2px rgba(0,0,0, 0.2) ;
+  /* box-shadow: 2px 2px 2px rgba(0,0,0, 0.2) ; */
+  box-shadow: 2px 2px 15px #3a7e7b22;
 }
 
 .text-shadow{
