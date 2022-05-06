@@ -1,3 +1,27 @@
 .login{
-    margin-top: 100px;
+    padding:14rem 1rem;
+    max-width: 675px;
+    margin:  0 auto;
+}
+
+.login-form{
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding:  2.5rem 3.5rem;
+    border-radius: 8px;
+}
+
+.login-img{
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:125px;
+}
+
+
+@media all and (max-width: 768px){
+    .login-img{
+        display: none;
+    }
 }

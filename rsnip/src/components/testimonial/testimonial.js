@@ -27,8 +27,12 @@ const Testimonial = () => {
         <div className="overlap-triangle"></div>
       </div>
       <div className="profile-bg light-shadow">
-        <img className="profile-img" src={Cody} alt="Cody" />
-        <div className="bold">Cody Ashby</div>
+        <img
+          className="profile-img"
+          src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png"
+          alt="User Profile"
+        />
+        <div className="bold">John Doe</div>
       </div>
     </div>
   );
