@@ -9,10 +9,12 @@ const Search = () => {
     console.log(searchParams.get("name"));
   }, [searchParams]);
   return (
-    <>
-      <div>Search Page</div>
-      <div>{searchParams.get("name")}</div>
-    </>
+    <div className="content p-t-8">
+      <div className="search-content">
+        <div>Search Page</div>
+        <div>{searchParams.get("name")}</div>
+      </div>
+    </div>
   );
 };
 

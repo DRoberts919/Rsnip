@@ -118,6 +118,7 @@ h6{
   font-weight: 600;
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
+  
 }
 
 .btn:hover{
@@ -127,6 +128,7 @@ h6{
 .green-btn{
   color: var(--main-bg-color) !important;
   background-color: var(--secondary-color);
+  cursor: pointer;
 }
 
 .green-btn-outline{
@@ -396,3 +398,4 @@ h6{
   font-size: 1rem;
   padding-left: 2.5rem;
 }
+
