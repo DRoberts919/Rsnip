@@ -15,7 +15,7 @@ const Header = () => {
           <h5 className="m-b-1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit..{" "}
           </h5>
-          <div>
+          <div className="white-txt-secondary">
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation
           </div>

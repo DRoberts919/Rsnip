@@ -55,7 +55,7 @@ const Home = () => {
             WHAT WE DO
           </div>
           <h3 className='m-b-1'>What is RSnip?</h3>
-          <div>
+          <div >
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
