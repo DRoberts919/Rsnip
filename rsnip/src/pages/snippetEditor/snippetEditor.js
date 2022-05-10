@@ -5,6 +5,7 @@ import React from 'react';
 import AceEditor from 'react-ace';
 import SplitPane from "react-split-pane";
 import { HotKeys, configure } from "react-hotkeys";
+import { useNavigate } from 'react-router-dom';
 
 // import mode-<language> , this imports the style and colors for the selected language.
 import 'ace-builds/src-noconflict/mode-javascript';
@@ -15,18 +16,21 @@ import 'ace-builds/src-noconflict/theme-monokai';
 // this is an optional import just improved the interaction.
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
+import EditNav from "../../components/navbar/editNavbar";
 
 configure({
     ignoreTags: []
 });
 
 const SnippetEditor = () => {
-
+    const navigate = useNavigate();
     const [selectedEditorTab, setSelectedEditorTab] = useState("JS");
     const [visibility, setVisibility] = useState("private");
     const [selectedCategoryList, setSelectedCategoryList] = useState([]);
-
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [categoryInput, setCategoryInput] = useState("");
+    const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
 
     const [structureCode, setStructureCode] = useState(` 
 <!DOCTYPE HTML>
@@ -42,25 +46,23 @@ const SnippetEditor = () => {
 </html>`);
     const [styleCode, setStyleCode] = useState("");
     const [functionCode, setFunctionCode] = useState(`
+const { useState } = React;
+const { createRoot } = ReactDOM;
 
+const App = (props) => { 
+const [text, setText] = useState('hello');
 
-  const { useState } = React;
-  const { createRoot } = ReactDOM;
+return (
+  <div>
+  <h1>{text}</h1>
+  <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
+  </div>
+);
+}
 
-  const App = (props) => { 
-    const [text, setText] = useState('hello');
-
-    return (
-      <div>
-        <h1>{text}</h1>
-        <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
-      </div>
-    );
-  }
-
-  const container = document.getElementById('app');
-  const root = createRoot(container);
-  root.render(<App />);
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<App />);
   `);
 
     const [srcDoc, setSrcDoc] = useState("");
@@ -110,7 +112,46 @@ const SnippetEditor = () => {
         compileCode();
     }, []);
 
+    const getData = () => {
+        return {
+            visibility:	visibility,
+            title: title,
+            description: description,
+            categories:	selectedCategoryList,
+            code: {
+                structureLanguage: "HTML",
+                structure: structureCode,
+                styleLanguage: "CSS",
+                styles: styleCode,
+                functionLanguage: "JS",
+                functionality: functionCode,
+                imports: []
+            }
+        }
+    }
 
+    const goToPrevPage = () => {
+        navigate(-1);
+    }
+
+    const saveSnippet = () => {
+        let data = getData();
+        //TODO: Fetch put data
+        console.log(data);
+        //TODO: Update display message
+        let date = new Date();
+        setSaveMessage(`Saved at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
+        console.log("save");
+    }
+
+    const publishSnippet = () => {
+        let data = getData();
+        //TODO: Fetch put data
+        //TODO: Update display message
+        let date = new Date();
+        setSaveMessage(`Published at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
+        console.log("publish");
+    }
 
     // const htmlString = `
     // <!DOCTYPE HTML>
@@ -193,6 +234,8 @@ const SnippetEditor = () => {
     
     
     return (
+    <>
+    <EditNav goToPrevPage={goToPrevPage} saveSnippet={saveSnippet} publishSnippet={publishSnippet} saveMessage={saveMessage}/>
     <HotKeys keyMap={keyMap} handlers={handlers}>
         <SplitPane split="vertical" minSize={"50%"} className="editor-content">
             <div className="editor-section">
@@ -293,7 +336,7 @@ const SnippetEditor = () => {
                 <div className="input-section">
                     <div className="input-field type2">
                         <label htmlFor="title">Title</label>
-                        <input type="text" id="title" />
+                        <input type="text" id="title" onChange={e => setTitle(e.target.value)} value={title}/>
                     </div>
                     
                     <div className="input-field type2">
@@ -306,7 +349,7 @@ const SnippetEditor = () => {
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="desc">Description</label>
-                        <textarea id="desc"></textarea>
+                        <textarea id="desc" onChange={e => setDescription(e.target.value)} value={description}></textarea>
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="category">Category</label>
@@ -330,6 +373,8 @@ const SnippetEditor = () => {
             </div>
         </SplitPane>
       </HotKeys>
+    </>
+
     );
   };
   

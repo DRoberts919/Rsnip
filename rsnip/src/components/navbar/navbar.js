@@ -10,7 +10,7 @@ const Navbar = () => {
   const [changeNav, setChangeNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
+  // const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
   const changeNavColors = () => {
     window.scrollY >= 1 ? setChangeNav(true) : setChangeNav(false);
   };
@@ -23,24 +23,25 @@ const Navbar = () => {
   
   window.addEventListener("scroll", changeNavColors);
   if(location.pathname.includes("/snippet/edit/")) {
-    return (<div className="edit-nav">
-      <div className="nav-group">
-        <div className="left">
-          <button className="btn green-btn-outline">
-            &#8249; Back
-          </button>
-        </div>
-        <div className="right">
-          <span>{saveMessage}</span>
-          <button className="btn green-btn-outline">
-            Save
-          </button>
-          <button className="btn green-btn">
-            Publish
-          </button>
-        </div>
-      </div>
-    </div>);
+    // return (<div className="edit-nav">
+    //   <div className="nav-group">
+    //     <div className="left">
+    //       <button className="btn green-btn-outline">
+    //         &#8249; Back
+    //       </button>
+    //     </div>
+    //     <div className="right">
+    //       <span>{saveMessage}</span>
+    //       <button className="btn green-btn-outline">
+    //         Save
+    //       </button>
+    //       <button className="btn green-btn">
+    //         Publish
+    //       </button>
+    //     </div>
+    //   </div>
+    // </div>);
+    return (<></>);
   }
   else {
     return (
