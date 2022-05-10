@@ -120,6 +120,8 @@ h6{
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
   transition: background-color 0.15s ease;
+  cursor: pointer;
+  border:none;
 }
 
 /* .btn:hover{
@@ -139,7 +141,15 @@ h6{
 }
 
 .green-btn-outline{
+  transition: background-color 0.15s ease, color 0.15s ease;
   border: 2px solid var(--secondary-color);
+  box-sizing: border-box;
+  padding: 6px 25px;
+}
+
+.green-btn-outline:hover {
+  background-color: var(--secondary-color);
+  color: var(--main-bg-color);
 }
 
 .form-btn{
@@ -330,8 +340,8 @@ h6{
 
 /* Shadow */
 .light-shadow{
-  /* box-shadow: 2px 2px 2px rgba(0,0,0, 0.2) ; */
   box-shadow: 2px 2px 15px #3a7e7b22;
+  /* box-shadow: 2px 2px 2px rgba(0,0,0, 0.2) ; */
 }
 
 .text-shadow{

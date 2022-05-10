@@ -281,14 +281,14 @@ const SnippetEditor = () => {
             </div>
             <div className="input-output-section">
                 <div className="rendered-output-section">
-                <iframe
-                    srcDoc={srcDoc}
-                    width="100%"
-                    height="100%"
-                    title="output"
-                    sandbox="allow-scripts"
-                />
-
+                    <div className="iframe-container">
+                        <iframe
+                            id="output-iframe"
+                            srcDoc={srcDoc}
+                            title="output"
+                            sandbox="allow-scripts"
+                        />
+                    </div>
                 </div>
                 <div className="input-section">
                     <div className="input-field type2">
