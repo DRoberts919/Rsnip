@@ -78,6 +78,7 @@ root.render(<App />);
             event.preventDefault();
             console.log("Ctrl + S was called!");
             //TODO: call method to compile code here 
+            //Doesnt really work :shrug:
             compileCode();
         }
     };
@@ -108,8 +109,10 @@ root.render(<App />);
         `);
     }
 
+    //TODO: fetch data from backend. If bad, then redirect
     useEffect(() => {
         compileCode();
+        // navigate("/");
     }, []);
 
     const getData = () => {
@@ -131,7 +134,7 @@ root.render(<App />);
     }
 
     const goToPrevPage = () => {
-        navigate(-1);
+        navigate("/");
     }
 
     const saveSnippet = () => {

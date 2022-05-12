@@ -13,7 +13,7 @@ import 'ace-builds/src-noconflict/theme-monokai';
 // this is an optional import just improved the interaction.
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import userIcon from "../../assets/images/user-icon.svg";
 
@@ -22,12 +22,15 @@ configure({
 });
 
 const ViewSnippet = () => {
+    let navigate = useNavigate();
     const [selectedEditorTab, setSelectedEditorTab] = useState("JS");
     const [visibility, setVisibility] = useState("private");
     const [selectedCategoryList, setSelectedCategoryList] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [user, setUser] = useState({});
+
+    const [redirect, setRedirect] = useState(false);
 
     const [structureCode, setStructureCode] = useState(` 
 <!DOCTYPE HTML>
@@ -112,13 +115,19 @@ root.render(<App />);
         setUser({user_id: "123", username: "Cashby"});
         setSelectedCategoryList(["Animated","Bootstrap","Button"]);
         compileCode();
+
+        //if data doesnt come in/ get an error
+        // setRedirect(true);
     }, []);
 
 
     const selectTab = (tab) => {
         setSelectedEditorTab(tab);
     }
-
+    if(redirect) {
+        //redirect to home page
+       return navigate("/");
+    }
     return (
     <div className="snippet-page content">
         <div className="title-section">
