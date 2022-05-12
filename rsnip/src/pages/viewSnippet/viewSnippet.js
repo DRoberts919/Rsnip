@@ -13,6 +13,9 @@ import 'ace-builds/src-noconflict/theme-monokai';
 // this is an optional import just improved the interaction.
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
+import { Link } from "react-router-dom";
+
+import userIcon from "../../assets/images/user-icon.svg";
 
 configure({
     ignoreTags: []
@@ -24,6 +27,7 @@ const ViewSnippet = () => {
     const [selectedCategoryList, setSelectedCategoryList] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [user, setUser] = useState({});
 
     const [structureCode, setStructureCode] = useState(` 
 <!DOCTYPE HTML>
@@ -101,7 +105,12 @@ root.render(<App />);
         `);
     }
 
+    //TODO: Fetch data and display; if user_id does not exist (data comes back null), display error
     useEffect(() => {
+        setTitle("Title of Project");
+        setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        setUser({user_id: "123", username: "Cashby"});
+        setSelectedCategoryList(["Animated","Bootstrap","Button"]);
         compileCode();
     }, []);
 
@@ -111,7 +120,24 @@ root.render(<App />);
     }
 
     return (
-    <div className="snippet-page">
+    <div className="snippet-page content">
+        <div className="title-section">
+            <div className="title-row">
+                <h1>{title}</h1>
+                <Link to={`/user/${user?.user_id}`}>
+                    <img src={userIcon} width={20}/>
+                    {user?.username}
+                </Link>
+            </div>
+            <p>{description}</p>
+            <div className="category-list">
+                {
+                    selectedCategoryList.map((category, index) => {
+                        return (<div className="selected-category-tag" key={`category${category}${index}`}>{category}</div>);
+                    })
+                }
+            </div>
+        </div>
         <div className="output-section">
             <div className="rendered-output-section">
                 <div className="iframe-container">
@@ -124,93 +150,93 @@ root.render(<App />);
                 </div>
             </div>
             
-        <div className="editor-section">
-            <div className="editor-bar">
-                <div className="tabs">
-                    <div className={selectedEditorTab === "HTML" ? "selected" : ""} onClick={() => selectTab("HTML")}>HTML</div>
-                    <div className={selectedEditorTab === "JS" ? "selected" : ""} onClick={() => selectTab("JS")}>JS</div>
-                    <div className={selectedEditorTab === "CSS" ? "selected" : ""} onClick={() => selectTab("CSS")}>CSS</div>
+            <div className="editor-section">
+                <div className="editor-bar">
+                    <div className="tabs">
+                        <div className={selectedEditorTab === "HTML" ? "selected" : ""} onClick={() => selectTab("HTML")}>HTML</div>
+                        <div className={selectedEditorTab === "JS" ? "selected" : ""} onClick={() => selectTab("JS")}>JS</div>
+                        <div className={selectedEditorTab === "CSS" ? "selected" : ""} onClick={() => selectTab("CSS")}>CSS</div>
+                    </div>
+                    <div className="run-btn" onClick={compileCode}>Run ▶</div>
                 </div>
-                <div className="run-btn" onClick={compileCode}>Run ▶</div>
-            </div>
                 <HotKeys keyMap={keyMap} handlers={handlers}>
-            {selectedEditorTab === "HTML" ?
-            <AceEditor
-                style={{
-                    height: '350px',
-                    width: '100%',
-                }}
-                className="ace-editor"
-                placeholder='Start Coding'
-                mode='html'
-                theme='monokai'
-                name='structure-code-editor'
-                onChange={currentCode => setStructureCode(currentCode)}
-                fontSize={18}
-                showPrintMargin={true}
-                showGutter={true}
-                highlightActiveLine={true}
-                value={structureCode}
-                setOptions={{
-                    enableBasicAutocompletion: true,
-                    enableLiveAutocompletion: true,
-                    enableSnippets: true,
-                    showLineNumbers: true,
-                    tabSize: 2,
-                }}
-                />
-            : selectedEditorTab === "JS" ? 
-            <AceEditor
-            style={{
-                height: '350px',
-                width: '100%',
-            }}
-            className="ace-editor"
-            placeholder='Start Coding'
-            mode='javascript'
-            theme='monokai'
-            name='script-code-editor'
-            onChange={currentCode => setFunctionCode(currentCode)}
-            fontSize={18}
-            showPrintMargin={true}
-            showGutter={true}
-            highlightActiveLine={true}
-            value={functionCode}
-            setOptions={{
-                enableBasicAutocompletion: true,
-                enableLiveAutocompletion: true,
-                enableSnippets: true,
-                showLineNumbers: true,
-                tabSize: 2,
-            }}
-            /> : 
-            <AceEditor
-                style={{
-                    height: '350px',
-                    width: '100%',
-                }}
-                className="ace-editor"
-                placeholder='Start Coding'
-                mode='css'
-                theme='monokai'
-                name='style-code-editor'
-                onChange={currentCode => setStyleCode(currentCode)}
-                fontSize={18}
-                showPrintMargin={true}
-                showGutter={true}
-                highlightActiveLine={true}
-                value={styleCode}
-                setOptions={{
-                    enableBasicAutocompletion: true,
-                    enableLiveAutocompletion: true,
-                    enableSnippets: true,
-                    showLineNumbers: true,
-                    tabSize: 2,
-                }}
-                />} 
-            </HotKeys>
+                {selectedEditorTab === "HTML" ?
+                <AceEditor
+                    style={{
+                        height: '350px',
+                        width: '100%',
+                    }}
+                    className="ace-editor"
+                    placeholder='Start Coding'
+                    mode='html'
+                    theme='monokai'
+                    name='structure-code-editor'
+                    onChange={currentCode => setStructureCode(currentCode)}
+                    fontSize={18}
+                    showPrintMargin={true}
+                    showGutter={true}
+                    highlightActiveLine={true}
+                    value={structureCode}
+                    setOptions={{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true,
+                        enableSnippets: true,
+                        showLineNumbers: true,
+                        tabSize: 2,
+                    }}
+                    />
+                : selectedEditorTab === "JS" ? 
+                <AceEditor
+                    style={{
+                        height: '350px',
+                        width: '100%',
+                    }}
+                    className="ace-editor"
+                    placeholder='Start Coding'
+                    mode='javascript'
+                    theme='monokai'
+                    name='script-code-editor'
+                    onChange={currentCode => setFunctionCode(currentCode)}
+                    fontSize={18}
+                    showPrintMargin={true}
+                    showGutter={true}
+                    highlightActiveLine={true}
+                    value={functionCode}
+                    setOptions={{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true,
+                        enableSnippets: true,
+                        showLineNumbers: true,
+                        tabSize: 2,
+                    }}
+                /> : 
+                <AceEditor
+                    style={{
+                        height: '350px',
+                        width: '100%',
+                    }}
+                    className="ace-editor"
+                    placeholder='Start Coding'
+                    mode='css'
+                    theme='monokai'
+                    name='style-code-editor'
+                    onChange={currentCode => setStyleCode(currentCode)}
+                    fontSize={18}
+                    showPrintMargin={true}
+                    showGutter={true}
+                    highlightActiveLine={true}
+                    value={styleCode}
+                    setOptions={{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true,
+                        enableSnippets: true,
+                        showLineNumbers: true,
+                        tabSize: 2,
+                    }}
+                    />} 
+                </HotKeys>
+            </div>
         </div>
-    </div>
 
     </div>
     );
