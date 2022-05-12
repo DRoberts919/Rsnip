@@ -48,7 +48,7 @@ const Navbar = () => {
       <div
         className={
           location.pathname !== "/"
-            ? "nav white-bg black-txt"
+            ? "nav white-bg light-shadow black-txt"
             : changeNav
             ? "nav white-bg light-shadow black-txt"
             : "nav white-txt"

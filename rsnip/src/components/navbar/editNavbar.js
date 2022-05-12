@@ -5,7 +5,7 @@ import "./navbarStyles.css";
 const EditNav = ({goToPrevPage, saveSnippet, publishSnippet, saveMessage}) => {
     // if(location.pathname.includes("/snippet/edit/")) {
         return (
-        <div className="edit-nav">
+        <div className="edit-nav light-shadow">
             <div className="nav-group">
                 <div className="left">
                 <button className="btn green-btn-outline" onClick={() => goToPrevPage()}>
