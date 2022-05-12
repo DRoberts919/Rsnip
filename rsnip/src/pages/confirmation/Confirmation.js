@@ -27,7 +27,13 @@ function Confirmation() {
     e.preventDefault();
 
     try {
-      await Auth.confirmSignUp(username, pin).then((res) => console.log(res));
+      await Auth.confirmSignUp(username, pin).then((res) =>{
+        if(res.error){
+          console.log(error)
+        }else{
+          console.log(res)
+        }
+      });
       navigate("../login", { replace: true });
     } catch (error) {
       setError(true);
