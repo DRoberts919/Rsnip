@@ -91,10 +91,14 @@ const Search = () => {
                         type="checkbox"
                         checked={category.isChecked}
                         onChange={() => handleCheckbox(i)}
+                        id={`${category}${i}`}
                       />
-                      <div style={{ marginLeft: "0.5rem", opacity: 0.7 }}>
+                      <label
+                        style={{ marginLeft: "0.5rem", opacity: 0.7 }}
+                        htmlFor={`${category}${i}`}
+                      >
                         {category.category}
-                      </div>
+                      </label>
                     </div>
                   );
                 })}

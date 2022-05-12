@@ -6,6 +6,7 @@
     left:0;
     width:100%;
     transition: 0.3s;
+    
 }
 
 .nav-links {
@@ -88,8 +89,17 @@ display: flex;
 .edit-nav button {
     margin: 0 0.5rem;
 }
+.edit-nav .nav-group .right {
+    display: flex;
+    align-items: center;
+}
 
 @media all and (max-width:768px) {
+    .edit-nav button {
+        margin: 0 0.25rem;
+        padding-left:0.9rem; 
+        padding-right:0.9rem; 
+    }
     .nav-burger{
         display: block;
     }

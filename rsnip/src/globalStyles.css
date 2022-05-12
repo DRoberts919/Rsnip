@@ -421,3 +421,11 @@ h6{
   padding-left: 2.5rem;
 }
 
+
+
+@media all and (max-width:768px) {
+  body {
+    font-size: 0.82rem;
+  }
+
+}
