@@ -74,7 +74,7 @@ const Profile = () => {
                   <div
                     className={`banner snippet-banner ${
                       randomColor[
-                        Math.floor(Math.random() * randomColor.length)
+                        Math.floor(Math.random(snippet?.snippet_id) * randomColor.length)
                       ]
                     }`}
                   ></div>

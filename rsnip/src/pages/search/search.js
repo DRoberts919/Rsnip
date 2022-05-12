@@ -88,10 +88,11 @@ const Search = () => {
                         type="checkbox"
                         checked={category.isChecked}
                         onChange={() => handleCheckbox(i)}
+                        id={`${category}${i}`}
                       />
-                      <div style={{ marginLeft: "0.5rem", opacity: 0.7 }}>
+                      <label style={{ marginLeft: "0.5rem", opacity: 0.7 }} htmlFor={`${category}${i}`}>
                         {category.category}
-                      </div>
+                      </label>
                     </div>
                   );
                 })}
@@ -107,7 +108,7 @@ const Search = () => {
               <div className="snippet-card light-shadow" key={`Snippet_${i}`}>
                 <div
                   className={`banner snippet-banner ${
-                    randomColor[Math.floor(Math.random() * randomColor.length)]
+                    randomColor[Math.floor(Math.random(snippet?.snippet_id) * randomColor.length)]
                   }`}
                 ></div>
                 <div className="snippet-title">{snippet.published.title}</div>
