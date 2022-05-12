@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
-import data from "../../json/profileTest.json";
 import allCategories from "../../categories.json";
+import useFetch from "../../hooks/useFetch";
 
 const Search = () => {
-  const [profileData, setProfileData] = useState([...data]);
+  const [snippets] = useFetch(process.env.REACT_APP_GET_SNIPPETS);
+  const [filterSnippets, setFilterSnippets] = useState([]);
   const [categories, setCategories] = useState(() => {
     let tempArr = [];
     allCategories.forEach((category) => {
@@ -18,7 +19,7 @@ const Search = () => {
   });
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchInput, setSearchInput] = useState("");
-  const [randomColor, setRandomColor] = useState([
+  const [randomColor] = useState([
     "purple-banner",
     "orange-banner",
     "dark-blue-banner",
@@ -28,9 +29,7 @@ const Search = () => {
   const navigate = useNavigate();
 
   const handleEnterKey = (e) => {
-    if (e.key === "Enter") {
-      navigate(`/search?name=${searchInput}`);
-    }
+    if (e.key === "Enter") navigate(`/search?name=${searchInput}`);
   };
 
   const handleCheckbox = (i) => {
@@ -39,13 +38,17 @@ const Search = () => {
     setCategories(tempCategories);
   };
 
+  useEffect(() => {
+    //filter by search param if any
+    //filer by category if any contain true
+    if (snippets) {
+      setFilterSnippets(snippets);
+    }
+  }, [snippets]);
+
   // useEffect(() => {
   //   console.log(searchParams.get("name"));
   // }, [searchParams]);
-
-  useEffect(() => {
-    console.log(categories);
-  }, [categories]);
 
   return (
     <div className="content p-t-8">
@@ -102,33 +105,42 @@ const Search = () => {
       </div>
       <div>
         <div className="row-center">
-          {profileData?.map((snippet, i) => {
-            return (
-              <div className="snippet-card light-shadow" key={`Snippet_${i}`}>
-                <div
-                  className={`banner snippet-banner ${
-                    randomColor[Math.floor(Math.random() * randomColor.length)]
-                  }`}
-                ></div>
-                <div className="snippet-title">{snippet.published.title}</div>
-                <div className="snippet-description">
-                  {snippet.published.description}
-                </div>
-                <div className="row category-group">
-                  {snippet.published.categories?.map((category, idx) => {
-                    return (
-                      <div
-                        className="selected-category-tag"
-                        key={`${category}_${idx}`}
-                      >
-                        {category}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+          {filterSnippets && filterSnippets.length > 0
+            ? filterSnippets?.map((snippet, i) => {
+                return (
+                  <div
+                    className="snippet-card light-shadow"
+                    key={`Snippet_${i}`}
+                  >
+                    <div
+                      className={`banner snippet-banner ${
+                        randomColor[
+                          Math.floor(Math.random() * randomColor.length)
+                        ]
+                      }`}
+                    ></div>
+                    <div className="snippet-title">
+                      {snippet.published?.title}
+                    </div>
+                    <div className="snippet-description">
+                      {snippet.published?.description}
+                    </div>
+                    <div className="row category-group">
+                      {snippet.published?.categories?.map((category, idx) => {
+                        return (
+                          <div
+                            className="selected-category-tag"
+                            key={`${category}_${idx}`}
+                          >
+                            {category}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })
+            : null}
         </div>
       </div>
     </div>
