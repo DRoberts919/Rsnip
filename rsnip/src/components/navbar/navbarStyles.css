@@ -94,6 +94,14 @@ display: flex;
     align-items: center;
 }
 
+.dark .nav.white-txt svg {
+    color:#fff;
+}
+
+.dark .edit-nav {
+    color: #f4f4f4;
+}
+
 @media all and (max-width:768px) {
     .edit-nav button {
         margin: 0 0.25rem;
