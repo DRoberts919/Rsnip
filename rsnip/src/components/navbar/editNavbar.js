@@ -13,7 +13,7 @@ const EditNav = ({goToPrevPage, saveSnippet, publishSnippet, saveMessage}) => {
                 </button>
                 </div>
                 <div className="right">
-                <span>{saveMessage}</span>
+                <span className="dark-secondary-text">{saveMessage}</span>
                 <button className="btn green-btn-outline" onClick={() => saveSnippet()}>
                     Save
                 </button>

@@ -153,8 +153,12 @@ h6{
   border: 2px solid var(--secondary-color);
   box-sizing: border-box;
   padding: 6px 25px;
+  background-color: transparent;
 }
 
+.dark .green-btn-outline {
+  color: #fafafa;
+}
 .green-btn-outline:hover {
   background-color: var(--secondary-color);
   color: #fafafa;
