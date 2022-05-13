@@ -10,6 +10,13 @@
   margin-top:2rem;
 }
 
+.home-header .white-txt {
+  color:#fafafa;
+}
+.home-header .white-txt-secondary {
+  color:#f1f4fed5;
+}
+
 @media all and (max-width:1200px){
   .header-txt{
     text-align: center;

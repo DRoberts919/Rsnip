@@ -3,3 +3,7 @@
     padding:1rem 3rem;
     border-radius: 8px;
 }
+
+.black-txt .card {
+    color: #34495E;
+}

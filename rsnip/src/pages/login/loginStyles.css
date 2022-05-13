@@ -12,6 +12,10 @@
     border-radius: 8px;
 }
 
+.dark .login-form {
+    background-color: var(--main-bg-color-2);
+}
+
 .login-img{
     position: absolute;
     bottom:0;
@@ -19,6 +23,10 @@
     width:125px;
 }
 
+
+.login-form input {
+    color: #34495E;
+}
 
 @media all and (max-width: 768px){
     .login-img{

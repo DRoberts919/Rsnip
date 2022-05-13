@@ -12,6 +12,12 @@
   --error-color: #cc0000;
 }
 
+html.dark:root {
+  --main-bg-color: #25323e;
+  --main-bg-color-2: #3b4a5a;
+  --primary-color:#fafafa;
+  --error-color: #ef5a5a;
+}
 /* HTML Elements */
 
 html, body {
@@ -131,7 +137,7 @@ h6{
 } */
 
 .green-btn{
-  color: var(--main-bg-color) !important;
+  color: #fafafa !important;
   background-color: var(--secondary-color);
   cursor: pointer;
   transition: background-color 0.15s ease;
@@ -151,7 +157,7 @@ h6{
 
 .green-btn-outline:hover {
   background-color: var(--secondary-color);
-  color: var(--main-bg-color);
+  color: #fafafa;
 }
 
 .form-btn{
@@ -177,6 +183,8 @@ h6{
   top: 1.2rem;
   left: 0.6rem;
 }
+
+
 
 /* Spacing */
 .m-1{
@@ -422,6 +430,9 @@ h6{
 }
 
 
+.dark .dark-secondary-text {
+  color: #f1f4fed5;
+}
 
 @media all and (max-width:768px) {
   body {

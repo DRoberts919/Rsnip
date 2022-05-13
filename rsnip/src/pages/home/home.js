@@ -55,7 +55,7 @@ const Home = () => {
             WHAT WE DO
           </div>
           <h3 className='m-b-1'>What is RSnip?</h3>
-          <div >
+          <div className="dark-secondary-text">
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -115,7 +115,7 @@ const HomeBoxes = ({ title, img, content }) => {
         </div>
         <div className='box-text'>
           <h4 className='box-title'>{title}</h4>
-          <div>{content}</div>
+          <div className="dark-secondary-text">{content}</div>
         </div>
       </div>
     </div>

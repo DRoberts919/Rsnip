@@ -60,3 +60,8 @@ path.star{
     border-radius: 100vh;
     object-fit: cover;
 }
+
+
+.black-txt .testimonial-msg {
+    color: #34495E;
+}
