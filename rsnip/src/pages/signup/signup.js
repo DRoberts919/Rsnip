@@ -37,27 +37,26 @@ const SignUp = () => {
     if (validateSignup()) {
       console.log("There is errors");
     } else {
-      console.log("were good");
+      try {
+        Auth.signUp({
+          username: username,
+          email: email,
+          password: password,
+          attributes: {
+            email: email,
+            name: username,
+          },
+        })
+          .then((res) => {
+            navigate("../confirmation", { replace: true });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
-    // try {
-    //   Auth.signUp({
-    //     username: username,
-    //     email: email,
-    //     password: password,
-    //     attributes: {
-    //       email: email,
-    //       name: username,
-    //     },
-    //   })
-    //     .then((res) => {
-    //       navigate("../confirmation", { replace: true });
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const validateSignup = () => {
