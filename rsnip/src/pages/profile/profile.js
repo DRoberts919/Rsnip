@@ -5,6 +5,7 @@ import data from "../../json/profileTest.json";
 import LinkedIn from "../../assets/images/linkedin-icon.svg";
 import Github from "../../assets/images/github-icon.svg";
 import Email from "../../assets/images/email-icon.svg";
+const seedrandom = require('seedrandom');
 
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
@@ -74,7 +75,7 @@ const Profile = () => {
                   <div
                     className={`banner snippet-banner ${
                       randomColor[
-                        Math.floor(Math.random(snippet?.snippet_id) * randomColor.length)
+                        Math.floor((snippet?.snippet_id ? seedrandom(`${snippet?.snippet_id}`)() : Math.random()) * randomColor.length)
                       ]
                     }`}
                   ></div>
