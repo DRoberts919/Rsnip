@@ -1,11 +1,11 @@
 import "./profileStyles.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import data from "../../json/profileTest.json";
 import LinkedIn from "../../assets/images/linkedin-icon.svg";
 import Github from "../../assets/images/github-icon.svg";
 import Email from "../../assets/images/email-icon.svg";
-const seedrandom = require('seedrandom');
+import useFetch from "../../hooks/useFetch";
+const seedrandom = require("seedrandom");
 
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
@@ -14,24 +14,16 @@ const seedrandom = require('seedrandom');
 // https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png
 
 const Profile = () => {
-  const [profileData, setProfileData] = useState([...data]);
   const { userId } = useParams();
+  const [profileData] = useFetch(
+    `https://2ao7thmdcd.execute-api.us-west-1.amazonaws.com/Testing/snippet/user/${userId}`
+  );
   const [randomColor, setRandomColor] = useState([
     "purple-banner",
     "orange-banner",
     "dark-blue-banner",
     "light-blue-banner",
   ]);
-
-  // useEffect(() => {
-  //   console.log(profileData);
-  // }, [profileData]);
-
-  // useEffect(() => {
-  // Fetch /snippet/user/{user_id} and set response to setProfileData
-  // console.log(profileData);
-  // console.log(userId);
-  // }, [profileData, userId]);
 
   return (
     <div className="content row-center align-start p-t-8">
@@ -69,13 +61,17 @@ const Profile = () => {
         </div>
         <div className="snippet-scrollbar">
           <div className="snippet-section">
-            {profileData?.map((snippet, i) => {
+            {profileData?.Items?.map((snippet, i) => {
               return (
                 <div className="snippet-card light-shadow" key={`Snippet_${i}`}>
                   <div
                     className={`banner snippet-banner ${
                       randomColor[
-                        Math.floor((snippet?.snippet_id ? seedrandom(`${snippet?.snippet_id}`)() : Math.random()) * randomColor.length)
+                        Math.floor(
+                          (snippet?.snippet_id
+                            ? seedrandom(`${snippet?.snippet_id}`)()
+                            : Math.random()) * randomColor.length
+                        )
                       ]
                     }`}
                   ></div>

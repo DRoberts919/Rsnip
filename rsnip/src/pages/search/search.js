@@ -40,16 +40,22 @@ const Search = () => {
   };
 
   useEffect(() => {
-    //filter by search param if any
-    //filer by category if any contain true
     if (snippets) {
+      let tempFilter = [...snippets];
+      let categoriesSelected = [];
+      categories.forEach((category, i) => {
+        if (category.isChecked) {
+          categoriesSelected.push(category);
+        }
+      });
+      console.log(tempFilter);
+      console.log(categoriesSelected);
+      // if (searchParams.get("name")) {
+      //   console.log("HAS NAME: ", searchParams.get("name"));
+      // }
       setFilterSnippets(snippets);
     }
-  }, [snippets]);
-
-  // useEffect(() => {
-  //   console.log(searchParams.get("name"));
-  // }, [searchParams]);
+  }, [snippets, searchParams, categories]);
 
   return (
     <div className="content p-t-8">
