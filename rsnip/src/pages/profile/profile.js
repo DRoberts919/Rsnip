@@ -5,6 +5,7 @@ import LinkedIn from "../../assets/images/linkedin-icon.svg";
 import Github from "../../assets/images/github-icon.svg";
 import Email from "../../assets/images/email-icon.svg";
 import useFetch from "../../hooks/useFetch";
+const seedrandom = require("seedrandom");
 
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
@@ -67,7 +68,9 @@ const Profile = () => {
                     className={`banner snippet-banner ${
                       randomColor[
                         Math.floor(
-                          Math.random(snippet?.snippet_id) * randomColor.length
+                          (snippet?.snippet_id
+                            ? seedrandom(`${snippet?.snippet_id}`)()
+                            : Math.random()) * randomColor.length
                         )
                       ]
                     }`}

@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
 import allCategories from "../../categories.json";
 import useFetch from "../../hooks/useFetch";
+const seedrandom = require('seedrandom');
 
 const Search = () => {
   const [snippets] = useFetch(process.env.REACT_APP_GET_SNIPPETS);
@@ -125,7 +126,7 @@ const Search = () => {
                     <div
                       className={`banner snippet-banner ${
                         randomColor[
-                          Math.floor(Math.random() * randomColor.length)
+                          Math.floor((snippet?.snippet_id ? seedrandom(`${snippet?.snippet_id}`)() : Math.random()) * randomColor.length)
                         ]
                       }`}
                     ></div>

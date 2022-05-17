@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./navbarStyles.css";
 import Hamburger from "hamburger-react";
 import { BsSearch } from "react-icons/bs";
+import DarkModeToggle from "./darkModeToggle";
 
 const Navbar = () => {
   const location = useLocation();
@@ -10,6 +11,8 @@ const Navbar = () => {
   const [changeNav, setChangeNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+
+  
   // const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
   const changeNavColors = () => {
     window.scrollY >= 1 ? setChangeNav(true) : setChangeNav(false);
@@ -20,6 +23,10 @@ const Navbar = () => {
       navigate(`/search?name=${searchInput}`);
     }
   };
+
+
+
+  
   
   window.addEventListener("scroll", changeNavColors);
   if(location.pathname.includes("/snippet/edit/")) {
@@ -85,6 +92,7 @@ const Navbar = () => {
             <Link className="btn green-btn light-shadow m-r-1" to="/login">
               Login
             </Link>
+              <DarkModeToggle />
           </div>
           <div className="nav-burger">
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} />

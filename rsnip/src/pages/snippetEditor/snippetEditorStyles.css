@@ -114,9 +114,19 @@
     padding:0.5rem 1.2rem;
     font-size:0.8rem;
 }
+.dark .btn-group .btn {
+    color: #f1f4fed5;
+}
 .btn-group .btn.selected {
     background-color: var(--secondary-color);
     color:#fff;
+}
+.input-section .input-field label {
+    color: #f1f4fed5;
+}
+
+.dark .input-section .input-field input, .input-section .input-field.type2 textarea {
+    color: #3b4a5a;
 }
 
 

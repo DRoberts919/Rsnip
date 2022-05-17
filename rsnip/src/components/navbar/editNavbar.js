@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import DarkModeToggle from "./darkModeToggle";
 import "./navbarStyles.css";
 
 
@@ -13,13 +14,14 @@ const EditNav = ({goToPrevPage, saveSnippet, publishSnippet, saveMessage}) => {
                 </button>
                 </div>
                 <div className="right">
-                <span>{saveMessage}</span>
+                <span className="dark-secondary-text">{saveMessage}</span>
                 <button className="btn green-btn-outline" onClick={() => saveSnippet()}>
                     Save
                 </button>
                 <button className="btn green-btn" onClick={() => publishSnippet()}>
                     Publish
                 </button>
+                <DarkModeToggle />
                 </div>
             </div>
         </div>);
