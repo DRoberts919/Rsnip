@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
-import data from "../../json/profileTest.json";
 import allCategories from "../../categories.json";
+import useFetch from "../../hooks/useFetch";
+const seedrandom = require('seedrandom');
 
 const Search = () => {
-  const [profileData, setProfileData] = useState([...data]);
+  const [snippets] = useFetch(process.env.REACT_APP_GET_SNIPPETS);
+  const [filterSnippets, setFilterSnippets] = useState([]);
   const [categories, setCategories] = useState(() => {
     let tempArr = [];
     allCategories.forEach((category) => {
@@ -18,7 +20,7 @@ const Search = () => {
   });
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchInput, setSearchInput] = useState("");
-  const [randomColor, setRandomColor] = useState([
+  const [randomColor] = useState([
     "purple-banner",
     "orange-banner",
     "dark-blue-banner",
@@ -28,9 +30,7 @@ const Search = () => {
   const navigate = useNavigate();
 
   const handleEnterKey = (e) => {
-    if (e.key === "Enter") {
-      navigate(`/search?name=${searchInput}`);
-    }
+    if (e.key === "Enter") navigate(`/search?name=${searchInput}`);
   };
 
   const handleCheckbox = (i) => {
@@ -39,13 +39,23 @@ const Search = () => {
     setCategories(tempCategories);
   };
 
-  // useEffect(() => {
-  //   console.log(searchParams.get("name"));
-  // }, [searchParams]);
-
   useEffect(() => {
-    console.log(categories);
-  }, [categories]);
+    if (snippets) {
+      let tempFilter = [...snippets];
+      let categoriesSelected = [];
+      categories.forEach((category, i) => {
+        if (category.isChecked) {
+          categoriesSelected.push(category);
+        }
+      });
+      console.log(tempFilter);
+      console.log(categoriesSelected);
+      // if (searchParams.get("name")) {
+      //   console.log("HAS NAME: ", searchParams.get("name"));
+      // }
+      setFilterSnippets(snippets);
+    }
+  }, [snippets, searchParams, categories]);
 
   return (
     <div className="content p-t-8">
@@ -88,10 +98,14 @@ const Search = () => {
                         type="checkbox"
                         checked={category.isChecked}
                         onChange={() => handleCheckbox(i)}
+                        id={`${category}${i}`}
                       />
-                      <div style={{ marginLeft: "0.5rem", opacity: 0.7 }}>
+                      <label
+                        style={{ marginLeft: "0.5rem", opacity: 0.7 }}
+                        htmlFor={`${category}${i}`}
+                      >
                         {category.category}
-                      </div>
+                      </label>
                     </div>
                   );
                 })}
@@ -102,33 +116,42 @@ const Search = () => {
       </div>
       <div>
         <div className="row-center">
-          {profileData?.map((snippet, i) => {
-            return (
-              <div className="snippet-card light-shadow" key={`Snippet_${i}`}>
-                <div
-                  className={`banner snippet-banner ${
-                    randomColor[Math.floor(Math.random() * randomColor.length)]
-                  }`}
-                ></div>
-                <div className="snippet-title">{snippet.published.title}</div>
-                <div className="snippet-description">
-                  {snippet.published.description}
-                </div>
-                <div className="row category-group">
-                  {snippet.published.categories?.map((category, idx) => {
-                    return (
-                      <div
-                        className="selected-category-tag"
-                        key={`${category}_${idx}`}
-                      >
-                        {category}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+          {filterSnippets && filterSnippets.length > 0
+            ? filterSnippets?.map((snippet, i) => {
+                return (
+                  <div
+                    className="snippet-card light-shadow"
+                    key={`Snippet_${i}`}
+                  >
+                    <div
+                      className={`banner snippet-banner ${
+                        randomColor[
+                          Math.floor((snippet?.snippet_id ? seedrandom(`${snippet?.snippet_id}`)() : Math.random()) * randomColor.length)
+                        ]
+                      }`}
+                    ></div>
+                    <div className="snippet-title">
+                      {snippet.published?.title}
+                    </div>
+                    <div className="snippet-description">
+                      {snippet.published?.description}
+                    </div>
+                    <div className="row category-group">
+                      {snippet.published?.categories?.map((category, idx) => {
+                        return (
+                          <div
+                            className="selected-category-tag"
+                            key={`${category}_${idx}`}
+                          >
+                            {category}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })
+            : null}
         </div>
       </div>
     </div>

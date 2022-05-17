@@ -3,6 +3,10 @@
     background-repeat: no-repeat;
 }
 
+.cta-bg .white-txt {
+    color: #fafafa;
+}
+
 @media all and (max-width:900px){
     .cta-mobile-img{
         display:none;

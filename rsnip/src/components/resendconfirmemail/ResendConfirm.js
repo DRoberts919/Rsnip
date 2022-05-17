@@ -61,7 +61,7 @@ function ResendConfirm() {
         </form>
       ) : (
         <div className="row-center txt-center">
-          <div>Have not recieved an email?&nbsp;</div>
+          <div className="dark-secondary-text">Have not recieved an email?&nbsp;</div>
           <div onClick={() => setIsOpen(true)} className="click-here-btn">
             Click Here
           </div>

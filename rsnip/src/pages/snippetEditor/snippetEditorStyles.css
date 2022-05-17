@@ -1,10 +1,4 @@
 /* Editor section */
-.editor-content {
-    display: grid;
-    grid-template-columns: 3fr 4fr;
-    /* padding-top:5rem; */
-    height: calc(100vh - 5rem)!important;
-}
 .editor-section {
     background-color: #282A2E;
     min-height: calc(100vh - 5rem);
@@ -82,6 +76,7 @@
   }
 
 #output-iframe {
+    background-color: #fafafa;
     position: absolute;
     top: 0;
     left: 0;
@@ -101,6 +96,7 @@
 }
 
 .btn-group {
+    display: flex;
     border-radius: 8px;
     overflow: hidden;
     border:2px solid var(--secondary-color);
@@ -118,9 +114,19 @@
     padding:0.5rem 1.2rem;
     font-size:0.8rem;
 }
+.dark .btn-group .btn {
+    color: #f1f4fed5;
+}
 .btn-group .btn.selected {
     background-color: var(--secondary-color);
     color:#fff;
+}
+.input-section .input-field label {
+    color: #f1f4fed5;
+}
+
+.dark .input-section .input-field input, .input-section .input-field.type2 textarea {
+    color: #3b4a5a;
 }
 
 
@@ -197,3 +203,22 @@
   .Resizer.disabled:hover {
     border-color: transparent;
   }
+
+
+
+
+
+@media all and (max-width: 767px) {
+    .editor-content {
+        display: flex;
+        flex-direction: column-reverse!important;
+        height: unset!important;
+    }
+    .Pane.Pane1 {
+        width: unset!important;
+    }
+    .input-output-section {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}

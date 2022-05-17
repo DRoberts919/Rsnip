@@ -6,6 +6,11 @@
     color: var(--primary-color);
     position: relative;
 }
+
+
+.dark .profile-section {
+    background-color: var(--main-bg-color-2);
+}
 .profile-title-section{
     max-width: 700px;
     margin: 0 auto;
@@ -100,6 +105,10 @@
     cursor: pointer;
     transition:0.2s;
 }
+
+.dark .snippet-card {
+    background-color: var(--main-bg-color-2);
+  }
 
 .snippet-card:hover{
     border: 3px solid var(--secondary-color);

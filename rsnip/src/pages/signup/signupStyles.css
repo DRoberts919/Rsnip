@@ -12,6 +12,10 @@
     border-radius: 8px;
 }
 
+.dark .signup-form {
+    background-color: var(--main-bg-color-2);
+}
+
 .signup-img{
     position: absolute;
     bottom:0;
@@ -19,6 +23,10 @@
     width:175px;
 }
 
+
+.signup-form input {
+    color: #34495E;
+}
 .already-member{
     margin-top: 1rem;
     text-decoration: underline;

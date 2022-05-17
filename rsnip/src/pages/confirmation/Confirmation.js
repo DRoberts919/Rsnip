@@ -45,7 +45,7 @@ function Confirmation() {
     <div className="content confirm">
       <div className="confirm-form light-shadow">
         <div className="confirm-title">Thank You For Signing Up!</div>
-        <div className="m-b-1">
+        <div className="m-b-1 dark-secondary-text">
           Please check your email to confirm your account.
         </div>
         <form onSubmit={(e) => handleConfirm(e)}>

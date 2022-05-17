@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import DarkModeToggle from "./darkModeToggle";
 import "./navbarStyles.css";
 
 
 const EditNav = ({goToPrevPage, saveSnippet, publishSnippet, saveMessage}) => {
     // if(location.pathname.includes("/snippet/edit/")) {
         return (
-        <div className="edit-nav">
+        <div className="edit-nav light-shadow">
             <div className="nav-group">
                 <div className="left">
                 <button className="btn green-btn-outline" onClick={() => goToPrevPage()}>
@@ -13,13 +14,14 @@ const EditNav = ({goToPrevPage, saveSnippet, publishSnippet, saveMessage}) => {
                 </button>
                 </div>
                 <div className="right">
-                <span>{saveMessage}</span>
+                <span className="dark-secondary-text">{saveMessage}</span>
                 <button className="btn green-btn-outline" onClick={() => saveSnippet()}>
                     Save
                 </button>
                 <button className="btn green-btn" onClick={() => publishSnippet()}>
                     Publish
                 </button>
+                <DarkModeToggle />
                 </div>
             </div>
         </div>);
