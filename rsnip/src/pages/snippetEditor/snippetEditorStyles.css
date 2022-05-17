@@ -121,7 +121,7 @@
     background-color: var(--secondary-color);
     color:#fff;
 }
-.input-section .input-field label {
+.dark .input-section .input-field label {
     color: #f1f4fed5;
 }
 
