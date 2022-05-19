@@ -4,7 +4,7 @@ import {setupServer} from 'msw/node'
 import {render, fireEvent, waitFor, screen} from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Login from '../pages/login/login';
-
+import { BrowserRouter } from "react-router-dom";
 
 const server = setupServer(
   rest.get('/login', (req, res, ctx) => {
@@ -17,7 +17,7 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 test('loads and displays login form', async () => {
-  render(<Login />)
+  render(<BrowserRouter><Login /></BrowserRouter>)
 
   await waitFor(() => screen.findByTestId('login-form'))
 
@@ -39,7 +39,7 @@ test('loads and displays login form', async () => {
 
 
 test('displays error message on form submit when form fields are empty', async () => {
-    render(<Login />)
+    render(<BrowserRouter><Login /></BrowserRouter>)
 
     await waitFor(() => screen.findByTestId('login-form'))
 
