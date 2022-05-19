@@ -56,43 +56,35 @@ const Home = () => {
           </div>
           <h3 className='m-b-1'>What is RSnip?</h3>
           <div className="dark-secondary-text">
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip. Ut enim ad minim veniam, quis nostrud exercitation{" "}
+            RSnip is an online tool that allows users to create and share small snippets of code
+            built in React. Common web solutions shouldn't be hard to code. You've already done it once,
+            why do it again? With RSnip, you can save your React code as a snippet to view and use later.
+            
           </div>
           <div className='row-center'>
             <HomeBoxes
               title='Fast'
               img={Fast}
-              content='Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip. Ut enim ad minim veniam, quis
-                    nostrud exercitation Ut enim ad minim veniam, quis nostrud
-                    exercitation.'
+              content='Create an account and post a snippet within minutes! RSnip keeps things
+                    simple, so you can do what you need to with minimal effort.'
             />
             <HomeBoxes
               title='Easy'
               img={Easy}
-              content='Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip. Ut enim ad minim veniam, quis
-                    nostrud exercitation Ut enim ad minim veniam, quis nostrud
-                    exercitation.'
+              content='Sharing runnable snippets has never been easier. RSnip allows you to create
+                    your own snippets and view others snippets with just a few clicks.'
             />
             <HomeBoxes
               title='Secure'
               img={Secure}
-              content='Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip. Ut enim ad minim veniam, quis
-                    nostrud exercitation Ut enim ad minim veniam, quis nostrud
-                    exercitation.'
+              content="RSnip uses a secure backend and database to make sure all of
+                    your secrets are safe. You'll be the only one able to see your private snippets."
             />
             <HomeBoxes
               title='Shareable'
               img={Shareable}
-              content='Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip. Ut enim ad minim veniam, quis
-                    nostrud exercitation Ut enim ad minim veniam, quis nostrud
-                    exercitation.'
+              content='Have a unique solution to a problem? RSnip allows you to 
+                    share your snippets online for others to see and use.'
             />
           </div>
         </div>
