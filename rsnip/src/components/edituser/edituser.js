@@ -8,16 +8,24 @@ function edituser() {
   const submitEdit = async (event) => {
     event.preventDefault();
 
-    // get your current session from Auth.currentAuthenticatedUser()
-    let user = await Auth.currentAuthenticatedUser();
+    try {
+      // get your current session from Auth.currentAuthenticatedUser()
+      let user = await Auth.currentAuthenticatedUser();
 
-    // update users info for congito;
-    let result = await Auth.updateUserAttributes(user, {
-      email: email,
-      name: username,
-    });
+      // update users info for congito;
+      let result = await Auth.updateUserAttributes(user, {
+        email: email,
+        name: username,
+      });
+      console.log(result); // SUCCESS 
 
-    console.log(result);
+      if(result === "SUCCESS") {
+        // update user Data in the dynamoDB User-Table
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return <div>edituser</div>;
