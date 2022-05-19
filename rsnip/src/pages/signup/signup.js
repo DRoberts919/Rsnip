@@ -105,7 +105,7 @@ const SignUp = () => {
   return (
     <div className="signup">
       <div className="relative">
-        <div className="signup-form light-shadow">
+        <div data-testid="signup-form" className="signup-form light-shadow">
           <div className="form-title">Sign Up</div>
           <form onSubmit={(e) => handleSignup(e)}>
             <div className="relative">
@@ -136,7 +136,7 @@ const SignUp = () => {
                 }}
               ></input>
               {errors.usernameError ? (
-                <div className="error-txt">
+                <div data-testid="signup-error-username" className="error-txt">
                   <ul>
                     <li>Must have at least 2 letters</li>
                     <li>Numbers are optional</li>
@@ -173,7 +173,7 @@ const SignUp = () => {
                 }}
               ></input>
               {errors.emailError ? (
-                <div className="error-txt">
+                <div data-testid="signup-error-email" className="error-txt">
                   <ul>
                     <li>Incorrect e-mail address</li>
                   </ul>
@@ -209,7 +209,7 @@ const SignUp = () => {
                 }}
               ></input>
               {errors.passwordError ? (
-                <div className="error-txt">
+                <div data-testid="signup-error-password" className="error-txt">
                   <ul>
                     <li>Must have at least 8 characters</li>
                     <li>An uppercase and lowercase letter</li>
@@ -251,7 +251,7 @@ const SignUp = () => {
               ></input>
 
               {errors.confirmError ? (
-                <div className="error-txt">
+                <div data-testid="signup-error-confirm" className="error-txt">
                   <ul>
                     <li>Password does not match</li>
                   </ul>
@@ -259,7 +259,7 @@ const SignUp = () => {
               ) : null}
             </div>
             <div className="m-2"></div>
-            <button className="light-shadow form-btn green-btn" type="submit">
+            <button data-testid="signup-btn" className="light-shadow form-btn green-btn" type="submit">
               Sign up
             </button>
           </form>

@@ -11,6 +11,7 @@
     "aws-amplify": "^4.3.19",
     "fs": "0.0.1-security",
     "hamburger-react": "^2.5.0",
+    "msw": "^0.40.0",
     "path": "^0.12.7",
     "react": "^18.0.0",
     "react-ace": "^10.0.0",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.16.7"
+    "@babel/preset-react": "^7.16.7",
+    "jest-watch-typeahead": "^0.6.5"
   }
 }
