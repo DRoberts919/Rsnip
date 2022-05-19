@@ -6,10 +6,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
 import allCategories from "../../categories.json";
 import useFetch from "../../hooks/useFetch";
-const seedrandom = require('seedrandom');
+import SnippetCard from "../../components/snippetCard/snippetCard";
 
 const Search = () => {
-  const [snippets] = useFetch(process.env.REACT_APP_GET_SNIPPETS);
+  const [snippets, setSnippets] = useState([]);
   const [filterSnippets, setFilterSnippets] = useState([]);
   const [categories, setCategories] = useState(() => {
     let tempArr = [];
@@ -19,14 +19,11 @@ const Search = () => {
     return tempArr;
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchInput, setSearchInput] = useState("");
-  const [randomColor] = useState([
-    "purple-banner",
-    "orange-banner",
-    "dark-blue-banner",
-    "light-blue-banner",
-  ]);
+  const [searchInput, setSearchInput] = useState(
+    searchParams.get("name") || ""
+  );
   const [openCategory, setOpenCategory] = useState(false);
+
   const navigate = useNavigate();
 
   const handleEnterKey = (e) => {
@@ -40,22 +37,34 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (snippets) {
-      let tempFilter = [...snippets];
-      let categoriesSelected = [];
-      categories.forEach((category, i) => {
-        if (category.isChecked) {
-          categoriesSelected.push(category);
-        }
-      });
-      console.log(tempFilter);
-      console.log(categoriesSelected);
-      // if (searchParams.get("name")) {
-      //   console.log("HAS NAME: ", searchParams.get("name"));
-      // }
-      setFilterSnippets(snippets);
-    }
+    // if (snippets) {
+    //   let tempFilter = [...snippets];
+    //   let categoriesSelected = [];
+    //   categories.forEach((category, i) => {
+    //     if (category.isChecked) {
+    //       categoriesSelected.push(category);
+    //     }
+    //   });
+    //   console.log(tempFilter);
+    //   console.log(categoriesSelected);
+    //   setFilterSnippets(snippets);
+    // }
   }, [snippets, searchParams, categories]);
+
+  useEffect(() => {
+    fetch(
+      `${process.env.REACT_APP_BASE_URL}snippet?searchQuery=${searchParams.get(
+        "name"
+      )}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setSnippets(data);
+        setFilterSnippets(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="content p-t-8">
@@ -118,38 +127,7 @@ const Search = () => {
         <div className="row-center">
           {filterSnippets && filterSnippets.length > 0
             ? filterSnippets?.map((snippet, i) => {
-                return (
-                  <div
-                    className="snippet-card light-shadow"
-                    key={`Snippet_${i}`}
-                  >
-                    <div
-                      className={`banner snippet-banner ${
-                        randomColor[
-                          Math.floor((snippet?.snippet_id ? seedrandom(`${snippet?.snippet_id}`)() : Math.random()) * randomColor.length)
-                        ]
-                      }`}
-                    ></div>
-                    <div className="snippet-title">
-                      {snippet.published?.title}
-                    </div>
-                    <div className="snippet-description">
-                      {snippet.published?.description}
-                    </div>
-                    <div className="row category-group">
-                      {snippet.published?.categories?.map((category, idx) => {
-                        return (
-                          <div
-                            className="selected-category-tag"
-                            key={`${category}_${idx}`}
-                          >
-                            {category}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
+                return <SnippetCard key={`Snippet_${i}`} snippet={snippet} />;
               })
             : null}
         </div>
