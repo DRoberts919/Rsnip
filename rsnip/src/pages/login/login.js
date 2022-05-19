@@ -7,7 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Login = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [focus, setFocus] = useState({
@@ -52,7 +52,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="relative">
-        <div className="login-form light-shadow">
+        <div data-testid="login-form" className="login-form light-shadow">
           <div className="form-title">Login</div>
           <form onSubmit={(e) => handleLogin(e)}>
             <div className="relative">
@@ -95,12 +95,12 @@ const Login = () => {
               ></input>
             </div>
             {error ? (
-              <div className="error-txt txt-center">
+              <div data-testid="login-error-message" className="error-txt txt-center">
                 Invalid Username/Password
               </div>
             ) : null}
             <div className="m-2"></div>
-            <button className="light-shadow form-btn green-btn" type="submit">
+            <button data-testid="login-btn" className="light-shadow form-btn green-btn" type="submit">
               Login
             </button>
           </form>
