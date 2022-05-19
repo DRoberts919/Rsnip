@@ -1,11 +1,11 @@
 import "./profileStyles.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LinkedIn from "../../assets/images/linkedin-icon.svg";
 import Github from "../../assets/images/github-icon.svg";
 import Email from "../../assets/images/email-icon.svg";
 import useFetch from "../../hooks/useFetch";
-const seedrandom = require("seedrandom");
+import SnippetCard from "../../components/snippetCard/snippetCard";
 
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
@@ -16,14 +16,8 @@ const seedrandom = require("seedrandom");
 const Profile = () => {
   const { userId } = useParams();
   const [profileData] = useFetch(
-    `https://2ao7thmdcd.execute-api.us-west-1.amazonaws.com/Testing/snippet/user/${userId}`
+    `${process.env.REACT_APP_BASE_URL}/snippet/user/${userId}`
   );
-  const [randomColor, setRandomColor] = useState([
-    "purple-banner",
-    "orange-banner",
-    "dark-blue-banner",
-    "light-blue-banner",
-  ]);
 
   return (
     <div className="content row-center align-start p-t-8">
@@ -62,37 +56,7 @@ const Profile = () => {
         <div className="snippet-scrollbar">
           <div className="snippet-section">
             {profileData?.Items?.map((snippet, i) => {
-              return (
-                <div className="snippet-card light-shadow" key={`Snippet_${i}`}>
-                  <div
-                    className={`banner snippet-banner ${
-                      randomColor[
-                        Math.floor(
-                          (snippet?.snippet_id
-                            ? seedrandom(`${snippet?.snippet_id}`)()
-                            : Math.random()) * randomColor.length
-                        )
-                      ]
-                    }`}
-                  ></div>
-                  <div className="snippet-title">{snippet.published.title}</div>
-                  <div className="snippet-description">
-                    {snippet.published.description}
-                  </div>
-                  <div className="row category-group">
-                    {snippet.published.categories?.map((category, idx) => {
-                      return (
-                        <div
-                          className="selected-category-tag"
-                          key={`${category}_${idx}`}
-                        >
-                          {category}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
+              return <SnippetCard key={`Snippet_${i}`} snippet={snippet} />;
             })}
           </div>
         </div>
