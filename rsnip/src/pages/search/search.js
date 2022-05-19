@@ -52,6 +52,7 @@ const Search = () => {
   }, [snippets, searchParams, categories]);
 
   useEffect(() => {
+    console.log("test".toUpperCase().includes("te".toUpperCase()));
     fetch(
       `${process.env.REACT_APP_BASE_URL}snippet?searchQuery=${searchParams.get(
         "name"
@@ -64,7 +65,7 @@ const Search = () => {
         setFilterSnippets(data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className="content p-t-8">

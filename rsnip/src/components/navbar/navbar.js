@@ -12,7 +12,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
-  
   // const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
   const changeNavColors = () => {
     window.scrollY >= 1 ? setChangeNav(true) : setChangeNav(false);
@@ -24,12 +23,8 @@ const Navbar = () => {
     }
   };
 
-
-
-  
-  
   window.addEventListener("scroll", changeNavColors);
-  if(location.pathname.includes("/snippet/edit/")) {
+  if (location.pathname.includes("/snippet/edit/")) {
     // return (<div className="edit-nav">
     //   <div className="nav-group">
     //     <div className="left">
@@ -48,9 +43,8 @@ const Navbar = () => {
     //     </div>
     //   </div>
     // </div>);
-    return (<></>);
-  }
-  else {
+    return <></>;
+  } else {
     return (
       <div
         className={
@@ -68,31 +62,34 @@ const Navbar = () => {
           </Link>
           <div className={menuOpen ? "nav-links" : "nav-links nav-hidden"}>
             {/* <div>{location.pathname}</div> */}
-            <div className="relative m-r-1">
-              <input
-                className="nav-search-snippet light-shadow m-1"
-                type="text"
-                placeholder="Search Snippet"
-                onKeyDown={handleEnterKey}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-              <Link
-                className="nav-search-icon"
-                to={`/search?name=${searchInput}`}
-              >
-                <div className="row">
-                  <div className="search-line"></div>
-                  <BsSearch color="#999" size={18} />
-                </div>
-              </Link>
-            </div>
+            {!location.pathname.includes("/search") ? (
+              <div className="relative m-r-1">
+                <input
+                  className="nav-search-snippet light-shadow m-1"
+                  type="text"
+                  placeholder="Search Snippet"
+                  onKeyDown={handleEnterKey}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                <Link
+                  className="nav-search-icon"
+                  to={`/search?name=${searchInput}`}
+                >
+                  <div className="row">
+                    <div className="search-line"></div>
+                    <BsSearch color="#999" size={18} />
+                  </div>
+                </Link>
+              </div>
+            ) : null}
+
             <Link className="m-r-1 nav-link" to="/register">
               Sign Up
             </Link>
             <Link className="btn green-btn light-shadow m-r-1" to="/login">
               Login
             </Link>
-              <DarkModeToggle />
+            <DarkModeToggle />
           </div>
           <div className="nav-burger">
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} />
@@ -100,7 +97,7 @@ const Navbar = () => {
         </div>
       </div>
     );
-    }
+  }
 };
 
 export default Navbar;
