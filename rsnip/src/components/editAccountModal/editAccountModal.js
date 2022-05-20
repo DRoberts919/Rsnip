@@ -1,17 +1,22 @@
+import { useState } from "react";
 import "./editAccountModalStyles.css";
 
 const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
+    const [tempUserData, setTempUserData] = useState(userInfo);
+    
     const closeModal = () => {setOpen(false)};
     
 
     const updateField = (fieldName, value) => {
-        let tempData = JSON.parse(JSON.stringify(userInfo));
+        let tempData = JSON.parse(JSON.stringify(tempUserData));
         tempData[fieldName] = value;
-        setInfo(tempData);
+        setTempUserData(tempData);
     }
 
     const updateProfile = () => {
         //TODO: use Dylan's lambda shit
+        //Update front end user state
+        setInfo(tempUserData);
         //close modal
         closeModal();
     }
@@ -32,7 +37,7 @@ const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
                         {[8,45,3,4].map((value,index) => {
                             return (
                             <div key={`male-image${index}`} 
-                              className={`profile-pic-container ${ userInfo?.profilePic === `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png` ? "selected" : ""}`} 
+                              className={`profile-pic-container ${ tempUserData?.profilePic === `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png` ? "selected" : ""}`} 
                               onClick={() => updateField("profilePic", `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png`)}>
                                 <img src={`https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png`}/>
                             </div>
@@ -43,7 +48,7 @@ const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
                         {[17,20,3,10].map((value,index) => {
                             return (
                             <div key={`female-image${index}`} 
-                              className={`profile-pic-container ${ userInfo?.profilePic === `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png` ? "selected" : ""}`}  
+                              className={`profile-pic-container ${ tempUserData?.profilePic === `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png` ? "selected" : ""}`}  
                               onClick={() => updateField("profilePic", `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png`)}>
                                 <img src={`https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png`}/>
                             </div>
@@ -53,19 +58,19 @@ const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
                     </div> 
                     <div className="input-field type2">
                         <label htmlFor="usernameInput">Username</label>
-                        <input type="text" id="usernameInput" value={userInfo?.name}/>
+                        <input type="text" id="usernameInput" value={tempUserData?.name} onChange={(evt) => updateField("name",evt.target.value)}/>
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="emailInput">Email</label>
-                        <input type="text" id="emailInput" value={userInfo?.email}/>
+                        <input type="text" id="emailInput" value={tempUserData?.email} onChange={(evt) => updateField("email",evt.target.value)}/>
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="linkedInInput">LinkedIn</label>
-                        <input type="text" id="linkedInInput" value={userInfo?.linkedIn}/>
+                        <input type="text" id="linkedInInput" value={tempUserData?.linkedIn} onChange={(evt) => updateField("linkedIn",evt.target.value)}/>
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="gitHubInput">GitHub</label>
-                        <input type="text" id="gitHubInput" value={userInfo?.gitHub}/>
+                        <input type="text" id="gitHubInput" value={tempUserData?.gitHub} onChange={(evt) => updateField("gitHub",evt.target.value)}/>
                     </div>
                     
                     <button className="btn green-btn" onClick={updateProfile}>
