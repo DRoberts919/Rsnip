@@ -6,6 +6,7 @@ import Github from "../../assets/images/github-icon.svg";
 import Email from "../../assets/images/email-icon.svg";
 import useFetch from "../../hooks/useFetch";
 import SnippetCard from "../../components/snippetCard/snippetCard";
+import EditAccountModal from "../../components/editAccountModal/editAccountModal";
 
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
@@ -15,11 +16,13 @@ import SnippetCard from "../../components/snippetCard/snippetCard";
 
 const Profile = () => {
   const { userId } = useParams();
-  const [profileData] = useFetch(
+  const [profileData, setProfileData] = useFetch(
     `${process.env.REACT_APP_BASE_URL}/snippet/user/${userId}`
   );
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
   return (
+    <>
     <div className="content row-center align-start p-t-8">
       <div className="profile-section light-shadow txt-center">
         <img
@@ -34,7 +37,7 @@ const Profile = () => {
         <div>fetch_userid@param.com</div>
         <div
           onClick={() => {
-            console.log("Modal popup to edit account?");
+            setEditModalOpen(true);
           }}
           className="btn green-btn light-shadow m-1 m-b-2"
         >
@@ -62,6 +65,8 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    <EditAccountModal isOpen={editModalOpen} setOpen={setEditModalOpen}  userInfo={profileData} setInfo={setProfileData}/>
+    </>
   );
 };
 
