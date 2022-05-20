@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./navbarStyles.css";
 import Hamburger from "hamburger-react";
 import { BsSearch } from "react-icons/bs";
 import DarkModeToggle from "./darkModeToggle";
+import { UserContext } from "../../hooks/useContext";
 
 const Navbar = () => {
   const location = useLocation();
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [changeNav, setChangeNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [user, setUser] = useContext(UserContext);
 
   // const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
   const changeNavColors = () => {
@@ -23,28 +25,12 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("USER: ", user);
+  }, [user]);
+
   window.addEventListener("scroll", changeNavColors);
-  if (location.pathname.includes("/snippet/edit/")) {
-    // return (<div className="edit-nav">
-    //   <div className="nav-group">
-    //     <div className="left">
-    //       <button className="btn green-btn-outline">
-    //         &#8249; Back
-    //       </button>
-    //     </div>
-    //     <div className="right">
-    //       <span>{saveMessage}</span>
-    //       <button className="btn green-btn-outline">
-    //         Save
-    //       </button>
-    //       <button className="btn green-btn">
-    //         Publish
-    //       </button>
-    //     </div>
-    //   </div>
-    // </div>);
-    return <></>;
-  } else {
+  if (!location.pathname.includes("/snippet/edit/")) {
     return (
       <div
         className={
@@ -82,13 +68,22 @@ const Navbar = () => {
                 </Link>
               </div>
             ) : null}
+            {user ? (
+              <>
+                <div>Sign Out BB</div>
+                <div>Account Img</div>
+              </>
+            ) : (
+              <>
+                <Link className="m-r-1 nav-link" to="/register">
+                  Sign Up
+                </Link>
+                <Link className="btn green-btn light-shadow m-r-1" to="/login">
+                  Login
+                </Link>
+              </>
+            )}
 
-            <Link className="m-r-1 nav-link" to="/register">
-              Sign Up
-            </Link>
-            <Link className="btn green-btn light-shadow m-r-1" to="/login">
-              Login
-            </Link>
             <DarkModeToggle />
           </div>
           <div className="nav-burger">

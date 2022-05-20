@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 
-function edituser() {
+function EditUser() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
 
@@ -17,11 +17,10 @@ function edituser() {
         email: email,
         name: username,
       });
-      console.log(result); // SUCCESS 
+      console.log(result); // SUCCESS
 
-      if(result === "SUCCESS") {
+      if (result === "SUCCESS") {
         // update user Data in the dynamoDB User-Table
-        
       }
     } catch (error) {
       console.log(error);
@@ -31,4 +30,4 @@ function edituser() {
   return <div>edituser</div>;
 }
 
-export default edituser;
+export default EditUser;
