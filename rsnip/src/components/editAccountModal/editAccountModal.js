@@ -53,7 +53,7 @@ const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
                     </div> 
                     <div className="input-field type2">
                         <label htmlFor="usernameInput">Username</label>
-                        <input type="text" id="usernameInput" value={userInfo?.username}/>
+                        <input type="text" id="usernameInput" value={userInfo?.name}/>
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="emailInput">Email</label>
