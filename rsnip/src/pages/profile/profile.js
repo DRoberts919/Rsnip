@@ -33,7 +33,11 @@ const Profile = () => {
     .then((data) => {setProfileData(data?.Item)})
     .catch((err) => console.log(err));
 
+  },[]);
+
+  useEffect(() => {
     //If user has a valid session and they are on their own profile page, then set the cognito user data
+    console.log(user)
     if(userId === user?.user_id) {
       setUserOnOwnProfile(true);
       try {
@@ -46,7 +50,7 @@ const Profile = () => {
         console.log(error);
       }
     }
-  },[]);
+  }, [user]);
 
 
   return (
