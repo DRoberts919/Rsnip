@@ -70,8 +70,12 @@ const Navbar = () => {
             ) : null}
             {user ? (
               <>
-                <div className="btn sign-out">Sign Out BB</div>
-                <img src={user.profilePic} alt="Profile Img" />
+                <div className="btn sign-out light-shadow">Sign Out</div>
+                <img
+                  className="nav-profile-img"
+                  src={user.profilePic}
+                  alt="Profile Img"
+                />
               </>
             ) : (
               <>
