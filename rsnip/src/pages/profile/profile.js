@@ -36,7 +36,7 @@ const Profile = () => {
       <div className="profile-section light-shadow txt-center">
         <img
           className="user-img light-shadow"
-          src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png"
+          src={profileData?.profilePic}
           alt="Profile Img"
         />
         <a href={profileData?.linkedIn} target="_blank"><img className="linkedin-icon" src={LinkedIn} alt="LinkedIn" /></a>
