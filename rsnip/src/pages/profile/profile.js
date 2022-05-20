@@ -1,5 +1,5 @@
 import "./profileStyles.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LinkedIn from "../../assets/images/linkedin-icon.svg";
 import Github from "../../assets/images/github-icon.svg";
@@ -7,7 +7,6 @@ import Email from "../../assets/images/email-icon.svg";
 import useFetch from "../../hooks/useFetch";
 import SnippetCard from "../../components/snippetCard/snippetCard";
 import EditAccountModal from "../../components/editAccountModal/editAccountModal";
-import {UserContext} from "../../hooks/userContext";
 
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
@@ -20,8 +19,18 @@ const Profile = () => {
   const [snippetData, setSnippetData] = useFetch(
     `${process.env.REACT_APP_BASE_URL}snippet/user/${userId}`
   );
-  const [user, setUser] = useContext(UserContext);
+  const [profileData, setProfileData] = useFetch(
+    
+  );
+
   const [editModalOpen, setEditModalOpen] = useState(false);
+  
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BASE_URL}user/${userId}`)
+    .then((res) => res.json())
+    .then((data) => profileData(data?.Item))
+    .catch((err) => console.log(err));
+  },[]);
 
   return (
     <>
