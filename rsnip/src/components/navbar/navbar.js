@@ -12,7 +12,7 @@ const Navbar = () => {
   const [changeNav, setChangeNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [user, setUser] = useContext("");
+  const [user, setUser] = useContext(UserContext);
 
   // const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
   const changeNavColors = () => {
