@@ -1,5 +1,5 @@
 import "./profileStyles.css";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LinkedIn from "../../assets/images/linkedin-icon.svg";
 import Github from "../../assets/images/github-icon.svg";
@@ -7,6 +7,7 @@ import Email from "../../assets/images/email-icon.svg";
 import useFetch from "../../hooks/useFetch";
 import SnippetCard from "../../components/snippetCard/snippetCard";
 import EditAccountModal from "../../components/editAccountModal/editAccountModal";
+import {UserContext} from "../../hooks/userContext";
 
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
@@ -16,9 +17,10 @@ import EditAccountModal from "../../components/editAccountModal/editAccountModal
 
 const Profile = () => {
   const { userId } = useParams();
-  const [profileData, setProfileData] = useFetch(
-    `${process.env.REACT_APP_BASE_URL}/snippet/user/${userId}`
+  const [snippetData, setSnippetData] = useFetch(
+    `${process.env.REACT_APP_BASE_URL}snippet/user/${userId}`
   );
+  const [user, setUser] = useContext(UserContext);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
   return (
@@ -46,7 +48,7 @@ const Profile = () => {
       </div>
       <div className="snippet-container ">
         <div className="profile-title-section">
-          <div className="profile-title">John Doe's Snippets</div>
+          <div className="profile-title">{profileData?.username}'s Snippets</div>
           <div
             className="plus-btn light-shadow"
             onClick={() => {
@@ -58,7 +60,7 @@ const Profile = () => {
         </div>
         <div className="snippet-scrollbar">
           <div className="snippet-section">
-            {profileData?.Items?.map((snippet, i) => {
+            {snippetData?.Items?.map((snippet, i) => {
               return <SnippetCard key={`Snippet_${i}`} snippet={snippet} />;
             })}
           </div>
