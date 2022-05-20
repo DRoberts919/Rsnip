@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./globalStyles.css";
 import { Amplify } from "aws-amplify";
-import App from "./app";
+import Search from "./pages/search/search";
+import Edituser from "./components/edituser/Edituser"
 
 Amplify.configure({
   aws_cognito_region:
@@ -12,4 +13,23 @@ Amplify.configure({
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <BrowserRouter>
+    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<SignUp />} />
+      <Route path="snippet/edit/:snippetId" element={<SnippetEditor />} />
+      <Route path="snippet/:snippetId" element={<ViewSnippet />} />
+      <Route path="user/:userId" element={<Profile />} />
+      <Route path="confirmation" element={<Confirmation />}></Route>
+      <Route path="search" element={<Search />} />
+      <Route
+        path="snippet/edit/worker-javascript.js"
+        element={<SnippetEditor />}
+      />
+      <Route path="test" element={<Edituser />}/>
+    </Routes>
+  </BrowserRouter>
+);
