@@ -16,10 +16,21 @@ import EditAccountModal from "../../components/editAccountModal/editAccountModal
 
 const Profile = () => {
   const { userId } = useParams();
-  const [profileData, setProfileData] = useFetch(
-    `${process.env.REACT_APP_BASE_URL}/snippet/user/${userId}`
+  const [snippetData, setSnippetData] = useFetch(
+    `${process.env.REACT_APP_BASE_URL}snippet/user/${userId}`
   );
+  const [profileData, setProfileData] = useFetch(
+    
+  );
+
   const [editModalOpen, setEditModalOpen] = useState(false);
+  
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BASE_URL}user/${userId}`)
+    .then((res) => res.json())
+    .then((data) => profileData(data?.Item))
+    .catch((err) => console.log(err));
+  },[]);
 
   return (
     <>
@@ -46,7 +57,7 @@ const Profile = () => {
       </div>
       <div className="snippet-container ">
         <div className="profile-title-section">
-          <div className="profile-title">John Doe's Snippets</div>
+          <div className="profile-title">{profileData?.username}'s Snippets</div>
           <div
             className="plus-btn light-shadow"
             onClick={() => {
@@ -58,7 +69,7 @@ const Profile = () => {
         </div>
         <div className="snippet-scrollbar">
           <div className="snippet-section">
-            {profileData?.Items?.map((snippet, i) => {
+            {snippetData?.Items?.map((snippet, i) => {
               return <SnippetCard key={`Snippet_${i}`} snippet={snippet} />;
             })}
           </div>
