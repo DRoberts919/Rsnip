@@ -1,9 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./globalStyles.css";
+import {BrowserRouter,Route,Routes} from "react-router-dom"
 import { Amplify } from "aws-amplify";
 import Search from "./pages/search/search";
-import Edituser from "./components/edituser/Edituser"
+import Edituser from "./components/edituser/edituser"
+import Home from "./pages/home/home.js"
+import Login from "./pages/login/login"
+import Profile from "./pages/profile/profile"
+import SignUp from "./pages/signup/signup"
+import Navbar from "./components/navbar/navbar"
+import SnippetEditor from "./pages/snippetEditor/snippetEditor"
+import Confirmation from "./pages/confirmation/Confirmation"
+import ViewSnippet from "./pages/viewSnippet/viewSnippet"
 
 Amplify.configure({
   aws_cognito_region:
