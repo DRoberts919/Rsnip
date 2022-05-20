@@ -12,6 +12,7 @@ import Profile from "./pages/profile/profile";
 import Confirmation from "./pages/confirmation/Confirmation";
 import { Amplify } from "aws-amplify";
 import Search from "./pages/search/search";
+import Edituser from "./components/edituser/Edituser"
 
 Amplify.configure({
   aws_cognito_region:
@@ -37,6 +38,7 @@ root.render(
         path="snippet/edit/worker-javascript.js"
         element={<SnippetEditor />}
       />
+      <Route path="test" element={<Edituser />}/>
     </Routes>
   </BrowserRouter>
 );

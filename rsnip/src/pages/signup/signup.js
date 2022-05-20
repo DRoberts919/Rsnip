@@ -39,7 +39,7 @@ const SignUp = () => {
     } else {
       try {
         Auth.signUp({
-          username: username,
+          name: username,
           email: email,
           password: password,
           attributes: {
