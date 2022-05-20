@@ -19,16 +19,14 @@ const Profile = () => {
   const [snippetData, setSnippetData] = useFetch(
     `${process.env.REACT_APP_BASE_URL}snippet/user/${userId}`
   );
-  const [profileData, setProfileData] = useFetch(
-    
-  );
+  const [profileData, setProfileData] = useState();
 
   const [editModalOpen, setEditModalOpen] = useState(false);
   
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}user/${userId}`)
     .then((res) => res.json())
-    .then((data) => profileData(data?.Item))
+    .then((data) => {setProfileData(data?.Item)})
     .catch((err) => console.log(err));
   },[]);
 
@@ -41,11 +39,11 @@ const Profile = () => {
           src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png"
           alt="Profile Img"
         />
-        <img className="linkedin-icon" src={LinkedIn} alt="LinkedIn" />
-        <img className="github-icon" src={Github} alt="Github" />
-        <img className="email-icon" src={Email} alt="Email" />
-        <div className="username-title">Username</div>
-        <div>fetch_userid@param.com</div>
+        <a href={profileData?.linkedIn} target="_blank"><img className="linkedin-icon" src={LinkedIn} alt="LinkedIn" /></a>
+        <a href={profileData?.gitHub} target="_blank"><img className="github-icon" src={Github} alt="Github" /></a>
+        <a href={`mailto:${profileData?.email}`} target="_blank"><img className="email-icon" src={Email} alt="Email" /></a>
+        <div className="username-title">{profileData?.name}</div>
+        <div>{profileData?.email}</div>
         <div
           onClick={() => {
             setEditModalOpen(true);
@@ -57,7 +55,7 @@ const Profile = () => {
       </div>
       <div className="snippet-container ">
         <div className="profile-title-section">
-          <div className="profile-title">{profileData?.username}'s Snippets</div>
+          <div className="profile-title">{profileData?.name}'s Snippets</div>
           <div
             className="plus-btn light-shadow"
             onClick={() => {
