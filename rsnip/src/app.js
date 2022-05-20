@@ -23,7 +23,9 @@ const App = () => {
     try {
       user = await Auth.currentAuthenticatedUser();
       if (user) {
-        setUser(user.attributes);
+        fetch(`${process.env.REACT_APP_BASE_URL}user/${user.attributes.sub}`)
+          .then((res) => res.json())
+          .then((data) => setUser(data.Item));
       }
     } catch (error) {
       console.log(error);
@@ -35,24 +37,12 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route
-            path="/"
-            element={user ? <Navigate to={`user/${user.sub}`} /> : <Home />}
-          />
-          <Route
-            path="login"
-            element={user ? <Navigate to={`user/${user.sub}`} /> : <Login />}
-          />
-          <Route
-            path="register"
-            element={user ? <Navigate to={`user/${user.sub}`} /> : <SignUp />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<SignUp />} />
           <Route path="snippet/edit/:snippetId" element={<SnippetEditor />} />
           <Route path="snippet/:snippetId" element={<ViewSnippet />} />
-          <Route
-            path="user/:userId"
-            element={user ? <Profile /> : <Navigate to="login" />}
-          />
+          <Route path="user/:userId" element={<Profile />} />
           <Route path="confirmation" element={<Confirmation />}></Route>
           <Route path="search" element={<Search />} />
           <Route
