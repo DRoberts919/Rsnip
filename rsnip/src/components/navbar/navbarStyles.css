@@ -15,10 +15,15 @@
     
 }
 
-
 .nav-logo {
     width: 40px;
     height: 40px;
+}
+
+.nav-profile-img{
+    width:47px;
+    margin: 1rem 1.25rem;
+    border-radius: 100vh;
 }
 
 .nav-title{

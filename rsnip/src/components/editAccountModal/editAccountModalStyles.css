@@ -1,0 +1,137 @@
+.edit-account-modal .screen {
+    /* width:100vw; */
+    /* height:100vh; */
+    z-index: 100;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: #25323e;
+    opacity: 0.2;
+    position: fixed;
+}
+
+.edit-account-modal .modal {
+    background-color: #fff;
+    border-radius: 8px;
+    color: var(--primary-color);
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    min-width: 300px;
+    max-width: 800px;
+    min-height: 200px;
+    max-height: 90vh;
+    overflow-x: hidden;
+    padding:2rem;
+    position: fixed;
+    transform: translateX(-50%);
+    left:50%;
+    top:6%;
+    z-index: 110;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 15px #3a7e7b22;
+}
+.dark .edit-account-modal .modal {
+    background-color: var(--main-bg-color-2);
+}
+
+.edit-account-modal .modal h1 {
+    font-size: 1.8rem;
+    margin:1rem 0;
+    font-weight: 500;
+    color:var(--primary-color);
+    margin:0;
+}
+
+
+.edit-account-modal .modal .modal-section {
+    /* border-top: 1px solid var(--color-secondary-light); */
+    border-bottom: 1px solid var(--main-bg-color-2);
+    padding:0.75rem 0;
+    /* background-color: var(--color-secondary-light); */
+    /* background-color: var(--color-primary); */
+
+}
+
+.modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+
+.close-modal-btn {
+    position: absolute;
+    right:1rem;
+    top:1rem;
+    background-color: transparent;
+    font-size: 1rem;
+    color:var(--primary-color);
+    font-weight: 900;
+    border:none;
+    transition: color 0.15s ease;
+}
+
+.close-modal-btn:hover {
+    color: var(--error-color);
+    cursor: pointer;
+}
+
+
+
+.dark .input-field label {
+    color: #f1f4fed5;
+}
+
+.dark .input-field input, .input-field.type2 textarea {
+    color: #3b4a5a;
+}
+
+
+
+
+.image-selection > div {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+}
+
+.profile-pic-container {
+    width:100px;
+    height: 100px;
+    margin:10px;
+    border-radius: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+    /* border:3px solid transparent; */
+    transition: box-shadow 0.2s ease;
+}
+
+.profile-pic-container.selected {
+    /* border-color: var(--secondary-color); */
+    box-shadow: 0 0 3px 3px var(--secondary-color);
+
+}
+
+
+.profile-pic-container > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-label {
+    text-transform: uppercase;
+    font-size: .9rem;
+}
+
+.modal .input-field {
+    margin: 0.5rem 0;
+}
+
+.modal .btn {
+    margin: 1rem auto 0;
+    display: block;
+}

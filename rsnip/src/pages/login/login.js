@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Auth } from "aws-amplify";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./loginStyles.css";
 import LoginImg from "../../assets/images/login-img.svg";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { UserContext } from "../../hooks/useContext";
 
 const Login = () => {
   // const navigate = useNavigate();
@@ -15,14 +16,18 @@ const Login = () => {
     password: false,
   });
   const [error, setError] = useState(false);
-
+  const [user, setUser] = useContext(UserContext);
   const handleLogin = (evt) => {
     evt.preventDefault();
 
     try {
       Auth.signIn(email, password)
         .then((res) => {
-          console.log(res);
+          localStorage.setItem("User", JSON.stringify(res.attributes));
+          setUser(res.attributes);
+          // console.log(res.attributes.email);
+          // console.log(res.attributes.name);
+          // console.log(res.attributes.sub);
           //signInUserSession.accessToken.jwtToken
           // navigate("/", { replace: true });
         })
@@ -95,12 +100,19 @@ const Login = () => {
               ></input>
             </div>
             {error ? (
-              <div data-testid="login-error-message" className="error-txt txt-center">
+              <div
+                data-testid="login-error-message"
+                className="error-txt txt-center"
+              >
                 Invalid Username/Password
               </div>
             ) : null}
             <div className="m-2"></div>
-            <button data-testid="login-btn" className="light-shadow form-btn green-btn" type="submit">
+            <button
+              data-testid="login-btn"
+              className="light-shadow form-btn green-btn"
+              type="submit"
+            >
               Login
             </button>
           </form>
