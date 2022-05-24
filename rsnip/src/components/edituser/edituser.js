@@ -16,9 +16,7 @@ function Edituser() {
       let cognitoUser = Auth.currentAuthenticatedUser().then((data) => {
         console.log(data);
         setCognitoUser(() => data);
-        fetch(
-          `https://2ao7thmdcd.execute-api.us-west-1.amazonaws.com/Testing/user/${data.attributes.sub}`
-        )
+        fetch(`${process.env.REACT_APP_BASE_URL}user/${data.attributes.sub}`)
           .then((res) => res.json())
           .then((res) => {
             console.log(res);
@@ -67,7 +65,7 @@ function Edituser() {
           };
 
           fetch(
-            `https://2ao7thmdcd.execute-api.us-west-1.amazonaws.com/Testing/user/${userData.Item.user_id}`,
+            `${process.env.REACT_APP_BASE_URL}user/${userData.Item.user_id}`,
             requestOptions
           )
             .then((res) => res.json())
@@ -83,10 +81,12 @@ function Edituser() {
     <div style={{ marginTop: "200px" }}>
       <input
         placeholder={username}
-        onChange={(e) => setUsername(e.target.value)}></input>
+        onChange={(e) => setUsername(e.target.value)}
+      ></input>
       <input
         placeholder={email}
-        onChange={(e) => setEmail(e.target.value)}></input>
+        onChange={(e) => setEmail(e.target.value)}
+      ></input>
       <input placeholder={gitHub}></input>
       <input placeholder={linkedIn}></input>
       <button onClick={submitEdit}>test</button>
