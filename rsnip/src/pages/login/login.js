@@ -8,7 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { UserContext } from "../../hooks/useContext";
 
 const Login = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [focus, setFocus] = useState({
@@ -29,7 +29,7 @@ const Login = () => {
           // console.log(res.attributes.name);
           // console.log(res.attributes.sub);
           //signInUserSession.accessToken.jwtToken
-          // navigate("/", { replace: true });
+          navigate("/", { replace: true });
         })
         .catch(() => {
           setError(true);
