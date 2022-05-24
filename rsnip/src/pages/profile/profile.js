@@ -37,13 +37,13 @@ const Profile = () => {
 
   useEffect(() => {
     //If user has a valid session and they are on their own profile page, then set the cognito user data
-    console.log(user)
+    // console.log(user)
     if(userId === user?.user_id) {
       setUserOnOwnProfile(true);
       try {
         // get your current session from Auth.currentAuthenticatedUser()
         let cognitoUser = Auth.currentAuthenticatedUser().then((data) => {
-          console.log(data);
+          // console.log(data);
           setCognitoUser(() => data);
         });
       } catch (error) {
@@ -98,7 +98,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
-    {userOnOwnProfile ? <EditAccountModal isOpen={editModalOpen} setOpen={setEditModalOpen}  userInfo={profileData} setInfo={setProfileData}/> : <></>}
+    {userOnOwnProfile ? <EditAccountModal isOpen={editModalOpen} setOpen={setEditModalOpen}  userInfo={profileData} setInfo={setProfileData} cognitoUser={cognitoUser}/> : <></>}
     </>
   );
 };

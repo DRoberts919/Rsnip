@@ -23,8 +23,12 @@ const Login = () => {
     try {
       Auth.signIn(email, password)
         .then((res) => {
-          localStorage.setItem("User", JSON.stringify(res.attributes));
-          setUser(res.attributes);
+          // localStorage.setItem("User", JSON.stringify(res.attributes));
+          // console.log(res.attributes);
+          // setUser(res.attributes);
+          fetch(`${process.env.REACT_APP_BASE_URL}user/${res.attributes.sub}`)
+          .then((res) => res.json())
+          .then((data) => setUser(data.Item));
           // console.log(res.attributes.email);
           // console.log(res.attributes.name);
           // console.log(res.attributes.sub);
