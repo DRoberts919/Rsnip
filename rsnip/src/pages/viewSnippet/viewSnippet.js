@@ -93,20 +93,23 @@ const ViewSnippet = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data.Item);
-        console.log(data.Item.isPublished);
+        const publishedData = data.Item.published;
         // if (!data.Item.isPublished && ) {
         // }
         //   setSnippets(data);
         //   setFilterSnippets(data);
+        setTitle(publishedData.title);
+        setDescription(publishedData.description);
+        setSelectedCategoryList(publishedData.categories);
+        setFunctionCode(publishedData.code.functionality);
+        setStructureCode(publishedData.code.structure);
+        setStyleCode(publishedData.code.styles);
+
+        fetch(`${process.env.REACT_APP_BASE_URL}user/${data.user_id}`)
+          .then((res) => res.json())
+          .then((data) => setUser(data));
       })
       .catch((err) => console.log(err));
-
-    setTitle("Title of Project");
-    setDescription(
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    );
-    setUser({ user_id: "123", username: "Cashby" });
-    setSelectedCategoryList(["Animated", "Bootstrap", "Button"]);
     compileCode();
 
     //if data doesnt come in/ get an error
