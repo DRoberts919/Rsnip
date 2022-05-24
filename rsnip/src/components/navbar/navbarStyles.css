@@ -75,6 +75,18 @@ display: flex;
       border: 1px solid rgba(0,0,0,0.1);
   }
 
+  .nav .sign-out {
+    padding: 6px 18px;
+    font-size: 0.9rem;
+  }
+  .nav.white-txt .sign-out {
+    color:#fff;
+    border-color: #fff;
+  }
+  .nav.white-txt .sign-out:hover {
+    background-color:#fff;
+    color:var(--error-color);
+  }
 
   /* Edit nav bar styles */
 
