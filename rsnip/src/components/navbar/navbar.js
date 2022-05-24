@@ -5,6 +5,7 @@ import Hamburger from "hamburger-react";
 import { BsSearch } from "react-icons/bs";
 import DarkModeToggle from "./darkModeToggle";
 import { UserContext } from "../../hooks/useContext";
+import { Auth } from "aws-amplify";
 
 const Navbar = () => {
   const location = useLocation();
@@ -28,6 +29,11 @@ const Navbar = () => {
   useEffect(() => {
     console.log("USER: ", user);
   }, [user]);
+
+  const signOutUser = async () => {
+    await Auth.signOut();
+    window.location.reload(false);
+  }
 
   window.addEventListener("scroll", changeNavColors);
   if (!location.pathname.includes("/snippet/edit/")) {
@@ -70,12 +76,12 @@ const Navbar = () => {
             ) : null}
             {user ? (
               <>
-                <div className="btn sign-out light-shadow">Sign Out</div>
-                <img
+                <div className="btn sign-out light-shadow" onClick={signOutUser}>Sign Out</div>
+                <Link to={`/user/${user.user_id}`}> <img
                   className="nav-profile-img"
                   src={user.profilePic}
                   alt="Profile Img"
-                />
+                /></Link>
               </>
             ) : (
               <>

@@ -11,5 +11,9 @@ Amplify.configure({
   aws_user_pools_web_client_id: "1fcur2odnfngog3rs3f215veua",
 });
 
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <App/>
+);

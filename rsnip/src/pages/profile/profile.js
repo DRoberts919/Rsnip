@@ -1,5 +1,5 @@
 import "./profileStyles.css";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LinkedIn from "../../assets/images/linkedin-icon.svg";
 import Github from "../../assets/images/github-icon.svg";
@@ -7,7 +7,8 @@ import Email from "../../assets/images/email-icon.svg";
 import useFetch from "../../hooks/useFetch";
 import SnippetCard from "../../components/snippetCard/snippetCard";
 import EditAccountModal from "../../components/editAccountModal/editAccountModal";
-
+import { UserContext } from "../../hooks/useContext";
+import { Auth } from "aws-amplify";
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
 
@@ -20,15 +21,37 @@ const Profile = () => {
     `${process.env.REACT_APP_BASE_URL}snippet/user/${userId}`
   );
   const [profileData, setProfileData] = useState();
-
+  const [cognitoUser, setCognitoUser] = useState();
   const [editModalOpen, setEditModalOpen] = useState(false);
-  
+  const [user, setUser] = useContext(UserContext); // auth user credentials
+
+  const [userOnOwnProfile, setUserOnOwnProfile] = useState(false);
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}user/${userId}`)
     .then((res) => res.json())
     .then((data) => {setProfileData(data?.Item)})
     .catch((err) => console.log(err));
+
   },[]);
+
+  useEffect(() => {
+    //If user has a valid session and they are on their own profile page, then set the cognito user data
+    // console.log(user)
+    if(userId === user?.user_id) {
+      setUserOnOwnProfile(true);
+      try {
+        // get your current session from Auth.currentAuthenticatedUser()
+        let cognitoUser = Auth.currentAuthenticatedUser().then((data) => {
+          // console.log(data);
+          setCognitoUser(() => data);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [user]);
+
 
   return (
     <>
@@ -36,7 +59,7 @@ const Profile = () => {
       <div className="profile-section light-shadow txt-center">
         <img
           className="user-img light-shadow"
-          src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png"
+          src={profileData?.profilePic}
           alt="Profile Img"
         />
         <a href={profileData?.linkedIn} target="_blank"><img className="linkedin-icon" src={LinkedIn} alt="LinkedIn" /></a>
@@ -44,14 +67,15 @@ const Profile = () => {
         <a href={`mailto:${profileData?.email}`} target="_blank"><img className="email-icon" src={Email} alt="Email" /></a>
         <div className="username-title">{profileData?.name}</div>
         <div>{profileData?.email}</div>
-        <div
+        {userOnOwnProfile ? <div
           onClick={() => {
             setEditModalOpen(true);
           }}
-          className="btn green-btn light-shadow m-1 m-b-2"
+          className="btn green-btn light-shadow m-1"
         >
           Edit Account
-        </div>
+        </div> 
+        : <></>}
       </div>
       <div className="snippet-container ">
         <div className="profile-title-section">
@@ -74,7 +98,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
-    <EditAccountModal isOpen={editModalOpen} setOpen={setEditModalOpen}  userInfo={profileData} setInfo={setProfileData}/>
+    {userOnOwnProfile ? <EditAccountModal isOpen={editModalOpen} setOpen={setEditModalOpen}  userInfo={profileData} setInfo={setProfileData} cognitoUser={cognitoUser}/> : <></>}
     </>
   );
 };

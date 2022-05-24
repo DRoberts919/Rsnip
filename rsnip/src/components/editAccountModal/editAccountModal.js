@@ -1,19 +1,72 @@
+import { useState } from "react";
 import "./editAccountModalStyles.css";
+import { Auth } from "aws-amplify";
 
-const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
+const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo, cognitoUser}) => {
+    const [tempUserData, setTempUserData] = useState(userInfo);
+    
     const closeModal = () => {setOpen(false)};
     
 
     const updateField = (fieldName, value) => {
-        let tempData = JSON.parse(JSON.stringify(userInfo));
+        let tempData = JSON.parse(JSON.stringify(tempUserData));
         tempData[fieldName] = value;
-        setInfo(tempData);
+        setTempUserData(tempData);
     }
 
+
+    const submitEdit = async () => {
+        // event.preventDefault();
+    
+        // update users info for congito;
+        if (cognitoUser !== null && tempUserData !== null) {
+          // UpdateUserAttribute will update the specific user within cognito
+          let result = await Auth.updateUserAttributes(cognitoUser, {
+            email: tempUserData.email,
+            name: tempUserData.name,
+          }).then((res) => {
+            console.log(res);
+            // if response is successfull then move on to updating dynamodb.
+            if (res === "SUCCESS") {
+              // update user Data in the dynamoDB User-Table
+    
+              let user = {
+                createdAt: userInfo.createdAt,
+                email: tempUserData.email,
+                name: tempUserData.name,
+                gitHub: tempUserData.gitHub,
+                linkedIn: tempUserData.linkedIn,
+                profilePic: tempUserData.profilePic,
+                user_id: userInfo.user_id,
+              };
+              let requestOptions = {
+                method: "PUT",
+                mode: "cors",
+                body: JSON.stringify(user),
+              };
+    
+              fetch(
+                `https://2ao7thmdcd.execute-api.us-west-1.amazonaws.com/Testing/user/${userInfo.user_id}`,
+                requestOptions
+              )
+                .then((res) => res.json())
+                .then((res) => console.log(res));
+            } else {
+              console.log("uh oh something went wrong on our end");
+            }
+          });
+        }
+      };
+
     const updateProfile = () => {
-        //TODO: use Dylan's lambda shit
+        //Use Dylan's lambda
+        submitEdit().then(() => {
+        //Update front end user state
+        setInfo(tempUserData);
         //close modal
         closeModal();
+        });
+        
     }
 
     if(isOpen) 
@@ -32,7 +85,7 @@ const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
                         {[8,45,3,4].map((value,index) => {
                             return (
                             <div key={`male-image${index}`} 
-                              className={`profile-pic-container ${ userInfo?.profilePic === `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png` ? "selected" : ""}`} 
+                              className={`profile-pic-container ${ tempUserData?.profilePic === `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png` ? "selected" : ""}`} 
                               onClick={() => updateField("profilePic", `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png`)}>
                                 <img src={`https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png`}/>
                             </div>
@@ -43,7 +96,7 @@ const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
                         {[17,20,3,10].map((value,index) => {
                             return (
                             <div key={`female-image${index}`} 
-                              className={`profile-pic-container ${ userInfo?.profilePic === `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png` ? "selected" : ""}`}  
+                              className={`profile-pic-container ${ tempUserData?.profilePic === `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png` ? "selected" : ""}`}  
                               onClick={() => updateField("profilePic", `https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png`)}>
                                 <img src={`https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png`}/>
                             </div>
@@ -53,19 +106,19 @@ const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
                     </div> 
                     <div className="input-field type2">
                         <label htmlFor="usernameInput">Username</label>
-                        <input type="text" id="usernameInput" value={userInfo?.name}/>
+                        <input type="text" id="usernameInput" value={tempUserData?.name} onChange={(evt) => updateField("name",evt.target.value)}/>
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="emailInput">Email</label>
-                        <input type="text" id="emailInput" value={userInfo?.email}/>
+                        <input type="text" id="emailInput" value={tempUserData?.email} onChange={(evt) => updateField("email",evt.target.value)}/>
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="linkedInInput">LinkedIn</label>
-                        <input type="text" id="linkedInInput" value={userInfo?.linkedIn}/>
+                        <input type="text" id="linkedInInput" value={tempUserData?.linkedIn} onChange={(evt) => updateField("linkedIn",evt.target.value)}/>
                     </div>
                     <div className="input-field type2">
                         <label htmlFor="gitHubInput">GitHub</label>
-                        <input type="text" id="gitHubInput" value={userInfo?.gitHub}/>
+                        <input type="text" id="gitHubInput" value={tempUserData?.gitHub} onChange={(evt) => updateField("gitHub",evt.target.value)}/>
                     </div>
                     
                     <button className="btn green-btn" onClick={updateProfile}>
