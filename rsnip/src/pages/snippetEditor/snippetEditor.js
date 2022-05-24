@@ -6,6 +6,8 @@ import AceEditor from 'react-ace';
 import SplitPane from "react-split-pane";
 import { HotKeys, configure } from "react-hotkeys";
 import { useNavigate } from 'react-router-dom';
+import useInterval from "../../hooks/useInterval";
+
 
 // import mode-<language> , this imports the style and colors for the selected language.
 import 'ace-builds/src-noconflict/mode-javascript';
@@ -31,6 +33,8 @@ const SnippetEditor = () => {
     const [description, setDescription] = useState("");
     const [categoryInput, setCategoryInput] = useState("");
     const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
+
+    const [newChanges, setNewChanges] = useState(false);
 
     const [structureCode, setStructureCode] = useState(` 
 <!DOCTYPE HTML>
@@ -66,7 +70,16 @@ root.render(<App />);
   `);
 
     const [srcDoc, setSrcDoc] = useState("");
+    
+    //save snippet every 10 seconds
+    useInterval(() => {
+        if(newChanges) saveSnippet();
+    }, 10000);
 
+    //Detect changes in code editors
+    useEffect(() => {
+        setNewChanges(true);
+    }, [structureCode, styleCode, functionCode]);
 
     // Override CTRL S
     const keyMap = {
@@ -145,6 +158,7 @@ root.render(<App />);
         let date = new Date();
         setSaveMessage(`Saved at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
         console.log("save");
+        setNewChanges(false);
     }
 
     const publishSnippet = () => {
@@ -154,6 +168,7 @@ root.render(<App />);
         let date = new Date();
         setSaveMessage(`Published at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
         console.log("publish");
+        setNewChanges(false);
     }
 
     // const htmlString = `
