@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./editAccountModalStyles.css";
+import { Auth } from "aws-amplify";
 
-const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
+const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo, cognitoUser}) => {
     const [tempUserData, setTempUserData] = useState(userInfo);
     
     const closeModal = () => {setOpen(false)};
@@ -13,12 +14,59 @@ const EditAccountModal = ({isOpen, setOpen, userInfo, setInfo}) => {
         setTempUserData(tempData);
     }
 
+
+    const submitEdit = async () => {
+        // event.preventDefault();
+    
+        // update users info for congito;
+        if (cognitoUser !== null && tempUserData !== null) {
+          // UpdateUserAttribute will update the specific user within cognito
+          let result = await Auth.updateUserAttributes(cognitoUser, {
+            email: tempUserData.email,
+            name: tempUserData.name,
+          }).then((res) => {
+            console.log(res);
+            // if response is successfull then move on to updating dynamodb.
+            if (res === "SUCCESS") {
+              // update user Data in the dynamoDB User-Table
+    
+              let user = {
+                createdAt: userInfo.createdAt,
+                email: tempUserData.email,
+                name: tempUserData.name,
+                gitHub: tempUserData.gitHub,
+                linkedIn: tempUserData.linkedIn,
+                profilePic: tempUserData.profilePic,
+                user_id: userInfo.user_id,
+              };
+              let requestOptions = {
+                method: "PUT",
+                mode: "cors",
+                body: JSON.stringify(user),
+              };
+    
+              fetch(
+                `https://2ao7thmdcd.execute-api.us-west-1.amazonaws.com/Testing/user/${userInfo.user_id}`,
+                requestOptions
+              )
+                .then((res) => res.json())
+                .then((res) => console.log(res));
+            } else {
+              console.log("uh oh something went wrong on our end");
+            }
+          });
+        }
+      };
+
     const updateProfile = () => {
-        //TODO: use Dylan's lambda shit
+        //Use Dylan's lambda
+        submitEdit().then(() => {
         //Update front end user state
         setInfo(tempUserData);
         //close modal
         closeModal();
+        });
+        
     }
 
     if(isOpen) 
