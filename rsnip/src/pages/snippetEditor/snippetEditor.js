@@ -42,8 +42,6 @@ const SnippetEditor = () => {
     const { snippetId } = useParams();
     const [snippetPublished, setSnippetPublished] = useState(false);
 
-    const [newChanges, setNewChanges] = useState(false);
-
     const [structureCode, setStructureCode] = useState(` 
 <!DOCTYPE HTML>
 <html lang="en">
@@ -158,7 +156,7 @@ root.render(<App />);
                 imports: []
             }
         }
-        );
+        
   };
 
   // const goToPrevPage = () => {
