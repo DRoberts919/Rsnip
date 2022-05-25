@@ -93,9 +93,11 @@ const ViewSnippet = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data.Item);
-        const publishedData = data.Item.published;
-        // if (!data.Item.isPublished && ) {
-        // }
+        const publishedData = data.Item?.published;
+        if (!data.Item || !data.Item.isPublished) {
+          //TODO: Redirect to home page
+          setRedirect(true);
+        }
         //   setSnippets(data);
         //   setFilterSnippets(data);
         setTitle(publishedData.title);
@@ -112,8 +114,7 @@ const ViewSnippet = () => {
       .catch((err) => console.log(err));
     compileCode();
 
-    //if data doesnt come in/ get an error
-    // setRedirect(true);
+
   }, []);
 
   const selectTab = (tab) => {
