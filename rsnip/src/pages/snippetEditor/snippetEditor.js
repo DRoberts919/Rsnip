@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./snippetEditorStyles.css";
 import categories from "../../categories.json";
 import React from "react";
@@ -18,6 +18,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/ext-beautify";
 import EditNav from "../../components/navbar/editNavbar";
+import { UserContext } from "../../hooks/useContext";
 
 configure({
   ignoreTags: [],
@@ -34,7 +35,7 @@ const SnippetEditor = () => {
   const [categoryInput, setCategoryInput] = useState("");
   const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
   const [snippetPublished, setSnippetPublished] = useState(false);
-
+  const [user, setUser] = useContext(UserContext);
   const [newChanges, setNewChanges] = useState(false);
 
   const [structureCode, setStructureCode] = useState(` 
@@ -156,6 +157,7 @@ root.render(<App />);
 
   //TODO: fetch data from backend. If bad, then redirect
   useEffect(() => {
+    console.log(user.user_id);
     fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -180,7 +182,7 @@ root.render(<App />);
 
   const getData = (publishBool) => {
     return {
-      // user_id: user_id,
+      user_id: user.user_id,
       snippet_id: snippetId,
       isPublished: publishBool,
       saved: {
