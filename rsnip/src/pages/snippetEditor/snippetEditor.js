@@ -6,6 +6,7 @@ import AceEditor from "react-ace";
 import SplitPane from "react-split-pane";
 import { HotKeys, configure } from "react-hotkeys";
 import { useNavigate, useParams } from "react-router-dom";
+import useInterval from "../../hooks/useInterval";
 
 // import mode-<language> , this imports the style and colors for the selected language.
 import "ace-builds/src-noconflict/mode-javascript";
@@ -33,6 +34,9 @@ const SnippetEditor = () => {
   const [categoryInput, setCategoryInput] = useState("");
   const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
   const [snippetPublished, setSnippetPublished] = useState(false);
+
+  const [newChanges, setNewChanges] = useState(false);
+
   const [structureCode, setStructureCode] = useState(` 
 <!DOCTYPE HTML>
 <html lang="en">
@@ -66,12 +70,21 @@ const root = createRoot(container);
 root.render(<App />);
   `);
 
-  const [srcDoc, setSrcDoc] = useState("");
-
   // Override CTRL S
   const keyMap = {
     SAVE: "Control+s",
   };
+  const [srcDoc, setSrcDoc] = useState("");
+
+  //save snippet every 10 seconds
+  useInterval(() => {
+    if (newChanges) saveSnippet();
+  }, 10000);
+
+  //Detect changes in code editors
+  useEffect(() => {
+    setNewChanges(true);
+  }, [structureCode, styleCode, functionCode]);
 
   const handlers = {
     SAVE: (event) => {
@@ -115,6 +128,31 @@ root.render(<App />);
         }
         `);
   };
+
+  // const goToPrevPage = () => {
+  //     navigate("/");
+  // }
+
+  // const saveSnippet = () => {
+  //     let data = getData();
+  //     //TODO: Fetch put data
+  //     console.log(data);
+  //     //TODO: Update display message
+  //     let date = new Date();
+  //     setSaveMessage(`Saved at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
+  //     console.log("save");
+  //     setNewChanges(false);
+  // }
+
+  // const publishSnippet = () => {
+  //     let data = getData();
+  //     //TODO: Fetch put data
+  //     //TODO: Update display message
+  //     let date = new Date();
+  //     setSaveMessage(`Published at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
+  //     console.log("publish");
+  //     setNewChanges(false);
+  // }
 
   //TODO: fetch data from backend. If bad, then redirect
   useEffect(() => {
