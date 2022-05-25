@@ -1,12 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./snippetEditorStyles.css";
 import categories from "../../categories.json";
 import React from "react";
 import AceEditor from "react-ace";
 import SplitPane from "react-split-pane";
 import { HotKeys, configure } from "react-hotkeys";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, Navigate, useParams } from "react-router-dom";
 import useInterval from "../../hooks/useInterval";
+import { UserContext } from "../../hooks/useContext";
 
 // import mode-<language> , this imports the style and colors for the selected language.
 import "ace-builds/src-noconflict/mode-javascript";
@@ -18,7 +19,6 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/ext-beautify";
 import EditNav from "../../components/navbar/editNavbar";
-import { UserContext } from "../../hooks/useContext";
 
 configure({
   ignoreTags: [],
@@ -37,6 +37,8 @@ const SnippetEditor = () => {
   const [snippetPublished, setSnippetPublished] = useState(false);
   const [user, setUser] = useContext(UserContext);
   const [newChanges, setNewChanges] = useState(false);
+
+  const [redirect, setRedirect] = useState(false);
 
   const [structureCode, setStructureCode] = useState(` 
 <!DOCTYPE HTML>
@@ -129,6 +131,34 @@ root.render(<App />);
         }
         `);
   };
+
+  //TODO: fetch data from backend. If bad, then redirect
+  useEffect(() => {
+    compileCode();
+    console.log(user);
+    if (user.user_id !== "TODO: insert user_id from fetch here") {
+      //setRedirect(true); //Uncomment this line
+    }
+  }, []);
+
+  //   const getData = () => {
+  //       return {
+  //           visibility:	visibility,
+  //           title: title,
+  //           description: description,
+  //           categories:	selectedCategoryList,
+  //           code: {
+  //               structureLanguage: "HTML",
+  //               structure: structureCode,
+  //               styleLanguage: "CSS",
+  //               styles: styleCode,
+  //               functionLanguage: "JS",
+  //               functionality: functionCode,
+  //               imports: []
+  //           }
+  //       }
+
+  // };
 
   // const goToPrevPage = () => {
   //     navigate("/");
@@ -335,6 +365,7 @@ root.render(<App />);
     }
   };
 
+  if (redirect) return <Navigate to="/" replace />;
   return (
     <>
       <EditNav
