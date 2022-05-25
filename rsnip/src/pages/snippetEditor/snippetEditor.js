@@ -132,14 +132,7 @@ root.render(<App />);
         `);
   };
 
-  //TODO: fetch data from backend. If bad, then redirect
-  useEffect(() => {
-    compileCode();
-    console.log(user);
-    if (user.user_id !== "TODO: insert user_id from fetch here") {
-      //setRedirect(true); //Uncomment this line
-    }
-  }, []);
+  
 
   //   const getData = () => {
   //       return {
@@ -187,16 +180,15 @@ root.render(<App />);
 
   //TODO: fetch data from backend. If bad, then redirect
   useEffect(() => {
-    console.log(user.user_id);
+    console.log(user?.user_id);
     fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.Item);
+        if (user?.user_id !== "TODO: insert user_id from fetch here") {
+            //setRedirect(true); //Uncomment this line
+          }
         const savedData = data.Item.saved;
-        // if (!data.Item.isPublished && ) {
-        // }
-        //   setSnippets(data);
-        //   setFilterSnippets(data);
         setTitle(savedData.title);
         setDescription(savedData.description);
         setSelectedCategoryList(savedData.categories);
@@ -207,7 +199,6 @@ root.render(<App />);
       })
       .catch((err) => console.log(err));
     compileCode();
-    // navigate("/");
   }, []);
 
   const getData = (publishBool) => {
@@ -271,6 +262,7 @@ root.render(<App />);
       `Saved at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
     );
     console.log("save");
+    setNewChanges(false);
   };
 
   const publishSnippet = () => {
@@ -290,6 +282,7 @@ root.render(<App />);
       `Published at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
     );
     console.log("publish");
+    setNewChanges(false);
   };
 
   // const htmlString = `
