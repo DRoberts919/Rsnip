@@ -180,26 +180,33 @@ root.render(<App />);
 
   //TODO: fetch data from backend. If bad, then redirect
   useEffect(() => {
-    console.log(user?.user_id);
-    fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.Item);
-        if (user?.user_id !== "TODO: insert user_id from fetch here") {
-            //setRedirect(true); //Uncomment this line
-          }
-        const savedData = data.Item.saved;
-        setTitle(savedData.title);
-        setDescription(savedData.description);
-        setSelectedCategoryList(savedData.categories);
-        setFunctionCode(savedData.code.functionality);
-        setStructureCode(savedData.code.structure);
-        setStyleCode(savedData.code.styles);
-        setSnippetPublished(data.Item.isPublished);
-      })
-      .catch((err) => console.log(err));
-    compileCode();
-  }, []);
+    if(user) {
+        console.log(user?.user_id);
+        fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data.Item);
+            //If the snippet does not belong to the user, redirect them
+            if (user?.user_id !== data.Item.user_id) {
+                console.log("redirect");
+                setRedirect(data.Item.snippet_id?? "home");
+            }
+            const savedData = data.Item.saved;
+            setTitle(savedData.title);
+            setDescription(savedData.description);
+            setSelectedCategoryList(savedData.categories);
+            setFunctionCode(savedData.code.functionality);
+            setStructureCode(savedData.code.structure);
+            setStyleCode(savedData.code.styles);
+            setSnippetPublished(data.Item.isPublished);
+            //Getting called before state is set still : I HATE REACT STATE
+            compileCode();
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
+
+
 
   const getData = (publishBool) => {
     return {
@@ -358,7 +365,8 @@ root.render(<App />);
     }
   };
 
-  if (redirect) return <Navigate to="/" replace />;
+  if (redirect === "home") return <Navigate to="/" replace />;
+  if (redirect) return <Navigate to={`/snippet/${redirect}`} replace />;
   return (
     <>
       <EditNav
