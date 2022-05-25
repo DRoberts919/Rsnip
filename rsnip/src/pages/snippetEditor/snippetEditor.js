@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./snippetEditorStyles.css";
 import categories from "../../categories.json";
 import React from 'react';
 import AceEditor from 'react-ace';
 import SplitPane from "react-split-pane";
 import { HotKeys, configure } from "react-hotkeys";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import useInterval from "../../hooks/useInterval";
+import { UserContext } from "../../hooks/useContext";
 
 
 // import mode-<language> , this imports the style and colors for the selected language.
@@ -33,6 +34,9 @@ const SnippetEditor = () => {
     const [description, setDescription] = useState("");
     const [categoryInput, setCategoryInput] = useState("");
     const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
+
+    const [user, setUser] = useContext(UserContext);
+    const [redirect, setRedirect] = useState(false);
 
     const [newChanges, setNewChanges] = useState(false);
 
@@ -125,7 +129,11 @@ root.render(<App />);
     //TODO: fetch data from backend. If bad, then redirect
     useEffect(() => {
         compileCode();
-        // navigate("/");
+        console.log(user);
+        if(user.user_id !== "TODO: insert user_id from fetch here") {
+            //setRedirect(true); //Uncomment this line
+        }
+        
     }, []);
 
     const getData = () => {
@@ -250,7 +258,7 @@ root.render(<App />);
 
 
     
-    
+    if(redirect) return <Navigate to="/" replace />;
     return (
     <>
     <EditNav goToPrevPage={goToPrevPage} saveSnippet={saveSnippet} publishSnippet={publishSnippet} saveMessage={saveMessage}/>
