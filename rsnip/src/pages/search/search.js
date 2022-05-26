@@ -1,11 +1,25 @@
 import "./searchStyles.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
 import allCategories from "../../categories.json";
 import useFetch from "../../hooks/useFetch";
 import SnippetCard from "../../components/snippetCard/snippetCard";
+
+
+const useDidMountEffect = (func, deps) => {
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if (didMount.current) {
+      func();
+    } else {
+      didMount.current = true;
+    }
+  }, deps);
+};
+
 
 const Search = () => {
   const [snippets, setSnippets] = useState([]);
@@ -36,6 +50,20 @@ const Search = () => {
     setCategories(tempCategories);
   };
 
+  //Get categories from query parameter
+  useEffect(() => {
+    console.log(searchParams.get("categories"));
+    let tempCategories = JSON.parse(JSON.stringify(categories));
+    searchParams.get("categories")?.split("-").forEach((catId) => {
+      tempCategories.map(tempCat => {
+        if(tempCat.category.id == catId) tempCat.isChecked = true;
+        return tempCat; 
+      }) 
+    })
+    console.log(tempCategories);
+    setCategories(tempCategories);  
+  }, []);
+
 
   useEffect(() => {
     if (snippets) {
@@ -54,6 +82,7 @@ const Search = () => {
 
       //Add categories to url
       const params = `name=${searchInput}&categories=${categoriesIDsSelected.join("-")}`;
+      
       setSearchParams(params);
 
       //Filter by selected categories
@@ -103,6 +132,7 @@ const Search = () => {
             type="text"
             placeholder="Search Snippet"
             onKeyDown={handleEnterKey}
+            value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
           <Link className="search-icon" to={`/search?name=${searchInput}`}>
