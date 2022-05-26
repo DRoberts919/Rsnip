@@ -38,6 +38,8 @@ const SnippetEditor = () => {
   const [user, setUser] = useContext(UserContext);
   const [newChanges, setNewChanges] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(false);
+
   const [redirect, setRedirect] = useState(false);
 
   const [structureCode, setStructureCode] = useState(` 
@@ -199,14 +201,17 @@ root.render(<App />);
             setStructureCode(savedData.code.structure);
             setStyleCode(savedData.code.styles);
             setSnippetPublished(data.Item.isPublished);
-            //Getting called before state is set still : I HATE REACT STATE
-            compileCode();
+
+            setInitialLoad(true);
+            // compileCode();
         })
         .catch((err) => console.log(err));
     }
   }, [user]);
 
-
+  useEffect(() => {
+    if(initialLoad) compileCode();
+  }, [initialLoad]);
 
   const getData = (publishBool) => {
     return {
