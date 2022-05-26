@@ -56,56 +56,40 @@ const Profile = () => {
 
 
   const createAndReturnSnippetId = async () => {
-    let x = {
+    let snippetObject = {
       "user_id": user.user_id,
       "dateCreated": "",
       "isPublished": false,
       "saved": {
-        "dateUpdated": "3-12-22",
-        "visibility": [
-          "public"
-        ],
-        "title": "Test Snippet",
-        "description": "This is an object holding all JSON data for snippet",
-        "categories": [
-          "Javascript",
-          "React"
-        ],
+        "dateUpdated": "",
+        "visibility": [""],
+        "title": "",
+        "description": "",
+        "categories": ["", ""],
         "code": {
-          "structureLanguage": "React",
-          "structure": "test",
-          "stylesLanguage": "CSS",
-          "styles": "test",
-          "functionLanguage": "Function",
-          "functionality": "test",
-          "imports": [
-            "test",
-            "testtwo"
-          ]
+          "structureLanguage": "",
+          "structure": "",
+          "stylesLanguage": "",
+          "styles": "",
+          "functionLanguage": "",
+          "functionality": "",
+          "imports": ["", ""]
         }
       },
       "published": {
-        "dateUpdated": "3-12-22",
-        "visibility": [
-          "public"
-        ],
-        "title": "Test Snippet",
-        "description": "This is an object holding all JSON data for snippet",
-        "categories": [
-          "Javascript",
-          "React"
-        ],
+        "dateUpdated": "",
+        "visibility": [""],
+        "title": "My New Snippet",
+        "description": "",
+        "categories": ["", ""],
         "code": {
-          "structureLanguage": "React",
-          "structure": "test",
-          "stylesLanguage": "CSS",
-          "styles": "test",
-          "functionLanguage": "Function",
-          "functionality": "test",
-          "imports": [
-            "test",
-            "testtwo"
-          ]
+          "structureLanguage": "",
+          "structure": "",
+          "stylesLanguage": "",
+          "styles": "",
+          "functionLanguage": "",
+          "functionality": "",
+          "imports": ["", ""]
         }
       }
     }
@@ -115,7 +99,7 @@ const Profile = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(x)
+      body: JSON.stringify(snippetObject)
     }).then(res => res.json()).then(data => {
       setSnippetId(data);
     }).catch(err => console.log(err));
