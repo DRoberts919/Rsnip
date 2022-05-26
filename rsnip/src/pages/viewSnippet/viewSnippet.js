@@ -96,7 +96,7 @@ const ViewSnippet = () => {
       .then((data) => {
         console.log(data.Item);
         const publishedData = data.Item?.published;
-        if (data.Item.isPublished) {
+        if (!data.Item.isPublished) {
           //TODO: Redirect to home page
           setRedirect(true);
         }
