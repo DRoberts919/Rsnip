@@ -4,7 +4,7 @@ import "./snippetCardStyles.css";
 
 const seedrandom = require("seedrandom");
 
-const SnippetCard = ({ snippet }) => {
+const SnippetCard = ({ snippet, isOwnProfile }) => {
   const [randomColor] = useState([
     "purple-banner",
     "orange-banner",
@@ -12,7 +12,13 @@ const SnippetCard = ({ snippet }) => {
     "light-blue-banner",
   ]);
   return (
-    <Link to={`/snippet/${snippet?.snippet_id}`}>
+    <Link
+      to={
+        isOwnProfile
+          ? `/snippet/edit/${snippet?.snippet_id}`
+          : `/snippet/${snippet?.snippet_id}`
+      }
+    >
       <div className="snippet-card light-shadow">
         <div
           className={`banner snippet-banner ${
