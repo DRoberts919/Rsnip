@@ -31,6 +31,8 @@ const ViewSnippet = () => {
   const [description, setDescription] = useState("");
   const [user, setUser] = useState({});
 
+  const [initialLoad, setInitialLoad] = useState(false);
+
   const [redirect, setRedirect] = useState(false);
 
   const [structureCode, setStructureCode] = useState("");
@@ -106,16 +108,22 @@ const ViewSnippet = () => {
         setFunctionCode(publishedData.code.functionality);
         setStructureCode(publishedData.code.structure);
         setStyleCode(publishedData.code.styles);
+        setInitialLoad(true);
 
         fetch(`${process.env.REACT_APP_BASE_URL}user/${data.user_id}`)
           .then((res) => res.json())
           .then((data) => setUser(data));
       })
       .catch((err) => console.log(err));
-    compileCode();
+    // compileCode();
 
 
   }, []);
+  
+
+  useEffect(() => {
+    if(initialLoad) compileCode();
+  }, [initialLoad]);
 
   const selectTab = (tab) => {
     setSelectedEditorTab(tab);
