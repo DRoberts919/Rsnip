@@ -1,8 +1,7 @@
 import "./searchStyles.css";
-import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
 import allCategories from "../../categories.json";
 import useFetch from "../../hooks/useFetch";
@@ -24,6 +23,7 @@ const Search = () => {
   );
   const [openCategory, setOpenCategory] = useState(false);
 
+
   const navigate = useNavigate();
 
   const handleEnterKey = (e) => {
@@ -36,19 +36,43 @@ const Search = () => {
     setCategories(tempCategories);
   };
 
+
   useEffect(() => {
-    // if (snippets) {
-    //   let tempFilter = [...snippets];
-    //   let categoriesSelected = [];
-    //   categories.forEach((category, i) => {
-    //     if (category.isChecked) {
-    //       categoriesSelected.push(category);
-    //     }
-    //   });
-    //   console.log(tempFilter);
-    //   console.log(categoriesSelected);
-    //   setFilterSnippets(snippets);
-    // }
+    if (snippets) {
+      let tempFilter = [...snippets];
+      //Get selected categories
+      let categoriesLabelsSelected = [];
+      let categoriesSelected = [];
+      let categoriesIDsSelected = [];
+      categories.forEach((category, i) => {
+        if (category.isChecked) {
+          categoriesSelected.push(category);
+          categoriesLabelsSelected.push(category.category.label);
+          categoriesIDsSelected.push(category.category.id);
+        }
+      });
+
+      //Add categories to url
+      const params = `name=${searchInput}&categories=${categoriesIDsSelected.join("-")}`;
+      setSearchParams(params);
+
+      //Filter by selected categories
+      if(categoriesSelected.length > 0) {
+      tempFilter = tempFilter.filter(snippet => {
+        let snipHasSelectedCategory = false;
+        for(let i = 0; i < snippet.published.categories.length; i++) {
+          if(categoriesLabelsSelected.includes(snippet.published.categories[i])) {
+            snipHasSelectedCategory = true;
+            break;
+          }
+        }
+        if(snipHasSelectedCategory) return snippet;
+      });
+    }
+      console.log(tempFilter);
+      console.log(categoriesSelected);
+      setFilterSnippets(tempFilter);
+    }
   }, [snippets, searchParams, categories]);
 
   useEffect(() => {
@@ -104,19 +128,19 @@ const Search = () => {
                   return (
                     <div
                       className="row align-center"
-                      key={`${category.category}_${i}`}
+                      key={`${category.category.label}_${i}`}
                     >
                       <input
                         type="checkbox"
                         checked={category.isChecked}
                         onChange={() => handleCheckbox(i)}
-                        id={`${category}${i}`}
+                        id={`${category.category.id}`}
                       />
                       <label
                         style={{ paddingLeft: "0.5rem", opacity: 0.7 }}
-                        htmlFor={`${category}${i}`}
+                        htmlFor={`${category.category.id}`}
                       >
-                        {category.category}
+                        {category.category.label}
                       </label>
                     </div>
                   );
