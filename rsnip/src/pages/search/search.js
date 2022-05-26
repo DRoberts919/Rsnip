@@ -60,6 +60,8 @@ const Search = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        //Only show data that is published
+        data = data.filter((snippet) => snippet.isPublished)
         console.log(data);
         setSnippets(data);
         setFilterSnippets(data);
@@ -111,7 +113,7 @@ const Search = () => {
                         id={`${category}${i}`}
                       />
                       <label
-                        style={{ marginLeft: "0.5rem", opacity: 0.7 }}
+                        style={{ paddingLeft: "0.5rem", opacity: 0.7 }}
                         htmlFor={`${category}${i}`}
                       >
                         {category.category}
