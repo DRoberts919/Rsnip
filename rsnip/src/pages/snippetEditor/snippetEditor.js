@@ -341,7 +341,8 @@ root.render(<App />);
   };
 
   const isCategoryReal = (category) => {
-    return categories.indexOf(category) !== -1;
+    // return categories.indexOf(category) !== -1;
+    return categories.filter((cat) => cat.label === category).length === 1;
   };
 
   const isCategoryInList = (category) => {
@@ -551,7 +552,7 @@ root.render(<App />);
                 />
                 <datalist id="categories">
                   {categories.map((c) => {
-                    return <option key={c} value={c} />;
+                    return <option key={c.id} value={c.label} />;
                   })}
                 </datalist>
                 <div className="selected-categories">

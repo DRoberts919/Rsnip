@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./snippetCardStyles.css";
+import { MdEdit } from "react-icons/md";
 
 const seedrandom = require("seedrandom");
 
-const SnippetCard = ({ snippet }) => {
+const SnippetCard = ({ snippet, isOwnProfile }) => {
   const [randomColor] = useState([
     "purple-banner",
     "orange-banner",
@@ -38,6 +39,16 @@ const SnippetCard = ({ snippet }) => {
             );
           })}
         </div>
+        {isOwnProfile ? (
+          <Link
+            className="snippet-card-edit"
+            to={`/snippet/edit/${snippet?.snippet_id}`}
+          >
+            <MdEdit color="#fff" size={28} />
+          </Link>
+        ) : (
+          <></>
+        )}
       </div>
     </Link>
   );

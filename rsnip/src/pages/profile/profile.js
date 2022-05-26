@@ -157,7 +157,13 @@ const Profile = () => {
           <div className='snippet-scrollbar'>
             <div className='snippet-section'>
               {snippetData?.Items?.map((snippet, i) => {
-                return <SnippetCard key={`Snippet_${i}`} snippet={snippet} />;
+                return (
+                  <SnippetCard
+                    key={`Snippet_${i}`}
+                    snippet={snippet}
+                    isOwnProfile={userOnOwnProfile}
+                  />
+                );
               })}
             </div>
           </div>
