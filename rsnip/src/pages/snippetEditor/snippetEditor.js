@@ -136,8 +136,6 @@ root.render(<App />);
         `);
   };
 
-  
-
   //   const getData = () => {
   //       return {
   //           visibility:	visibility,
@@ -184,35 +182,35 @@ root.render(<App />);
 
   //TODO: fetch data from backend. If bad, then redirect
   useEffect(() => {
-    if(user) {
-        console.log(user?.user_id);
-        fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
+    if (user) {
+      console.log(user?.user_id);
+      fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data.Item);
-            //If the snippet does not belong to the user, redirect them
-            if (user?.user_id !== data.Item.user_id) {
-                console.log("redirect");
-                setRedirect(data.Item.snippet_id?? "home");
-            }
-            const savedData = data.Item.saved;
-            setTitle(savedData.title);
-            setDescription(savedData.description);
-            setSelectedCategoryList(savedData.categories);
-            setFunctionCode(savedData.code.functionality);
-            setStructureCode(savedData.code.structure);
-            setStyleCode(savedData.code.styles);
-            setSnippetPublished(data.Item.isPublished);
+          console.log(data.Item);
+          //If the snippet does not belong to the user, redirect them
+          if (user?.user_id !== data.Item.user_id) {
+            console.log("redirect");
+            setRedirect(data.Item.snippet_id ?? "home");
+          }
+          const savedData = data.Item.saved;
+          setTitle(savedData.title);
+          setDescription(savedData.description);
+          setSelectedCategoryList(savedData.categories);
+          setFunctionCode(savedData.code.functionality);
+          setStructureCode(savedData.code.structure);
+          setStyleCode(savedData.code.styles);
+          setSnippetPublished(data.Item.isPublished);
 
-            setInitialLoad(true);
-            // compileCode();
+          setInitialLoad(true);
+          // compileCode();
         })
         .catch((err) => console.log(err));
     }
   }, [user]);
 
   useEffect(() => {
-    if(initialLoad) compileCode();
+    if (initialLoad) compileCode();
   }, [initialLoad]);
 
   const getData = (publishBool) => {
@@ -256,7 +254,7 @@ root.render(<App />);
   };
 
   const goToPrevPage = () => {
-    navigate("/");
+    navigate(`../user/${user.user_id}`, { replace: true });
   };
 
   const saveSnippet = () => {
@@ -392,30 +390,27 @@ root.render(<App />);
         saveMessage={saveMessage}
       />
       <HotKeys keyMap={keyMap} handlers={handlers}>
-        <SplitPane split="vertical" minSize={"50%"} className="editor-content">
-          <div className="editor-section">
-            <div className="editor-bar">
-              <div className="tabs">
+        <SplitPane split='vertical' minSize={"50%"} className='editor-content'>
+          <div className='editor-section'>
+            <div className='editor-bar'>
+              <div className='tabs'>
                 <div
                   className={selectedEditorTab === "HTML" ? "selected" : ""}
-                  onClick={() => selectTab("HTML")}
-                >
+                  onClick={() => selectTab("HTML")}>
                   HTML
                 </div>
                 <div
                   className={selectedEditorTab === "JS" ? "selected" : ""}
-                  onClick={() => selectTab("JS")}
-                >
+                  onClick={() => selectTab("JS")}>
                   JS
                 </div>
                 <div
                   className={selectedEditorTab === "CSS" ? "selected" : ""}
-                  onClick={() => selectTab("CSS")}
-                >
+                  onClick={() => selectTab("CSS")}>
                   CSS
                 </div>
               </div>
-              <div className="run-btn" onClick={compileCode}>
+              <div className='run-btn' onClick={compileCode}>
                 Run ▶
               </div>
             </div>
@@ -425,11 +420,11 @@ root.render(<App />);
                   height: "calc(100vh - 7.5rem)",
                   width: "100%",
                 }}
-                className="ace-editor"
-                placeholder="Start Coding"
-                mode="html"
-                theme="monokai"
-                name="structure-code-editor"
+                className='ace-editor'
+                placeholder='Start Coding'
+                mode='html'
+                theme='monokai'
+                name='structure-code-editor'
                 onChange={(currentCode) => setStructureCode(currentCode)}
                 fontSize={18}
                 showPrintMargin={true}
@@ -450,11 +445,11 @@ root.render(<App />);
                   height: "calc(100vh - 7.5rem)",
                   width: "100%",
                 }}
-                className="ace-editor"
-                placeholder="Start Coding"
-                mode="javascript"
-                theme="monokai"
-                name="script-code-editor"
+                className='ace-editor'
+                placeholder='Start Coding'
+                mode='javascript'
+                theme='monokai'
+                name='script-code-editor'
                 onChange={(currentCode) => setFunctionCode(currentCode)}
                 fontSize={18}
                 showPrintMargin={true}
@@ -477,11 +472,11 @@ root.render(<App />);
                   height: "calc(100vh - 7.5rem)",
                   width: "100%",
                 }}
-                className="ace-editor"
-                placeholder="Start Coding"
-                mode="css"
-                theme="monokai"
-                name="style-code-editor"
+                className='ace-editor'
+                placeholder='Start Coding'
+                mode='css'
+                theme='monokai'
+                name='style-code-editor'
                 onChange={(currentCode) => setStyleCode(currentCode)}
                 fontSize={18}
                 showPrintMargin={true}
@@ -498,79 +493,76 @@ root.render(<App />);
               />
             )}
           </div>
-          <div className="input-output-section">
-            <div className="rendered-output-section">
-              <div className="iframe-container">
+          <div className='input-output-section'>
+            <div className='rendered-output-section'>
+              <div className='iframe-container'>
                 <iframe
-                  id="output-iframe"
+                  id='output-iframe'
                   srcDoc={srcDoc}
-                  title="output"
-                  sandbox="allow-scripts"
+                  title='output'
+                  sandbox='allow-scripts'
                 />
               </div>
             </div>
-            <div className="input-section">
-              <div className="input-field type2">
-                <label htmlFor="title">Title</label>
+            <div className='input-section'>
+              <div className='input-field type2'>
+                <label htmlFor='title'>Title</label>
                 <input
-                  type="text"
-                  id="title"
+                  type='text'
+                  id='title'
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
                 />
               </div>
 
-              <div className="input-field type2">
-                <label htmlFor="visibility">Visibility</label>
+              <div className='input-field type2'>
+                <label htmlFor='visibility'>Visibility</label>
                 {/* Button group */}
-                <div className="btn-group">
+                <div className='btn-group'>
                   <button
                     onClick={() => setVisibility("public")}
                     className={`btn ${
                       visibility === "public" ? "selected" : ""
-                    }`}
-                  >
+                    }`}>
                     Public
                   </button>
                   <button
                     onClick={() => setVisibility("private")}
                     className={`btn ${
                       visibility === "private" ? "selected" : ""
-                    }`}
-                  >
+                    }`}>
                     Private
                   </button>
                 </div>
               </div>
-              <div className="input-field type2">
-                <label htmlFor="desc">Description</label>
+              <div className='input-field type2'>
+                <label htmlFor='desc'>Description</label>
                 <textarea
-                  id="desc"
+                  id='desc'
                   onChange={(e) => setDescription(e.target.value)}
-                  value={description}
-                ></textarea>
+                  value={description}></textarea>
               </div>
-              <div className="input-field type2">
-                <label htmlFor="category">Category</label>
+              <div className='input-field type2'>
+                <label htmlFor='category'>Category</label>
                 <input
-                  type="text"
-                  id="category"
-                  list="categories"
+                  type='text'
+                  id='category'
+                  list='categories'
                   value={categoryInput}
                   onChange={(e) => setCategoryInput(e.target.value)}
                   onKeyPress={(event) => {
                     addCategoryToList(event);
                   }}
                 />
-                <datalist id="categories">
+                <datalist id='categories'>
                   {categories.map((c) => {
                     return <option key={c.id} value={c.label} />;
                   })}
                 </datalist>
-                <div className="selected-categories">
+                <div className='selected-categories'>
                   {selectedCategoryList.map((category) => {
                     return (
-                      <div key={category} className="selected-category-tag">
+                      <div key={category} className='selected-category-tag'>
                         {category}{" "}
                         <span onClick={() => removeCategoryFromList(category)}>
                           &#10006;
