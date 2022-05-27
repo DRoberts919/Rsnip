@@ -109,10 +109,9 @@ const ViewSnippet = () => {
         setStructureCode(publishedData.code.structure);
         setStyleCode(publishedData.code.styles);
         setInitialLoad(true);
-
-        fetch(`${process.env.REACT_APP_BASE_URL}user/${data.user_id}`)
+        fetch(`${process.env.REACT_APP_BASE_URL}user/${data.Item.user_id}`)
           .then((res) => res.json())
-          .then((data) => setUser(data));
+          .then((data) => setUser(data.Item));
       })
       .catch((err) => console.log(err));
     // compileCode();
@@ -120,6 +119,11 @@ const ViewSnippet = () => {
 
   }, []);
   
+
+  useEffect(() => {
+    console.log(user);
+  }, [user])
+
 
   useEffect(() => {
     if(initialLoad) compileCode();
@@ -139,7 +143,7 @@ const ViewSnippet = () => {
           <h1>{title}</h1>
           <Link to={`/user/${user?.user_id}`}>
             <img src={userIcon} width={20} alt="User Icon" />
-            {user?.username}
+            {user?.name}
           </Link>
         </div>
         <p>{description}</p>
