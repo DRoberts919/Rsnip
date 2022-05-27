@@ -1,4 +1,5 @@
 /* Editor section */
+
 .editor-section {
     background-color: #282A2E;
     min-height: calc(100vh - 5rem);
@@ -45,6 +46,11 @@
     right:0;
     background-color: #282A2E;
 }
+
+
+.SplitPane.editor-content.vertical {
+    height:initial!important;
+} 
 
 /* Right section */
 .input-output-section {
