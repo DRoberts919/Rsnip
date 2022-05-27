@@ -29,7 +29,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--main-bg-color);
   font-family: 'Poppins', sans-serif;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 code {
