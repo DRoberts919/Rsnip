@@ -76,8 +76,8 @@ const Navbar = () => {
             ) : null}
             {user ? (
               <>
-                <div className="btn sign-out light-shadow" onClick={signOutUser}>Sign Out</div>
-                <Link to={`/user/${user.user_id}`}> <img
+                <div className="btn sign-out light-shadow link" onClick={signOutUser}>Sign Out</div>
+                <Link to={`/user/${user.user_id}`} className="link profile-link"> <img
                   className="nav-profile-img"
                   src={user.profilePic}
                   alt="Profile Img"
@@ -85,18 +85,19 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link className="m-r-1 nav-link" to="/register">
+                <Link className="m-r-1 nav-link link" to="/register">
                   Sign Up
                 </Link>
-                <Link className="btn green-btn light-shadow m-r-1" to="/login">
+                <Link className="btn green-btn light-shadow m-r-1 link login-btn" to="/login">
                   Login
                 </Link>
               </>
             )}
 
-            <DarkModeToggle />
+            <div className="desktop"><DarkModeToggle maskId={1} /></div>
           </div>
           <div className="nav-burger">
+            <DarkModeToggle maskId={2}/>
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} />
           </div>
         </div>
