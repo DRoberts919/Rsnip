@@ -134,8 +134,6 @@ root.render(<App />);
         `);
   };
 
-  
-
   //   const getData = () => {
   //       return {
   //           visibility:	visibility,
@@ -182,35 +180,35 @@ root.render(<App />);
 
   //TODO: fetch data from backend. If bad, then redirect
   useEffect(() => {
-    if(user) {
-        console.log(user?.user_id);
-        fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
+    if (user) {
+      console.log(user?.user_id);
+      fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data.Item);
-            //If the snippet does not belong to the user, redirect them
-            if (user?.user_id !== data.Item.user_id) {
-                console.log("redirect");
-                setRedirect(data.Item.snippet_id?? "home");
-            }
-            const savedData = data.Item.saved;
-            setTitle(savedData.title);
-            setDescription(savedData.description);
-            setSelectedCategoryList(savedData.categories);
-            setFunctionCode(savedData.code.functionality);
-            setStructureCode(savedData.code.structure);
-            setStyleCode(savedData.code.styles);
-            setSnippetPublished(data.Item.isPublished);
+          console.log(data.Item);
+          //If the snippet does not belong to the user, redirect them
+          if (user?.user_id !== data.Item.user_id) {
+            console.log("redirect");
+            setRedirect(data.Item.snippet_id ?? "home");
+          }
+          const savedData = data.Item.saved;
+          setTitle(savedData.title);
+          setDescription(savedData.description);
+          setSelectedCategoryList(savedData.categories);
+          setFunctionCode(savedData.code.functionality);
+          setStructureCode(savedData.code.structure);
+          setStyleCode(savedData.code.styles);
+          setSnippetPublished(data.Item.isPublished);
 
-            setInitialLoad(true);
-            // compileCode();
+          setInitialLoad(true);
+          // compileCode();
         })
         .catch((err) => console.log(err));
     }
   }, [user]);
 
   useEffect(() => {
-    if(initialLoad) compileCode();
+    if (initialLoad) compileCode();
   }, [initialLoad]);
 
   const getData = (publishBool) => {
@@ -369,6 +367,16 @@ root.render(<App />);
       temp.splice(selectedCategoryList.indexOf(category), 1);
       setSelectedCategoryList(temp);
     }
+  };
+
+  const deleteSnippet = () => {
+    console.log("DELETE SNIPPET");
+    fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("SNIPPET DELETED/REDIRECt"))
+      .catch((err) => console.log(err));
   };
 
   if (redirect === "home") return <Navigate to="/" replace />;
@@ -567,6 +575,9 @@ root.render(<App />);
                     );
                   })}
                 </div>
+              </div>
+              <div className="btn delete-snippet" onClick={deleteSnippet}>
+                Delete Snippet
               </div>
             </div>
           </div>

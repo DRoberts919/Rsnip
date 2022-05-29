@@ -129,6 +129,14 @@
     color: #3b4a5a;
 }
 
+.delete-snippet{
+    background-color:var(--error-color);
+    color: #fff;
+    width: 125px;
+    text-align: center;
+    margin-top: 10px;
+}
+
 
 /* scroll bar */
 
