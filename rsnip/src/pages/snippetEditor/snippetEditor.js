@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import "./snippetEditorStyles.css";
 import categories from "../../categories.json";
 import React from "react";
@@ -17,8 +17,10 @@ import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-monokai";
 // this is an optional import just improved the interaction.
 import "ace-builds/src-noconflict/ext-language_tools";
-import "ace-builds/src-noconflict/ext-beautify";
+import { beautify } from "ace-builds/src-noconflict/ext-beautify";
+
 import EditNav from "../../components/navbar/editNavbar";
+console.log(beautify);
 
 configure({
   ignoreTags: [],
@@ -252,7 +254,7 @@ root.render(<App />);
   };
 
   const goToPrevPage = () => {
-    navigate("/");
+    navigate(`../user/${user.user_id}`, { replace: true });
   };
 
   const saveSnippet = () => {
@@ -379,6 +381,12 @@ root.render(<App />);
       .catch((err) => console.log(err));
   };
 
+  //   const jsEditorRef = useRef();
+
+  //   useEffect(() => {
+  //     beautify(jsEditorRef.current.editor.session);
+  //   }, [initialLoad]);
+
   if (redirect === "home") return <Navigate to="/" replace />;
   if (redirect) return <Navigate to={`/snippet/${redirect}`} replace />;
   return (
@@ -459,6 +467,8 @@ root.render(<App />);
                 showGutter={true}
                 highlightActiveLine={true}
                 value={functionCode}
+                // ref={jsEditorRef}
+                // commands={beautify.commands}
                 setOptions={{
                   enableBasicAutocompletion: true,
                   enableLiveAutocompletion: true,

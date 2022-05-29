@@ -11,7 +11,8 @@
     font-family: 'Poppins', sans-serif;
     border-radius: 7px;
     border:none;
-    width: 400px;
+    max-width: 400px;
+    width: 70vw;
     
   }
 
@@ -60,3 +61,15 @@
   background-color: var(--main-bg-color-2);
 }
 
+@media all and (max-width:875px) {
+  .category-box{
+    /* right: 0%; */
+    transform: translateX(-50%);
+  }
+}
+
+@media all and (max-width:563px) {
+  .category-box{
+    left: 50%;
+  }
+}

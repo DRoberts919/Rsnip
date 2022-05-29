@@ -29,6 +29,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--main-bg-color);
   font-family: 'Poppins', sans-serif;
+  /* scroll-behavior: smooth; */
 }
 
 code {
@@ -149,7 +150,7 @@ h6{
 }
 
 .green-btn{
-  color: #fafafa !important;
+  color: #fafafa;
   background-color: var(--secondary-color);
   cursor: pointer;
   transition: background-color 0.15s ease;

@@ -12,7 +12,16 @@ import Profile from "./pages/profile/profile";
 import Confirmation from "./pages/confirmation/Confirmation";
 import Search from "./pages/search/search";
 
+const ScrollToTop = ({ children }) => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  });
 
+  return children || null;
+};
 
 
 const NoAuthRoute = ({user, component}) => {
@@ -24,6 +33,10 @@ const App = () => {
   const [user, setUser] = useState();
   useEffect(() => {
     getUser();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
   }, []);
 
   const getUser = async () => {
@@ -45,14 +58,14 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="login" element={<NoAuthRoute user={user} component={<Login />}/> } />
-          <Route path="register" element={<NoAuthRoute user={user} component={<SignUp />}/>} />
-          <Route path="snippet/edit/:snippetId" element={<SnippetEditor />} />
-          <Route path="snippet/:snippetId" element={<ViewSnippet />} />
-          <Route path="user/:userId" element={<Profile />} />
-          <Route path="confirmation" element={<Confirmation />} />
-          <Route path="search" element={<Search />} />
+          <Route path="/" element={<ScrollToTop><Home /></ScrollToTop>} />
+          <Route path="login" element={<ScrollToTop><NoAuthRoute user={user} component={<Login />}/> </ScrollToTop>} />
+          <Route path="register" element={<ScrollToTop><NoAuthRoute user={user} component={<SignUp />}/></ScrollToTop>} />
+          <Route path="snippet/edit/:snippetId" element={<ScrollToTop><SnippetEditor /></ScrollToTop>} />
+          <Route path="snippet/:snippetId" element={<ScrollToTop><ViewSnippet /></ScrollToTop>} />
+          <Route path="user/:userId" element={<ScrollToTop><Profile /></ScrollToTop>} />
+          <Route path="confirmation" element={<ScrollToTop><Confirmation /></ScrollToTop>} />
+          <Route path="search" element={<ScrollToTop><Search /></ScrollToTop>} />
           <Route
             path="snippet/edit/worker-javascript.js"
             element={<SnippetEditor />}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { animated, useSpring } from "react-spring";
 
 
-const DarkModeToggle = () => {
+const DarkModeToggle = ({maskId}) => {
 
     const [isDarkMode, setDarkMode] = useState(false);
   
@@ -76,7 +76,7 @@ const DarkModeToggle = () => {
         ...svgContainerProps
       }}
     >
-      <mask id="myMask2">
+      <mask id={`myMask${maskId}`}>
         <rect x="0" y="0" width="100%" height="100%" fill="white" />
         <animated.circle style={maskedCircleProps} r="9" fill="black" />
       </mask>
@@ -86,7 +86,7 @@ const DarkModeToggle = () => {
         cy="12"
         style={centerCircleProps}
         fill="currentColor"
-        mask="url(#myMask2)"
+        mask={`url(#myMask${maskId})`}
       />
       <animated.g stroke="currentColor" style={linesProps}>
         <line x1="12" y1="1" x2="12" y2="3" />

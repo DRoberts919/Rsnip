@@ -1,11 +1,25 @@
 import "./searchStyles.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
 import allCategories from "../../categories.json";
 import useFetch from "../../hooks/useFetch";
 import SnippetCard from "../../components/snippetCard/snippetCard";
+
+
+const useDidMountEffect = (func, deps) => {
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if (didMount.current) {
+      func();
+    } else {
+      didMount.current = true;
+    }
+  }, deps);
+};
+
 
 const Search = () => {
   const [snippets, setSnippets] = useState([]);
@@ -27,8 +41,39 @@ const Search = () => {
   const navigate = useNavigate();
 
   const handleEnterKey = (e) => {
-    if (e.key === "Enter") navigate(`/search?name=${searchInput}`);
+    // if (e.key === "Enter") navigate(`/search?name=${searchInput}`);
+    if (e.key === "Enter") getSearchResults();
   };
+
+  const getSearchResults = () => {
+    if (snippets) {
+      //Get selected categories
+      let categoriesSelected = [];
+      let categoriesIDsSelected = [];
+      categories.forEach((category, i) => {
+        if (category.isChecked) {
+          categoriesSelected.push(category);
+          categoriesIDsSelected.push(category.category.id);
+        }
+      });
+
+      //Add categories to url
+      const params = `name=${searchInput}&categories=${categoriesIDsSelected.join("-")}`;
+      
+      setSearchParams(params);
+    }
+    fetch(`${process.env.REACT_APP_BASE_URL}snippet?searchQuery=${searchInput}`)
+      .then((res) => res.json())
+      .then((data) => {
+        //Only show data that is published
+        data = data.filter((snippet) => snippet.isPublished)
+        console.log(data);
+        setSnippets(data);
+        setFilterSnippets(data);
+      })
+      .catch((err) => console.log(err));
+  }
+
 
   const handleCheckbox = (i) => {
     const tempCategories = [...categories];
@@ -36,28 +81,36 @@ const Search = () => {
     setCategories(tempCategories);
   };
 
+  useEffect(() => {
+    getSearchResults();
+  }, []);
+  //Get categories from query parameter
+  useEffect(() => {
+    // console.log(searchParams.get("categories"));
+    let tempCategories = JSON.parse(JSON.stringify(categories));
+    searchParams.get("categories")?.split("-").forEach((catId) => {
+      tempCategories.map(tempCat => {
+        if(tempCat.category.id == catId) tempCat.isChecked = true;
+        return tempCat; 
+      }) 
+    })
+    // console.log(tempCategories);
+    setCategories(tempCategories);  
+  }, []);
 
   useEffect(() => {
-    if (snippets) {
-      let tempFilter = [...snippets];
-      //Get selected categories
-      let categoriesLabelsSelected = [];
-      let categoriesSelected = [];
-      let categoriesIDsSelected = [];
-      categories.forEach((category, i) => {
-        if (category.isChecked) {
-          categoriesSelected.push(category);
-          categoriesLabelsSelected.push(category.category.label);
-          categoriesIDsSelected.push(category.category.id);
-        }
-      });
-
-      //Add categories to url
-      const params = `name=${searchInput}&categories=${categoriesIDsSelected.join("-")}`;
-      setSearchParams(params);
-
-      //Filter by selected categories
-      if(categoriesSelected.length > 0) {
+    //Get selected categories
+    let tempFilter = [...snippets];
+    let categoriesLabelsSelected = [];
+    let categoriesSelected = [];
+    categories.forEach((category, i) => {
+      if (category.isChecked) {
+        categoriesSelected.push(category);
+        categoriesLabelsSelected.push(category.category.label);
+      }
+    });
+    //Filter by selected categories
+    if(categoriesSelected.length > 0) {
       tempFilter = tempFilter.filter(snippet => {
         let snipHasSelectedCategory = false;
         for(let i = 0; i < snippet.published.categories.length; i++) {
@@ -69,29 +122,66 @@ const Search = () => {
         if(snipHasSelectedCategory) return snippet;
       });
     }
-      console.log(tempFilter);
-      console.log(categoriesSelected);
-      setFilterSnippets(tempFilter);
-    }
-  }, [snippets, searchParams, categories]);
+    // console.log(tempFilter);
+    // console.log(categoriesSelected);
+    setFilterSnippets(tempFilter);
+  }, [snippets, categories]);
+  // useEffect(() => {
+  //   if (snippets) {
+  //     let tempFilter = [...snippets];
+  //     //Get selected categories
+  //     let categoriesLabelsSelected = [];
+  //     let categoriesSelected = [];
+  //     let categoriesIDsSelected = [];
+  //     categories.forEach((category, i) => {
+  //       if (category.isChecked) {
+  //         categoriesSelected.push(category);
+  //         categoriesLabelsSelected.push(category.category.label);
+  //         categoriesIDsSelected.push(category.category.id);
+  //       }
+  //     });
 
-  useEffect(() => {
-    console.log("test".toUpperCase().includes("te".toUpperCase()));
-    fetch(
-      `${process.env.REACT_APP_BASE_URL}snippet?searchQuery=${searchParams.get(
-        "name"
-      )}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        //Only show data that is published
-        data = data.filter((snippet) => snippet.isPublished)
-        console.log(data);
-        setSnippets(data);
-        setFilterSnippets(data);
-      })
-      .catch((err) => console.log(err));
-  }, [searchParams]);
+  //     //Add categories to url
+  //     const params = `name=${searchInput}&categories=${categoriesIDsSelected.join("-")}`;
+      
+  //     setSearchParams(params);
+
+  //     //Filter by selected categories
+  //     if(categoriesSelected.length > 0) {
+  //     tempFilter = tempFilter.filter(snippet => {
+  //       let snipHasSelectedCategory = false;
+  //       for(let i = 0; i < snippet.published.categories.length; i++) {
+  //         if(categoriesLabelsSelected.includes(snippet.published.categories[i])) {
+  //           snipHasSelectedCategory = true;
+  //           break;
+  //         }
+  //       }
+  //       if(snipHasSelectedCategory) return snippet;
+  //     });
+  //   }
+  //     // console.log(tempFilter);
+  //     // console.log(categoriesSelected);
+  //     setFilterSnippets(tempFilter);
+  //   }
+  // }, [snippets, categories]);
+
+  // useEffect(() => {
+  //   // console.log("test".toUpperCase().includes("te".toUpperCase()));
+  //   fetch(
+  //     `${process.env.REACT_APP_BASE_URL}snippet?searchQuery=${searchParams.get(
+  //       "name"
+  //     )}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       //Only show data that is published
+  //       data = data.filter((snippet) => snippet.isPublished)
+  //       // console.log(data);
+  //       setSnippets(data);
+  //       setFilterSnippets(data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [searchParams]);
 
   return (
     <div className="content p-t-8">
@@ -103,14 +193,15 @@ const Search = () => {
             type="text"
             placeholder="Search Snippet"
             onKeyDown={handleEnterKey}
+            value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          <Link className="search-icon" to={`/search?name=${searchInput}`}>
+          <div className="search-icon" onClick={getSearchResults} style={{cursor:"pointer"}}>
             <div className="row">
               <div className="search-line"></div>
               <BsSearch color="#999" size={20} />
             </div>
-          </Link>
+          </div>
         </div>
         <div className="relative">
           <img
