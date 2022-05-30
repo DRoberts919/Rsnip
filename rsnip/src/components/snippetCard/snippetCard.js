@@ -41,6 +41,7 @@ const SnippetCard = ({ snippet, isOwnProfile }) => {
         </div>
         {isOwnProfile ? (
           <Link
+            id="edit-snippet"
             className="snippet-card-edit"
             to={`/snippet/edit/${snippet?.snippet_id}`}
           >

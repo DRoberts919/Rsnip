@@ -112,50 +112,53 @@ const Profile = () => {
 
   return (
     <>
-      <div className='content row-center align-start p-t-8'>
-        <div className='profile-section light-shadow txt-center'>
+      <div className="content row-center align-start p-t-8">
+        <div className="profile-section light-shadow txt-center">
           <img
-            className='user-img light-shadow'
+            className="user-img light-shadow"
             src={profileData?.profilePic}
-            alt='Profile Img'
+            alt="Profile Img"
           />
-          <a href={profileData?.linkedIn} target='_blank'>
-            <img className='linkedin-icon' src={LinkedIn} alt='LinkedIn' />
+          <a href={profileData?.linkedIn} target="_blank">
+            <img className="linkedin-icon" src={LinkedIn} alt="LinkedIn" />
           </a>
-          <a href={profileData?.gitHub} target='_blank'>
-            <img className='github-icon' src={Github} alt='Github' />
+          <a href={profileData?.gitHub} target="_blank">
+            <img className="github-icon" src={Github} alt="Github" />
           </a>
-          <a href={`mailto:${profileData?.email}`} target='_blank'>
-            <img className='email-icon' src={Email} alt='Email' />
+          <a href={`mailto:${profileData?.email}`} target="_blank">
+            <img className="email-icon" src={Email} alt="Email" />
           </a>
-          <div className='username-title'>{profileData?.name}</div>
+          <div className="username-title">{profileData?.name}</div>
           <div>{profileData?.email}</div>
           {userOnOwnProfile ? (
             <div
               onClick={() => {
                 setEditModalOpen(true);
               }}
-              className='btn green-btn light-shadow m-1'>
+              className="btn green-btn light-shadow m-1"
+            >
               Edit Account
             </div>
           ) : (
             <></>
           )}
         </div>
-        <div className='snippet-container '>
-          <div className='profile-title-section'>
-            <div className='profile-title'>{profileData?.name}'s Snippets</div>
+        <div className="snippet-container ">
+          <div className="profile-title-section">
+            <div className="profile-title">{profileData?.name}'s Snippets</div>
             <div
-              className='plus-btn light-shadow'
+              id="add-snippet"
+              className="plus-btn light-shadow"
               onClick={() => {
                 // console.log("Navigate to create snippet");
                 createAndReturnSnippetId();
-              }}>
+              }}
+            >
               +
             </div>
           </div>
-          <div className='snippet-scrollbar'>
-            <div className='snippet-section'>
+          <div className="snippet-scrollbar">
+            <div className="snippet-section">
               {snippetData?.Items?.map((snippet, i) => {
                 return (
                   <SnippetCard

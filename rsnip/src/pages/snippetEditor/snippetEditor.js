@@ -377,7 +377,10 @@ root.render(<App />);
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then((data) => console.log("SNIPPET DELETED/REDIRECt"))
+      .then((data) => {
+        console.log("SNIPPET DELETED/REDIRECt");
+        navigate(`/user/${user.user_id}`);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -586,7 +589,11 @@ root.render(<App />);
                   })}
                 </div>
               </div>
-              <div className="btn delete-snippet" onClick={deleteSnippet}>
+              <div
+                id="delete-snippet"
+                className="btn delete-snippet"
+                onClick={deleteSnippet}
+              >
                 Delete Snippet
               </div>
             </div>

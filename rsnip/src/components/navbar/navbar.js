@@ -33,7 +33,7 @@ const Navbar = () => {
   const signOutUser = async () => {
     await Auth.signOut();
     window.location.reload(false);
-  }
+  };
 
   window.addEventListener("scroll", changeNavColors);
   if (!location.pathname.includes("/snippet/edit/")) {
@@ -64,6 +64,7 @@ const Navbar = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
                 <Link
+                  id="nav-search"
                   className="nav-search-icon"
                   to={`/search?name=${searchInput}`}
                 >
@@ -76,28 +77,46 @@ const Navbar = () => {
             ) : null}
             {user ? (
               <>
-                <div className="btn sign-out light-shadow link" onClick={signOutUser}>Sign Out</div>
-                <Link to={`/user/${user.user_id}`} className="link profile-link"> <img
-                  className="nav-profile-img"
-                  src={user.profilePic}
-                  alt="Profile Img"
-                /></Link>
+                <div
+                  className="btn sign-out light-shadow link"
+                  onClick={signOutUser}
+                >
+                  Sign Out
+                </div>
+                <Link
+                  id="account-btn"
+                  to={`/user/${user.user_id}`}
+                  className="link profile-link"
+                >
+                  {" "}
+                  <img
+                    className="nav-profile-img"
+                    src={user.profilePic}
+                    alt="Profile Img"
+                  />
+                </Link>
               </>
             ) : (
               <>
                 <Link className="m-r-1 nav-link link" to="/register">
                   Sign Up
                 </Link>
-                <Link className="btn green-btn light-shadow m-r-1 link login-btn" to="/login">
+                <Link
+                  id="nav-login"
+                  className="btn green-btn light-shadow m-r-1 link login-btn"
+                  to="/login"
+                >
                   Login
                 </Link>
               </>
             )}
 
-            <div className="desktop"><DarkModeToggle maskId={1} /></div>
+            <div className="desktop">
+              <DarkModeToggle maskId={1} />
+            </div>
           </div>
           <div className="nav-burger">
-            <DarkModeToggle maskId={2}/>
+            <DarkModeToggle maskId={2} />
             <Hamburger toggled={menuOpen} toggle={setMenuOpen} />
           </div>
         </div>

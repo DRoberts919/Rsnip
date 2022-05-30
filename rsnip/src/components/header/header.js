@@ -12,14 +12,21 @@ const Header = () => {
       <div className="content row-center p-t-8 p-b-12 white-txt">
         <div className="p-lr-2 header-txt">
           <h2 className="m-b-1">Welcome To RSnip</h2>
-          <h5 className="m-b-1 green-txt" style={{textTransform: "uppercase"}}> 
+          <h5
+            className="m-b-1 green-txt"
+            style={{ textTransform: "uppercase" }}
+          >
             An online React snippet library
           </h5>
           <div className="white-txt-secondary">
-            RSnip is a tool that allows users to create and store their React 
-            code solutions as snippets that run on the browser. 
+            RSnip is a tool that allows users to create and store their React
+            code solutions as snippets that run on the browser.
           </div>
-          <Link className="m-t-1 btn green-btn light-shadow" to="/register">
+          <Link
+            id="signup"
+            className="m-t-1 btn green-btn light-shadow"
+            to="/register"
+          >
             Get Started
           </Link>
         </div>

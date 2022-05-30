@@ -1,12 +1,16 @@
 import "./searchStyles.css";
 import { useEffect, useState, useRef } from "react";
 import { BsSearch } from "react-icons/bs";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
 import allCategories from "../../categories.json";
 import useFetch from "../../hooks/useFetch";
 import SnippetCard from "../../components/snippetCard/snippetCard";
-
 
 const useDidMountEffect = (func, deps) => {
   const didMount = useRef(false);
@@ -19,7 +23,6 @@ const useDidMountEffect = (func, deps) => {
     }
   }, deps);
 };
-
 
 const Search = () => {
   const [snippets, setSnippets] = useState([]);
@@ -36,7 +39,6 @@ const Search = () => {
     searchParams.get("name") || ""
   );
   const [openCategory, setOpenCategory] = useState(false);
-
 
   const navigate = useNavigate();
 
@@ -58,22 +60,23 @@ const Search = () => {
       });
 
       //Add categories to url
-      const params = `name=${searchInput}&categories=${categoriesIDsSelected.join("-")}`;
-      
+      const params = `name=${searchInput}&categories=${categoriesIDsSelected.join(
+        "-"
+      )}`;
+
       setSearchParams(params);
     }
     fetch(`${process.env.REACT_APP_BASE_URL}snippet?searchQuery=${searchInput}`)
       .then((res) => res.json())
       .then((data) => {
         //Only show data that is published
-        data = data.filter((snippet) => snippet.isPublished)
+        data = data.filter((snippet) => snippet.isPublished);
         console.log(data);
         setSnippets(data);
         setFilterSnippets(data);
       })
       .catch((err) => console.log(err));
-  }
-
+  };
 
   const handleCheckbox = (i) => {
     const tempCategories = [...categories];
@@ -88,14 +91,17 @@ const Search = () => {
   useEffect(() => {
     // console.log(searchParams.get("categories"));
     let tempCategories = JSON.parse(JSON.stringify(categories));
-    searchParams.get("categories")?.split("-").forEach((catId) => {
-      tempCategories.map(tempCat => {
-        if(tempCat.category.id == catId) tempCat.isChecked = true;
-        return tempCat; 
-      }) 
-    })
+    searchParams
+      .get("categories")
+      ?.split("-")
+      .forEach((catId) => {
+        tempCategories.map((tempCat) => {
+          if (tempCat.category.id == catId) tempCat.isChecked = true;
+          return tempCat;
+        });
+      });
     // console.log(tempCategories);
-    setCategories(tempCategories);  
+    setCategories(tempCategories);
   }, []);
 
   useEffect(() => {
@@ -110,16 +116,18 @@ const Search = () => {
       }
     });
     //Filter by selected categories
-    if(categoriesSelected.length > 0) {
-      tempFilter = tempFilter.filter(snippet => {
+    if (categoriesSelected.length > 0) {
+      tempFilter = tempFilter.filter((snippet) => {
         let snipHasSelectedCategory = false;
-        for(let i = 0; i < snippet.published.categories.length; i++) {
-          if(categoriesLabelsSelected.includes(snippet.published.categories[i])) {
+        for (let i = 0; i < snippet.published.categories.length; i++) {
+          if (
+            categoriesLabelsSelected.includes(snippet.published.categories[i])
+          ) {
             snipHasSelectedCategory = true;
             break;
           }
         }
-        if(snipHasSelectedCategory) return snippet;
+        if (snipHasSelectedCategory) return snippet;
       });
     }
     // console.log(tempFilter);
@@ -143,7 +151,7 @@ const Search = () => {
 
   //     //Add categories to url
   //     const params = `name=${searchInput}&categories=${categoriesIDsSelected.join("-")}`;
-      
+
   //     setSearchParams(params);
 
   //     //Filter by selected categories
@@ -189,6 +197,7 @@ const Search = () => {
         {/* <div>{searchParams.get("name")}</div> */}
         <div className="search-bar relative">
           <input
+            id="search-input"
             className="search-snippet light-shadow m-1"
             type="text"
             placeholder="Search Snippet"
@@ -196,7 +205,11 @@ const Search = () => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          <div className="search-icon" onClick={getSearchResults} style={{cursor:"pointer"}}>
+          <div
+            className="search-icon"
+            onClick={getSearchResults}
+            style={{ cursor: "pointer" }}
+          >
             <div className="row">
               <div className="search-line"></div>
               <BsSearch color="#999" size={20} />

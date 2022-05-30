@@ -27,8 +27,8 @@ const Login = () => {
           // console.log(res.attributes);
           // setUser(res.attributes);
           fetch(`${process.env.REACT_APP_BASE_URL}user/${res.attributes.sub}`)
-          .then((res) => res.json())
-          .then((data) => setUser(data.Item));
+            .then((res) => res.json())
+            .then((data) => setUser(data.Item));
           // console.log(res.attributes.email);
           // console.log(res.attributes.name);
           // console.log(res.attributes.sub);
@@ -74,6 +74,7 @@ const Login = () => {
                 />
               </div>
               <input
+                id="login-username"
                 className={
                   error ? "login-signup-input error" : "login-signup-input"
                 }
@@ -93,6 +94,7 @@ const Login = () => {
                 />
               </div>
               <input
+                id="login-password"
                 className={
                   error ? "login-signup-input error" : "login-signup-input"
                 }
@@ -113,6 +115,7 @@ const Login = () => {
             ) : null}
             <div className="m-2"></div>
             <button
+              id="login-btn"
               data-testid="login-btn"
               className="light-shadow form-btn green-btn"
               type="submit"
