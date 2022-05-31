@@ -88,18 +88,15 @@ const ViewSnippet = () => {
         `);
   };
 
-  //TODO: Fetch data and display; if user_id does not exist (data comes back null), display error
+  //Fetch data and display; if user_id does not exist (data comes back null), display error
   useEffect(() => {
     //
     fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.Item);
+        
         const publishedData = data.Item?.published;
-        if (!data.Item.isPublished) {
-          //TODO: Redirect to home page
-          setRedirect(true);
-        }
+        
         //   setSnippets(data);
         //   setFilterSnippets(data);
         setTitle(publishedData.title);
@@ -111,7 +108,16 @@ const ViewSnippet = () => {
         setInitialLoad(true);
         fetch(`${process.env.REACT_APP_BASE_URL}user/${data.Item.user_id}`)
           .then((res) => res.json())
-          .then((data) => setUser(data.Item));
+          .then((uData) => {
+            setUser(uData.Item);
+            console.log(data.Item);
+            console.log(user);
+            console.log(data.Item.user_id == uData.Item.user_id, data.Item.isPublished);
+            if (!(data.Item.user_id == uData.Item.user_id || data.Item.isPublished)) {
+              // Redirect to home page
+              setRedirect(true);
+            }
+          });
       })
       .catch((err) => console.log(err));
     // compileCode();
