@@ -1,28 +1,15 @@
 import "./searchStyles.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import {
-  Link,
-  useLocation,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
 import CategoryImg from "../../assets/images/filter-category.jpg";
 import allCategories from "../../categories.json";
-import useFetch from "../../hooks/useFetch";
 import SnippetCard from "../../components/snippetCard/snippetCard";
 
-const useDidMountEffect = (func, deps) => {
-  const didMount = useRef(false);
 
-  useEffect(() => {
-    if (didMount.current) {
-      func();
-    } else {
-      didMount.current = true;
-    }
-  }, deps);
-};
 
 const Search = () => {
   const [snippets, setSnippets] = useState([]);
@@ -40,10 +27,8 @@ const Search = () => {
   );
   const [openCategory, setOpenCategory] = useState(false);
 
-  const navigate = useNavigate();
 
   const handleEnterKey = (e) => {
-    // if (e.key === "Enter") navigate(`/search?name=${searchInput}`);
     if (e.key === "Enter") getSearchResults();
   };
 
@@ -130,71 +115,14 @@ const Search = () => {
         if (snipHasSelectedCategory) return snippet;
       });
     }
-    // console.log(tempFilter);
-    // console.log(categoriesSelected);
+
     setFilterSnippets(tempFilter);
   }, [snippets, categories]);
-  // useEffect(() => {
-  //   if (snippets) {
-  //     let tempFilter = [...snippets];
-  //     //Get selected categories
-  //     let categoriesLabelsSelected = [];
-  //     let categoriesSelected = [];
-  //     let categoriesIDsSelected = [];
-  //     categories.forEach((category, i) => {
-  //       if (category.isChecked) {
-  //         categoriesSelected.push(category);
-  //         categoriesLabelsSelected.push(category.category.label);
-  //         categoriesIDsSelected.push(category.category.id);
-  //       }
-  //     });
 
-  //     //Add categories to url
-  //     const params = `name=${searchInput}&categories=${categoriesIDsSelected.join("-")}`;
-
-  //     setSearchParams(params);
-
-  //     //Filter by selected categories
-  //     if(categoriesSelected.length > 0) {
-  //     tempFilter = tempFilter.filter(snippet => {
-  //       let snipHasSelectedCategory = false;
-  //       for(let i = 0; i < snippet.published.categories.length; i++) {
-  //         if(categoriesLabelsSelected.includes(snippet.published.categories[i])) {
-  //           snipHasSelectedCategory = true;
-  //           break;
-  //         }
-  //       }
-  //       if(snipHasSelectedCategory) return snippet;
-  //     });
-  //   }
-  //     // console.log(tempFilter);
-  //     // console.log(categoriesSelected);
-  //     setFilterSnippets(tempFilter);
-  //   }
-  // }, [snippets, categories]);
-
-  // useEffect(() => {
-  //   // console.log("test".toUpperCase().includes("te".toUpperCase()));
-  //   fetch(
-  //     `${process.env.REACT_APP_BASE_URL}snippet?searchQuery=${searchParams.get(
-  //       "name"
-  //     )}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       //Only show data that is published
-  //       data = data.filter((snippet) => snippet.isPublished)
-  //       // console.log(data);
-  //       setSnippets(data);
-  //       setFilterSnippets(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [searchParams]);
 
   return (
     <div className="content p-t-8">
       <div className="search-content light-shadow row-center">
-        {/* <div>{searchParams.get("name")}</div> */}
         <div className="search-bar relative">
           <input
             id="search-input"

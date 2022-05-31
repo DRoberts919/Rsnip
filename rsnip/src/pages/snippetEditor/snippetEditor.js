@@ -180,7 +180,7 @@ root.render(<App />);
   //     setNewChanges(false);
   // }
 
-  //TODO: fetch data from backend. If bad, then redirect
+  //fetch data from backend. If bad, then redirect
   useEffect(() => {
     if (user) {
       console.log(user?.user_id);
@@ -259,7 +259,7 @@ root.render(<App />);
 
   const saveSnippet = () => {
     let data = getData(snippetPublished);
-    //TODO: Fetch put data
+    //Fetch put data
     fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`, {
       method: "PUT",
       mode: "cors",
@@ -268,7 +268,7 @@ root.render(<App />);
       .then((res) => res.json())
       .then((data) => console.log(data));
     console.log(data);
-    //TODO: Update display message
+    //Update display message
     let date = new Date();
     setSaveMessage(
       `Saved at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
@@ -279,7 +279,7 @@ root.render(<App />);
 
   const publishSnippet = () => {
     let data = getData(true);
-    //TODO: Fetch put data
+    //Fetch put data
     fetch(`${process.env.REACT_APP_BASE_URL}snippet/${snippetId}`, {
       method: "PUT",
       mode: "cors",
@@ -288,7 +288,7 @@ root.render(<App />);
       .then((res) => res.json())
       .then((data) => console.log(data));
     console.log(data);
-    //TODO: Update display message
+    //Update display message
     let date = new Date();
     setSaveMessage(
       `Published at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
