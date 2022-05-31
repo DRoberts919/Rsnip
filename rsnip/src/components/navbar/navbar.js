@@ -38,6 +38,7 @@ const Navbar = () => {
   window.addEventListener("scroll", changeNavColors);
   if (!location.pathname.includes("/snippet/edit/")) {
     return (
+      <>
       <div
         className={
           location.pathname !== "/"
@@ -121,6 +122,8 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {menuOpen ? <div className="nav-screen" onClick={() => setMenuOpen(false)}></div> : <></>}
+      </>
     );
   }
 };
