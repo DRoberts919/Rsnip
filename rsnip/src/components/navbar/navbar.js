@@ -49,7 +49,7 @@ const Navbar = () => {
         }
       >
         <div className="content nav-group semi-bold">
-          <Link className="nav-title nav-group" to="/">
+          <Link className="nav-title nav-group" to="/" onClick={() => setMenuOpen(false)}>
             <img className="nav-logo" src="/RSnip_Logo.svg" alt="RSnip Logo" />
             Snip
           </Link>
@@ -68,6 +68,7 @@ const Navbar = () => {
                   id="nav-search"
                   className="nav-search-icon"
                   to={`/search?name=${searchInput}`}
+                  onClick={() => setMenuOpen(false)}
                 >
                   <div className="row">
                     <div className="search-line"></div>
@@ -88,6 +89,7 @@ const Navbar = () => {
                   id="account-btn"
                   to={`/user/${user.user_id}`}
                   className="link profile-link"
+                  onClick={() => setMenuOpen(false)}
                 >
                   {" "}
                   <img
@@ -99,13 +101,14 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link className="m-r-1 nav-link link" to="/register">
+                <Link className="m-r-1 nav-link link" to="/register" onClick={() => setMenuOpen(false)}>
                   Sign Up
                 </Link>
                 <Link
                   id="nav-login"
                   className="btn green-btn light-shadow m-r-1 link login-btn"
                   to="/login"
+                  onClick={() => setMenuOpen(false)}
                 >
                   Login
                 </Link>
