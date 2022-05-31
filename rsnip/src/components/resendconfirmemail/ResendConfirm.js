@@ -23,7 +23,6 @@ function ResendConfirm() {
     } catch (error) {
       setError(true);
       setSuccess(false);
-      // console.log(error);
     }
   };
 
@@ -61,7 +60,9 @@ function ResendConfirm() {
         </form>
       ) : (
         <div className="row-center txt-center">
-          <div className="dark-secondary-text">Have not recieved an email?&nbsp;</div>
+          <div className="dark-secondary-text">
+            Have not recieved an email?&nbsp;
+          </div>
           <div onClick={() => setIsOpen(true)} className="click-here-btn">
             Click Here
           </div>

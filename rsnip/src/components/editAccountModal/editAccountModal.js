@@ -111,6 +111,7 @@ const EditAccountModal = ({
                     >
                       <img
                         src={`https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/${value}.png`}
+                        alt="Female Avatar"
                       />
                     </div>
                   );
@@ -136,6 +137,7 @@ const EditAccountModal = ({
                     >
                       <img
                         src={`https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/${value}.png`}
+                        alt="Female Avatar"
                       />
                     </div>
                   );

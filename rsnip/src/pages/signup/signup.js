@@ -1,6 +1,6 @@
 import { Auth } from "aws-amplify";
 import { useNavigate, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./signupStyles.css";
 import { FaUserAlt, FaCheckCircle } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -259,7 +259,11 @@ const SignUp = () => {
               ) : null}
             </div>
             <div className="m-2"></div>
-            <button data-testid="signup-btn" className="light-shadow form-btn green-btn" type="submit">
+            <button
+              data-testid="signup-btn"
+              className="light-shadow form-btn green-btn"
+              type="submit"
+            >
               Sign up
             </button>
           </form>

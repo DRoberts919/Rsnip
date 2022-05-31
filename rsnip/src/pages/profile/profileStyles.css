@@ -36,7 +36,6 @@
 .plus-btn{
     background-color: var(--secondary-color);
     color: var(--main-bg-color);
-    /* padding: 0.25rem 0.75rem; */
     font-size: 1.75rem;
     padding: 0px 0.75rem;
     font-weight: 600;

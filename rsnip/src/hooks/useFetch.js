@@ -9,9 +9,6 @@ const useFetch = (url) => {
       .then((data) => setData(data))
       .catch((err) => console.log(err));
   }, [url]);
-  // useEffect(() => {
-  //   console.log(url, data);
-  // }, [data]);
   return [data, setData];
 };
 

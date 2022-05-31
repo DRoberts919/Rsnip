@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Auth } from "aws-amplify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./loginStyles.css";
 import LoginImg from "../../assets/images/login-img.svg";
 import { MdEmail } from "react-icons/md";
@@ -16,23 +16,16 @@ const Login = () => {
     password: false,
   });
   const [error, setError] = useState(false);
-  const [user, setUser] = useContext(UserContext);
+  const [, setUser] = useContext(UserContext);
   const handleLogin = (evt) => {
     evt.preventDefault();
 
     try {
       Auth.signIn(email, password)
         .then((res) => {
-          // localStorage.setItem("User", JSON.stringify(res.attributes));
-          // console.log(res.attributes);
-          // setUser(res.attributes);
           fetch(`${process.env.REACT_APP_BASE_URL}user/${res.attributes.sub}`)
             .then((res) => res.json())
             .then((data) => setUser(data.Item));
-          // console.log(res.attributes.email);
-          // console.log(res.attributes.name);
-          // console.log(res.attributes.sub);
-          //signInUserSession.accessToken.jwtToken
           navigate("/", { replace: true });
         })
         .catch(() => {
@@ -43,13 +36,13 @@ const Login = () => {
     }
   };
 
-  const logout = async () => {
-    try {
-      await Auth.signOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const logout = async () => {
+  //   try {
+  //     await Auth.signOut();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const onFocus = (inputName) => {
     setFocus((prev) => ({ ...prev, [inputName]: true }));
@@ -123,9 +116,6 @@ const Login = () => {
               Login
             </button>
           </form>
-          {/* <div>
-            <button onClick={() => logout()}>Logout</button>
-          </div> */}
         </div>
         <img className="login-img" src={LoginImg} alt="Login Img" />
       </div>

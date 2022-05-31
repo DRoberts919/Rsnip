@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import DarkModeToggle from "./darkModeToggle";
 import "./navbarStyles.css";
 
@@ -8,7 +7,6 @@ const EditNav = ({
   publishSnippet,
   saveMessage,
 }) => {
-  // if(location.pathname.includes("/snippet/edit/")) {
   return (
     <div className="edit-nav light-shadow">
       <div className="nav-group">
@@ -42,7 +40,6 @@ const EditNav = ({
       </div>
     </div>
   );
-  // }
 };
 
 export default EditNav;

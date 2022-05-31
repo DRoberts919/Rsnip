@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { Auth } from "aws-amplify";
-
 import "./homeStyles.css";
 import Card from "../../components/card/card";
 import CardImgOne from "../../assets/images/card-img-1.png";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
@@ -31,18 +31,6 @@ test("loads and displays login form", async () => {
   expect(screen.getByTestId("login-form")).not.toBeEmpty();
   expect(screen.getByRole("button")).toBeEnabled();
 });
-
-//sample
-// test('handles server error', async () => {
-//   render(<Fetch url="/login" />)
-
-//   fireEvent.click(screen.getByText('Login'))
-
-//   await waitFor(() => screen.getByRole('alert'))
-
-//   expect(screen.getByRole('alert')).toHaveTextContent('Oops, failed to fetch!')
-//   expect(screen.getByRole('button')).not.toBeDisabled()
-// })
 
 test("displays error message on form submit when form fields are empty", async () => {
   render(

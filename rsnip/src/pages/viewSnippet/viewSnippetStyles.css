@@ -1,7 +1,6 @@
 /* Editor section */
 .snippet-page {
     padding-top:calc(4rem + 40px);
-    /* height: calc(100vh - 2rem - 40px)!important; */
     color: var(--primary-color);
 }
 

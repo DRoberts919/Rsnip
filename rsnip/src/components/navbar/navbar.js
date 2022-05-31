@@ -13,9 +13,8 @@ const Navbar = () => {
   const [changeNav, setChangeNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
 
-  // const [saveMessage, setSaveMessage] = useState("Autosaved at 5:00 PM");
   const changeNavColors = () => {
     window.scrollY >= 1 ? setChangeNav(true) : setChangeNav(false);
   };
@@ -53,7 +52,6 @@ const Navbar = () => {
             Snip
           </Link>
           <div className={menuOpen ? "nav-links" : "nav-links nav-hidden"}>
-            {/* <div>{location.pathname}</div> */}
             {!location.pathname.includes("/search") ? (
               <div className="relative m-r-1">
                 <input

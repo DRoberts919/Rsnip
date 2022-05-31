@@ -58,6 +58,7 @@ describe("app.js", () => {
     await page.click("#edit-snippet");
     await delay(4000);
     await page.click("#delete-snippet");
+
     // Delay before closing
     await delay(5000);
   });

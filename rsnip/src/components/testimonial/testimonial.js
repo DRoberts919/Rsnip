@@ -1,6 +1,5 @@
 import "./testimonialStyles.css";
 import StarRatings from "react-star-ratings";
-import Cody from "../../assets/images/cody.jpg";
 
 const Testimonial = () => {
   return (
@@ -11,8 +10,9 @@ const Testimonial = () => {
       <h3 className="m-b-2">RSnip Reviews</h3>
       <div className="testimonial-msg light-shadow extra-white-bg txt-left">
         <div className="m-b-1">
-          RSnip has made it easy for me to keep a library of my commonly used React solutions.
-          And when I need help building something new, I can find how other people have solved the problem.
+          RSnip has made it easy for me to keep a library of my commonly used
+          React solutions. And when I need help building something new, I can
+          find how other people have solved the problem.
         </div>
         <StarRatings
           rating={5}

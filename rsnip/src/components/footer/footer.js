@@ -6,11 +6,14 @@ const Footer = () => {
   return (
     <div style={{ backgroundImage: `url(${BgHeader})` }} className="footer-bg">
       <div className="content row-center stretch white-txt txt-center p-tb-3">
-        <div className="footer-block white-txt-secondary" >
+        <div className="footer-block white-txt-secondary">
           <div className="footer-title m-b-1">ABOUT US</div>
           <div>
-            RSnip was created by <a href="https://ryanunroe.com" target="_blank">Ryan Unroe</a>,
-            Cody Ashby, Phillip Duarte, and Dylan Roberts.
+            RSnip was created by{" "}
+            <a href="https://ryanunroe.com" target="_blank" rel="noreferrer">
+              Ryan Unroe
+            </a>
+            , Cody Ashby, Phillip Duarte, and Dylan Roberts.
           </div>
         </div>
         <div className="footer-block white-txt-secondary">
@@ -25,10 +28,6 @@ const Footer = () => {
           <div>info@rsnip.com</div>
           <div>SLC, UT 84100, US</div>
         </div>
-        {/* <div className="footer-block">
-          <div className="footer-title m-b-1">SEARCH SNIPPET</div>
-          <input type="text"></input>
-        </div> */}
       </div>
     </div>
   );

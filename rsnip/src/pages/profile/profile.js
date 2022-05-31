@@ -9,6 +9,7 @@ import SnippetCard from "../../components/snippetCard/snippetCard";
 import EditAccountModal from "../../components/editAccountModal/editAccountModal";
 import { UserContext } from "../../hooks/useContext";
 import { Auth } from "aws-amplify";
+
 // Profile images
 // https://ashwinvalento.github.io/cartoon-avatar/
 
@@ -17,14 +18,14 @@ import { Auth } from "aws-amplify";
 
 const Profile = () => {
   const { userId } = useParams();
-  const [snippetData, setSnippetData] = useFetch(
+  const [snippetData] = useFetch(
     `${process.env.REACT_APP_BASE_URL}snippet/user/${userId}`
   );
   const [profileData, setProfileData] = useState();
   const [cognitoUser, setCognitoUser] = useState();
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [user, setUser] = useContext(UserContext); // auth user credentials
-  const [snippetId, setSnippetId] = useState();
+  const [user] = useContext(UserContext); // auth user credentials
+  const [, setSnippetId] = useState();
 
   const [userOnOwnProfile, setUserOnOwnProfile] = useState(false);
 
@@ -119,13 +120,17 @@ const Profile = () => {
             src={profileData?.profilePic}
             alt="Profile Img"
           />
-          <a href={profileData?.linkedIn} target="_blank">
+          <a href={profileData?.linkedIn} target="_blank" rel="noreferrer">
             <img className="linkedin-icon" src={LinkedIn} alt="LinkedIn" />
           </a>
-          <a href={profileData?.gitHub} target="_blank">
+          <a href={profileData?.gitHub} target="_blank" rel="noreferrer">
             <img className="github-icon" src={Github} alt="Github" />
           </a>
-          <a href={`mailto:${profileData?.email}`} target="_blank">
+          <a
+            href={`mailto:${profileData?.email}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             <img className="email-icon" src={Email} alt="Email" />
           </a>
           <div className="username-title">{profileData?.name}</div>

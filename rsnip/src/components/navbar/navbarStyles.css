@@ -1,5 +1,4 @@
 .nav{
-    /* background-color: var(--primary-color); */
     position: fixed;
     z-index: 50;
     top:0;
@@ -190,9 +189,6 @@ display: flex;
         color: var(--primary-color); 
     }
 
-    /* .nav.white-txt .sign-out {
-        color: #34495E;
-    } */
     .nav .sign-out {
         border:none;
     }
@@ -200,7 +196,6 @@ display: flex;
         width: 100%;
         justify-content: center;
         display: flex;
-        /* box-shadow: 1px 1px 4px rgba(0,0,0,0.2); */
         padding:0;
     }
     
