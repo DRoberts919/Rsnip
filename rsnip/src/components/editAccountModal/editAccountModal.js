@@ -34,7 +34,6 @@ const EditAccountModal = ({
         email: tempUserData.email,
         name: tempUserData.name,
       }).then((res) => {
-        console.log(res);
         // if response is successfull then move on to updating dynamodb.
         if (res === "SUCCESS") {
           // update user Data in the dynamoDB User-Table
@@ -61,7 +60,7 @@ const EditAccountModal = ({
             .then((res) => res.json())
             .then((res) => console.log(res));
         } else {
-          console.log("uh oh something went wrong on our end");
+          console.log("Error");
         }
       });
     }

@@ -14,12 +14,10 @@ function Edituser() {
     try {
       // get your current session from Auth.currentAuthenticatedUser()
       let cognitoUser = Auth.currentAuthenticatedUser().then((data) => {
-        console.log(data);
         setCognitoUser(() => data);
         fetch(`${process.env.REACT_APP_BASE_URL}user/${data.attributes.sub}`)
           .then((res) => res.json())
           .then((res) => {
-            console.log(res);
             setUsername(res.Item.name);
             setEmail(res.Item.email);
             setGitHub(res.Item.gitHub);
@@ -44,7 +42,6 @@ function Edituser() {
         email: email,
         name: username,
       }).then((res) => {
-        console.log(res);
         // if response is successfull then move on to updating dynamodb.
         if (res === "SUCCESS") {
           // update user Data in the dynamoDB User-Table
@@ -71,7 +68,7 @@ function Edituser() {
             .then((res) => res.json())
             .then((res) => console.log(res));
         } else {
-          console.log("uh oh something went wrong on our end");
+          console.log("Error");
         }
       });
     }

@@ -71,7 +71,6 @@ const Search = () => {
       .then((data) => {
         //Only show data that is published
         data = data.filter((snippet) => snippet.isPublished);
-        console.log(data);
         setSnippets(data);
         setFilterSnippets(data);
       })
@@ -89,7 +88,6 @@ const Search = () => {
   }, []);
   //Get categories from query parameter
   useEffect(() => {
-    // console.log(searchParams.get("categories"));
     let tempCategories = JSON.parse(JSON.stringify(categories));
     searchParams
       .get("categories")
@@ -100,7 +98,6 @@ const Search = () => {
           return tempCat;
         });
       });
-    // console.log(tempCategories);
     setCategories(tempCategories);
   }, []);
 
@@ -130,8 +127,6 @@ const Search = () => {
         if (snipHasSelectedCategory) return snippet;
       });
     }
-    // console.log(tempFilter);
-    // console.log(categoriesSelected);
     setFilterSnippets(tempFilter);
   }, [snippets, categories]);
   // useEffect(() => {
@@ -167,14 +162,11 @@ const Search = () => {
   //       if(snipHasSelectedCategory) return snippet;
   //     });
   //   }
-  //     // console.log(tempFilter);
-  //     // console.log(categoriesSelected);
   //     setFilterSnippets(tempFilter);
   //   }
   // }, [snippets, categories]);
 
   // useEffect(() => {
-  //   // console.log("test".toUpperCase().includes("te".toUpperCase()));
   //   fetch(
   //     `${process.env.REACT_APP_BASE_URL}snippet?searchQuery=${searchParams.get(
   //       "name"
@@ -184,7 +176,6 @@ const Search = () => {
   //     .then((data) => {
   //       //Only show data that is published
   //       data = data.filter((snippet) => snippet.isPublished)
-  //       // console.log(data);
   //       setSnippets(data);
   //       setFilterSnippets(data);
   //     })

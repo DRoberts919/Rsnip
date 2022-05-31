@@ -36,14 +36,6 @@ const Login = () => {
     }
   };
 
-  // const logout = async () => {
-  //   try {
-  //     await Auth.signOut();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const onFocus = (inputName) => {
     setFocus((prev) => ({ ...prev, [inputName]: true }));
   };

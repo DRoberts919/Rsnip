@@ -17,7 +17,6 @@ function ResendConfirm() {
 
     try {
       await Auth.resendSignUp(username);
-      console.log("code resent to email");
       setError(false);
       setSuccess(true);
     } catch (error) {

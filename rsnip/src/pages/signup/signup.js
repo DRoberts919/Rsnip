@@ -35,7 +35,6 @@ const SignUp = () => {
   const handleSignup = (evt) => {
     evt.preventDefault();
     if (validateSignup()) {
-      console.log("There is errors");
     } else {
       try {
         Auth.signUp({
